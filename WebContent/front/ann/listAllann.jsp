@@ -15,9 +15,8 @@
 %>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('.table-hover tr').click(function() {
-			//$(this).attr("value");
-			$("#formhidden").find("#annno").attr("value",$(this).attr("value"));
+		$(".table-hover tr").click(function() {
+			$("#formhidden").find("#annno").attr("value",$(this).find("input[type='hidden']").attr("value"));
 			$("#formhidden").submit();
 		});				
 	});
@@ -42,8 +41,8 @@
 						<tbody>
 							<c:forEach var="annVO" items="${list}" begin="<%=pageIndex%>"
 								end="<%=pageIndex+rowsPerPage-1%>">
-								<tr value="${annVO.annno}">
-	                       			<td>${annVO.anntitle}</td>
+								<tr style="cursor:pointer">
+	                       			<td>${annVO.anntitle}<input type="hidden" name="annno" value="${annVO.annno}"></td>
 										
 									<td><fmt:formatDate value="${annVO.anndate}"
 											pattern="yyyy-MM-dd HH:mm:ss" /></td>

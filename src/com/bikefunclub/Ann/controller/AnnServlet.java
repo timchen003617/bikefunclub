@@ -68,7 +68,6 @@ public class AnnServlet extends HttpServlet {
 
 				/** 3.查詢完成,準備轉交(Send the Success view) */
 				req.setAttribute("annVO", annVO); // 資料庫取出的adVO物件,存入req
-				System.out.println(annVO.getAnnno());
 				String url = "/front/ann/page_ann_info.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交page_update_ad_input.jsp
 				successView.forward(req, res);

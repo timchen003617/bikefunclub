@@ -37,8 +37,6 @@
 
 </head>
 <body>
-	<div id="previewrotmap" title="路線地圖預覽" style="display:none">
-	</div>
 	<!-- slider -->
 	<jsp:include page="/front/home/slider.jsp"></jsp:include>
 	<!-- header -->
