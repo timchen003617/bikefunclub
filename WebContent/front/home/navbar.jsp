@@ -7,7 +7,7 @@
 	<div class="navbar">
 		<div class="container">
 			<ul id="navigation">
-				<li><a href="#">公告</a></li>
+				<li><a href="<%=path%>/front/ann/page_listAllann.jsp">公告</a></li>
 				<li><a href="#">會員專區</a>
 					<ul>
 						<li><a href="<%=path%>/front/mem/page_update_mem_input.jsp">個人資料管理</a></li>
