@@ -15,7 +15,8 @@
 	List<RotVO> listrotbymem = rotSvc.getrotsBymemnoFromMemrot(memno);
 	pageContext.setAttribute("listrotbymem", listrotbymem);
 %>
-
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="<%=path%>/js/googlemap_dialog.js"></script>
 <div class="container body-content">
 	<div class="row">
 		<form class="form-gp" action="<%=path%>/Gp.do" method="post"
@@ -59,14 +60,16 @@
 				</div>
 				<div>
 					<label for="rotno" class="label"><span class="red">*騎乘路線</span></label>
-					<select size="1" name="rotno">
+					<select size="1" name="rotno" id="selected_rot">
 						<c:forEach var="rotVO2" items="${listrotbymem}">
 							<option value="${rotVO2.rotno}"
 								${(rotVO2.rotno==gpVO.rotno)?'selected':'' }>${rotVO2.rotname}</option>
 						</c:forEach>
-					</select> <input style="margin-left: 10px;" type="button" id="rotmap"
+					</select>  <input style="margin-left: 10px;" type="button" id="rotmap"
 						class="btn btn-primary" value="地圖預覽" /> <span class="red"
 						style="float: left; margin-left: 10px;">(自己的收藏路線)</span>
+							<div id="previewrotmap" title="路線地圖"
+								style="display: none"></div>
 				</div>
 				<div>
 					<label for="gpnote" class="label"><span>注意事項</span></label>

@@ -47,11 +47,13 @@ $(document).ready(function() {
 					});
 				}
 				var request = {
-					origin : start,
-					destination : end,
-					waypoints : waypts,
-					optimizeWaypoints : true,
-					travelMode : google.maps.TravelMode.WALKING
+						origin : start,
+						destination : end,
+						waypoints : waypts,
+						optimizeWaypoints : true,
+						avoidHighways : true,
+						avoidTolls : true,
+						travelMode : google.maps.TravelMode.DRIVING
 				};
 				directionsService.route(request, function(response, status) {
 					if (status == google.maps.DirectionsStatus.OK) {

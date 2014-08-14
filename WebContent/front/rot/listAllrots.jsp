@@ -67,18 +67,16 @@
 
 	}
 	var directionsDisplay;
-	var flightPath;
-	var flightPlanCoordinates;
 	var directionsService = new google.maps.DirectionsService();
 	var map;
-	var readtype = 1;//0:polyline,1:directionsService
+
 	function setmap(obj, targetMap) {
 		var start = obj.rotstart.lat + ',' + obj.rotstart.lng;
 		var end = obj.rotend.lat + ',' + obj.rotend.lng;
 
 		var waypts = [];
 		var wayptsArray = obj.rotloc;
-		if (wayptsArray != undefined) {// && (wayptsArray.length < 9)
+		if (wayptsArray != undefined) {
 			for (var i = 0; i < wayptsArray.length; i++) {
 				waypts.push({
 					location : wayptsArray[i].lat + ',' + wayptsArray[i].lng,
@@ -86,34 +84,20 @@
 				});
 			}
 			var request = {
-				origin : start,
-				destination : end,
-				waypoints : waypts,
-				optimizeWaypoints : true,
-				travelMode : google.maps.TravelMode.WALKING
+					origin : start,
+					destination : end,
+					waypoints : waypts,
+					optimizeWaypoints : true,
+					avoidHighways : true,
+					avoidTolls : true,
+					travelMode : google.maps.TravelMode.DRIVING
 			};
 			directionsService.route(request, function(response, status) {
 				if (status == google.maps.DirectionsStatus.OK) {
 					directionsDisplay.setDirections(response);
 				}
 			});
-		} /*else {
-			readtype = 0;
-			var lng=parseFloat(obj.rotstart.lng);
-			var lat=parseFloat(obj.rotstart.lat);
-			waypts.push(new google.maps.LatLng(lng,lat));
-			alert(lng);
-			alert(lat);
-			for (var i = 0; i < wayptsArray.length; i++) {
-				var lng=parseFloat(wayptsArray[i].lng);
-				var lat=parseFloat(wayptsArray[i].lat);
-				waypts.push(new google.maps.LatLng(lng,lat));
-			}
-			var lng=parseFloat(obj.rotstart.lng);
-			var lat=parseFloat(obj.rotstart.lat);			
-			waypts.push(new google.maps.LatLng(lng,lat));
 		}
-		    flightPlanCoordinates =waypts;*/
 	}
 	function HomeControl(controlDiv, map) {
 
@@ -166,18 +150,9 @@
 
 		map = new google.maps.Map(document.getElementById("map-container"),
 				mapOptions);
-		if (readtype == 1) {
+
 			directionsDisplay.setMap(map);
-		}/*  else if (readtype == 0) {		    
-              flightPath = new google.maps.Polyline({
-              path: flightPlanCoordinates,
-              geodesic: true,
-              strokeColor: '#FF0000',
-              strokeOpacity: 1.0,
-              strokeWeight: 2
-            });
-			flightPath.setMap(map);
-		} */
+
 		var homeControlDiv = document.createElement('div');
 		var homeControl = new HomeControl(homeControlDiv, map);
 

@@ -77,7 +77,7 @@
 								name="tabNum" value="<%=tabNum%>"><input type="hidden"
 								id="insertyouno" name="insertyouno" value="${memVO.memno}"> <input
 								type="submit" id="btninsfri" class="btn btn-primary btn-lg btn-block"
-								value="加入好友"></td>
+								value="關注好友"></td>
 						</tr>
 					</tbody>
 				</table>
