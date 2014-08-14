@@ -86,7 +86,7 @@
 								name="tabNum" value="<%=tabNum%>"> <input type="hidden"
 								id="deleteyouno" name="deleteyouno" value="${friVO.youno}"> <input
 								id="delfri" type="button" name="${friVO.youno}"
-								class="btn btn-primary btn-lg btn-block" value="刪除好友"></td>
+								class="btn btn-primary btn-lg btn-block" value="取消關注"></td>
 						</tr>
 					</tbody>
 				</table>
