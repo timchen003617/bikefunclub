@@ -43,7 +43,7 @@
 					class="com.bikefunclub.rotcls.model.RotclsService" />
 				<select size="1" name="rotclsno">
 					<c:forEach var="rotclsVO" items="${rotclsSvc.all}">
-						<option value="${rotclsVO.rotclsno}">${rotclsVO.rotclsname}
+						<option value="${rotclsVO.rotclsno}">${rotclsVO.rotclsname}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -54,8 +54,8 @@
 			<div>
 				<label for="rotauth" class="label"><span class="red">*分享對象</span></label>
 				<select size="1" name="rotauth">
-					<option value="PUBLIC">公開
-					<option value="PERSONAL">個人
+					<option value="PUBLIC">公開</option>
+					<option value="PERSONAL">個人</option>
 				</select>
 			</div>
 			<div>

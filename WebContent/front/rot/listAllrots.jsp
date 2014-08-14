@@ -198,12 +198,12 @@
 						<jsp:useBean id="rotclsSvc" scope="page"
 							class="com.bikefunclub.rotcls.model.RotclsService" />
 						選擇路線分類: <select size="1" name="rotclsno" id="select_rotclsno">
-							<option value="0">請選擇
+							<option value="0">請選擇</option>
 								<c:forEach var="rotclsVO" items="${rotclsSvc.all}">
 									<option value="${rotclsVO.rotclsno}"
 										<c:if test="${not empty rotclsno}">
 								 ${(rotclsno==rotclsVO.rotclsno)?'selected':'' }		
-								</c:if>>${rotclsVO.rotclsname}
+								</c:if>>${rotclsVO.rotclsname}</option>
 								</c:forEach>
 						</select>
 					</h3>

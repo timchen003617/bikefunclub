@@ -42,7 +42,7 @@
 					<select size="1" name="gpclsno">
 						<c:forEach var="gpclsVO" items="${gpclsSvc.all}">
 							<option value="${gpclsVO.gpclsno}"
-								${(gpVO.gpclsno==gpclsVO.gpclsno)?'selected':'' }>${gpclsVO.gpclsname}
+								${(gpVO.gpclsno==gpclsVO.gpclsno)?'selected':'' }>${gpclsVO.gpclsname}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -63,10 +63,10 @@
 					<select size="1" name="rotno" id="selected_rot">
 						<c:forEach var="rotVO1" items="${listrotbymem}">
 							<c:if test="${rotVO1.rotno==rotVO.rotno}">
-								<option value="${rotVO1.rotno}" selected>${rotVO1.rotname}
+								<option value="${rotVO1.rotno}" selected>${rotVO1.rotname}</option>
 							</c:if>
 							<c:if test="${rotVO1.rotno!=rotVO.rotno}">
-								<option value="${rotVO1.rotno}">${rotVO1.rotname}
+								<option value="${rotVO1.rotno}">${rotVO1.rotname}</option>
 							</c:if>
 						</c:forEach>
 					</select> <input style="margin-left: 10px;" type="button" id="rotmap"

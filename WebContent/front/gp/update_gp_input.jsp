@@ -41,7 +41,7 @@
 					<select size="1" name="gpclsno">
 						<c:forEach var="gpclsVO" items="${gpclsSvc.all}">
 							<option value="${gpclsVO.gpclsno}"
-								${(gpVO.gpclsno==gpclsVO.gpclsno)?'selected':'' }>${gpclsVO.gpclsname}
+								${(gpVO.gpclsno==gpclsVO.gpclsno)?'selected':'' }>${gpclsVO.gpclsname}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -62,7 +62,7 @@
 					<select size="1" name="rotno">
 						<c:forEach var="rotVO2" items="${listrotbymem}">
 							<option value="${rotVO2.rotno}"
-								${(rotVO2.rotno==gpVO.rotno)?'selected':'' }>${rotVO2.rotname}
+								${(rotVO2.rotno==gpVO.rotno)?'selected':'' }>${rotVO2.rotname}</option>
 						</c:forEach>
 					</select> <input style="margin-left: 10px;" type="button" id="rotmap"
 						class="btn btn-primary" value="地圖預覽" /> <span class="red"
