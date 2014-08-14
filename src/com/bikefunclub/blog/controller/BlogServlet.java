@@ -243,7 +243,7 @@ public class BlogServlet extends HttpServlet {
 				String authname = req.getParameter("authname");
 				System.out.println("2-5");
 				System.out.println("3");
-				Date date = new Date(System.currentTimeMillis());
+//				Date date = new Date(System.currentTimeMillis());
 //				Timestamp bgtime = Timestamp
 //						.valueOf(new java.text.SimpleDateFormat(
 //								"yyyy-MM-dd HH:mm:ss").format(date));
@@ -316,70 +316,42 @@ public class BlogServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		if ("launchblog".equals(action)) {// 發起揪團，來自page_insert_gp.jsp
-			System.out.println("1");
+		if ("launchblblog_info".equals(action)) {// 發起揪團詳細資料,來自launchgp_info.jsp
+            System.out.println("00");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			BlogService  blogSvc = new BlogService(); 
-			BlogVO blogVO = new BlogVO();
-			
-			
-			System.out.println("2");
-			/** 1.接收請求參數 **/
+			BlogService blogSvc = new BlogService();
+			System.out.println("01");
+		 
+		    
+		
+		    
+
 			try {
-				Integer memno = new Integer(req.getParameter("memno"));
-				System.out.println("2-1");
-				Integer blogclsno = new Integer(req.getParameter("blogclsno"));
-				System.out.println("2-2");
-				String bgtitle = req.getParameter("bgtitle").trim();
-				System.out.println("2-3");
-				String bgtext = req.getParameter("bgtext").trim();
-				System.out.println("2-4");
-				String authname = req.getParameter("authname").trim();
-				System.out.println("2-5");
+				/*************************** 1.接收請求參數 ****************************************/
+                Integer blogno = new Integer(req.getParameter("blogno"));
+                System.out.println("02");
+				/*************************** 2.開始查詢資料 ****************************************/
+				BlogVO blogVO = blogSvc.getOneBlog(blogno);
+				System.out.println("03");
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("blogVO", blogVO); // 資料庫取出的list物件,存入request
 
-				// 揪團建立時間
-				System.out.println("3");
-				/** 2 輸入格式的錯誤處理 **/
-
-				if (bgtitle.isEmpty()) {
-					errorMsgs.add("請輸入網誌標題!");
-				}
-				if (bgtext.isEmpty()) {
-					errorMsgs.add("請輸入網誌內容!");
-				}
-				
-				
-				
-				
-
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("blogVO", blogVO);// 含有輸入格式錯誤的rotVO物件,也存入req
-				  RequestDispatcher failureView = req
-							.getRequestDispatcher("/front/blog/page_insert_blog.jsp");
-					failureView.forward(req, res);
-					System.out.println("4");
-					return; // 程式中斷
-				}
-				/*************************** 3.開始新增資料 *****************************************/
-				blogVO = blogSvc.addBlog(memno, blogclsno, bgtitle, bgtext,authname);
-				System.out.println("5");
-			    /*************************** 4.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front/blog/page_listAllblog.jsp";
+				String url = "/front/blog/page_launchblog_info.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
+				System.out.println("04");
 				successView.forward(req, res);
-				System.out.println("6");
-				/** 其他可能的錯誤處理 **/
+
+				/*************************** 其他可能的錯誤處理 ***********************************/
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
+				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front/blog/page_insert_blog.jsp");
-				System.out.println("7");
+						.getRequestDispatcher("/front/blog/page_blog_info.jsp");
+				System.out.println("05");
 				failureView.forward(req, res);
 			}
-
 		}
+	
 	
 	
 	}
