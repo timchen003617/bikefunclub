@@ -119,11 +119,11 @@
 				<div class="field">
 					<table class="table">
 						<thead>
- 							<tr>
+							<tr>
 								<th><h3>
 										<strong>收藏路線</strong>
 									</h3></th>
- 							</tr>
+							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="rotVO" items="${rotlist}">
@@ -132,13 +132,19 @@
 									<span>、</span>
 								</c:if>
 								<tr>
-									<td><span>【路線名稱:${rotVO.rotname}】 </span></td>
+									<td>
+										<form action="<%=path%>/Rot.do" method="post">
+											<a href="javascript:;" onclick="parentNode.submit();">【路線名稱:${rotVO.rotname}】</a><input
+												type="hidden" name="action" value="getRot_info"><input
+												type="hidden" name="rotno" value="${rotVO.rotno}">
+										</form>
+									</td>
 								</tr>
 							</c:forEach>
- 						</tbody>
- 					</table>
- 				</div>
-				
+						</tbody>
+					</table>
+				</div>
+
 			</div>
 		</div>
 	</div>
