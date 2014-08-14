@@ -1,0 +1,201 @@
+alter session set deferred_segment_creation=false;
+--相片所屬相簿
+DROP TABLE GPALBUM;
+
+--相簿
+DROP TABLE ALBUM;
+DROP SEQUENCE albumseq;
+
+--相簿分類
+DROP TABLE ALBCLS;
+DROP SEQUENCE albclsseq;
+
+--相片
+DROP TABLE PHOTO;
+DROP SEQUENCE photoseq;
+
+--網誌留言
+DROP TABLE BLOGCOM;
+DROP SEQUENCE blogcomseq;
+
+--網誌
+DROP TABLE BLOG;
+DROP SEQUENCE blogseq;
+
+--網誌分類
+DROP TABLE BLOGCLS;
+DROP SEQUENCE blogclsseq;
+
+
+--GREATE
+--相片
+
+CREATE TABLE PHOTO (
+  PHOTONO     NUMBER(6)      NOT NULL, 
+  MEMNO       NUMBER(6)      NOT NULL,
+  PHCOO       VARCHAR2(100)  , 
+  PHASS       NUMBER(1)      NOT NULL,
+  PHFILENAME  VARCHAR2(100)  NOT NULL,
+  PHEXTNAME   VARCHAR2(10)   NOT NULL,
+  PHUP        DATE           NOT NULL,
+  PHFILE      BLOB           NOT NULL,
+    
+ PRIMARY KEY (PHOTONO),
+
+ FOREIGN KEY (MEMNO) REFERENCES MEMBER(MEMNO));
+
+CREATE SEQUENCE photoseq
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE; 
+
+INSERT INTO PHOTO (photono,memno,phcoo,phass,phfilename,phextname,phup,phfile) VALUES 
+(photoseq.NEXTVAL, 1, '(100.2255,100.3311)', 1, '1234', 'jpg',TO_DATE('2014/07/07 20:00:00','yyyy-mm-dd hh24:mi:ss'),utl_raw.cast_to_raw('你好嗎?'));
+INSERT INTO PHOTO (photono,memno,phcoo,phass,phfilename,phextname,phup,phfile) VALUES 
+(photoseq.NEXTVAL, 2, '(100.5288,150.3113)', 1, '12345', 'jpg',TO_DATE('2014/07/08 21:10:10','yyyy-mm-dd hh24:mi:ss'),utl_raw.cast_to_raw('很不好'));
+INSERT INTO PHOTO (photono,memno,phcoo,phass,phfilename,phextname,phup,phfile) VALUES 
+(photoseq.NEXTVAL, 2,null , 0, 'aaaa', 'jpg',TO_DATE('2014/05/05 20:12:10','yyyy-mm-dd hh24:mi:ss'),utl_raw.cast_to_raw('烙賽阿'));
+
+--相簿分類
+
+CREATE TABLE ALBCLS (
+  ALBCLSNO         NUMBER(2)         NOT NULL, 
+  ALBCLSNAME       VARCHAR2(20)      NOT NULL,
+
+   
+PRIMARY KEY (ALBCLSNO));
+
+
+CREATE SEQUENCE albclsseq
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+
+INSERT INTO ALBCLS (albclsno,albclsname ) VALUES
+(albclsseq.NEXTVAL, '野外');
+INSERT INTO ALBCLS (albclsno,albclsname ) VALUES
+(albclsseq.NEXTVAL, '教室');
+
+--相簿
+
+CREATE TABLE ALBUM (
+  ALBNO       NUMBER(6)      NOT NULL, 
+  MEMNO       NUMBER(6)      NOT NULL,
+  ALBCLSNO    NUMBER(2)      NOT NULL,
+  AUTHNAME    VARCHAR2(10)   NOT NULL,
+  ALBTITLE    VARCHAR2(20)   NOT NULL,
+  ALBDESC     VARCHAR2(100)  NOT NULL,
+  ALBTIME     DATE           NOT NULL,
+
+ 
+PRIMARY KEY (ALBNO),
+FOREIGN KEY (MEMNO) REFERENCES MEMBER(MEMNO),
+FOREIGN KEY (ALBCLSNO) REFERENCES ALBCLS(ALBCLSNO));
+
+CREATE SEQUENCE albumseq
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+
+INSERT INTO ALBUM (albno,memno,albclsno,authname,albtitle,albdesc,albtime) VALUES
+(albumseq.NEXTVAL, 1, 1, 'PERSONAL','流出','就描述', TO_DATE('2014/01/01 00:05:10','yyyy-mm-dd hh24:mi:ss'));
+INSERT INTO ALBUM (albno,memno,albclsno,authname,albtitle,albdesc,albtime) VALUES
+(albumseq.NEXTVAL, 2, 1, 'PUBLIC','流入','還描述', TO_DATE('2014/02/02 00:10:30','yyyy-mm-dd hh24:mi:ss'));
+INSERT INTO ALBUM (albno,memno,albclsno,authname,albtitle,albdesc,albtime) VALUES
+(albumseq.NEXTVAL, 2, 1, 'SHAREFS','XXX','...', TO_DATE('2014/03/03 03:10:30','yyyy-mm-dd hh24:mi:ss'));
+
+--相片所屬相簿
+
+CREATE TABLE GPALBUM (
+  ALBNO       NUMBER(6)      NOT NULL, 
+  PHOTONO     NUMBER(6)      NOT NULL,
+
+   
+FOREIGN KEY (ALBNO) REFERENCES ALBUM(ALBNO),
+FOREIGN KEY (PHOTONO) REFERENCES PHOTO(PHOTONO),
+PRIMARY KEY (ALBNO,PHOTONO));
+
+INSERT INTO GPALBUM VALUES( 1, 1);
+
+--網誌分類
+
+CREATE TABLE BLOGCLS (
+  BLOGCLSNO    NUMBER(6)     NOT NULL, 
+  BLOGCLSNAME  VARCHAR2(20)  NOT NULL,  
+PRIMARY KEY (BLOGCLSNO));
+
+CREATE SEQUENCE blogclsseq
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;  
+
+
+INSERT INTO BLOGCLS VALUES (blogclsseq.NEXTVAL,'休閒');
+INSERT INTO BLOGCLS VALUES (blogclsseq.NEXTVAL,'旅遊');
+INSERT INTO BLOGCLS VALUES (blogclsseq.NEXTVAL,'夜遊');
+INSERT INTO BLOGCLS VALUES (blogclsseq.NEXTVAL,'競賽');
+INSERT INTO BLOGCLS VALUES (blogclsseq.NEXTVAL,'登山');
+
+--網誌
+
+CREATE TABLE BLOG (
+  BLOGNO  	 NUMBER(6)           NOT NULL,
+  MEMNO   	 NUMBER(6)           NOT NULL,
+  BLOGCLSNO 	 NUMBER(6)           NOT NULL,  	
+  BGTITLE        VARCHAR2(20)        NOT NULL,
+  BGTEXT	 CLOB,
+  BGTIME	 DATE,
+  AUTHNAME       VARCHAR2(20)        NOT NULL, 
+     
+PRIMARY KEY (BLOGNO),
+FOREIGN KEY (MEMNO) REFERENCES MEMBER (MEMNO),
+FOREIGN KEY (BLOGCLSNO) REFERENCES BLOGCLS (BLOGCLSNO));
+
+CREATE SEQUENCE blogseq
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+
+INSERT INTO BLOG (blogno, memno, blogclsno, bgtitle, bgtext, bgtime,authname) VALUES
+(blogseq.NEXTVAL, 1, 2, '義和團', '神功護體阿', TO_DATE('2014/10/10 10:10:10','yyyy-mm-dd hh24:mi:ss'), 'PERSONAL');
+INSERT INTO BLOG (blogno, memno, blogclsno, bgtitle, bgtext, bgtime,authname) VALUES
+(blogseq.NEXTVAL, 1, 2, '肉蒲團', '阿阿阿', TO_DATE('2014/11/11 11:11:11','yyyy-mm-dd hh24:mi:ss'), 'PUBLIC');
+
+
+
+--網誌留言
+
+CREATE TABLE BLOGCOM (
+  BGCOMNO     NUMBER(6)           NOT NULL,
+  BLOGNO      NUMBER(6)           NOT NULL,
+  MEMNO       NUMBER(6)           NOT NULL,
+  BGCOMTEXT   VARCHAR2(500)       NOT NULL,
+  BGCOMTIME   DATE,    
+
+PRIMARY KEY (BGCOMNO),
+FOREIGN KEY (BLOGNO) REFERENCES BLOG (BLOGNO),	   
+FOREIGN KEY (MEMNO) REFERENCES MEMBER (MEMNO));
+
+
+CREATE SEQUENCE blogcomseq
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+NOCACHE;
+
+INSERT INTO BLOGCOM VALUES ( blogcomseq.NEXTVAL, 1, 1, '雄壯、威武...',TO_DATE('2014/06/06 06:06:06','yyyy-mm-dd hh24:mi:ss'));
+INSERT INTO BLOGCOM VALUES ( blogcomseq.NEXTVAL, 2, 1, '嚴肅、剛直...',TO_DATE('2014/07/07 07:07:07','yyyy-mm-dd hh24:mi:ss'));
+INSERT INTO BLOGCOM VALUES ( blogcomseq.NEXTVAL, 2, 1, '安靜、確實...',TO_DATE('2014/08/08 08:08:08','yyyy-mm-dd hh24:mi:ss'));
+
+COMMIT;

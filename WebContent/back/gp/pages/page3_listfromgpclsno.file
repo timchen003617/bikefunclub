@@ -1,0 +1,24 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div class="row">
+	<div class="col-md-12">
+		<%if ( pageNumber1 > 1) {%>
+		<div class="pull-right"> 
+   			<%if (rowsPerPage1<rowNumber1) {%>
+   		   	<ul class="pagination pagination-sm">
+      	 	<li><A href="<%=request.getContextPath()%>/Gpcls.do?whichPage1=1&action=getGps_FromGpclsno_ForGp&gpclsno=${gpclsno}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+			<%for (int i=1; i<=pageNumber1; i++){%>
+				<%if (i==whichPage1) {%>
+		           <li class="active"><a href="<%=request.getContextPath()%>/Gpcls.do?whichPage1=<%=i%>&action=getGps_FromGpclsno_ForGp&gpclsno=${gpclsno}"><%=i%><span class="sr-only">(current)</span></a></li>
+				   
+				<%} else {%>
+				   <li><a href="<%=request.getContextPath()%>/Gpcls.do?whichPage1=<%=i%>&action=getGps_FromGpclsno_ForGp&gpclsno=${gpclsno}"><%=i%></a></li>
+				<%}%>
+		    <%}%>       		        		  
+      		 	<li><A href="<%=request.getContextPath()%>/Gpcls.do?whichPage1=<%=pageNumber1%>&action=getGps_FromGpclsno_ForGp&gpclsno=${gpclsno}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+			</ul>         
+            <%}%>
+        </div>
+  	    <%}%>  
+		<div class="clearfix"></div>
+	</div> 
+</div>

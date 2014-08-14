@@ -1,0 +1,45 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%  int memrowsPerPage = 6;  //每頁的筆數    
+    int memrowNumber=0;      //總筆數
+    int mempageNumber=0;     //總頁數      
+    int memwhichPage=1;      //第幾頁
+    int mempageIndexArray[]=null;
+    int mempageIndex=0; 
+%>
+
+<%  
+    memrowNumber=memlist.size();
+    if (memrowNumber%memrowsPerPage !=0)
+     mempageNumber=memrowNumber/memrowsPerPage +1;
+    else mempageNumber=memrowNumber/memrowsPerPage;    
+
+    mempageIndexArray=new int[mempageNumber]; 
+    for (int i=1 ; i<=mempageIndexArray.length ; i++)
+    mempageIndexArray[i-1]=i*memrowsPerPage-memrowsPerPage;
+%>
+
+<%  try {
+      memwhichPage = Integer.parseInt(request.getParameter("memwhichPage"));
+      mempageIndex=mempageIndexArray[memwhichPage-1];
+    } catch (NumberFormatException e) { //第一次執行的時候
+       memwhichPage=1;
+       mempageIndex=0;
+    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+         if (mempageNumber>0){
+              memwhichPage=mempageNumber;
+              mempageIndex=mempageIndexArray[mempageNumber-1];
+         }
+    } 
+%>
+
+<%if (mempageNumber>0){%>
+<div class="row">
+<div class="col-md-12"> 
+<div class="pull-left"> 
+<p><span>第<%=memwhichPage%>/<%=mempageNumber%>頁</span>&nbsp&nbsp<span>共<%=memrowNumber%>筆</span></p>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<%}%>
+

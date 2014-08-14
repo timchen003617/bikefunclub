@@ -1,0 +1,498 @@
+body {
+	font: 11pt/1.7em "Helvetica Neue", Helvetica, "Heiti TC", "微軟正黑體",
+		"Microsoft Sans Serif", Helvetica, Geneva, sans-serif;
+	background-color: #eee;
+	height: 80%;
+}
+
+#myhome {
+	border: 1px solid #ccc;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	margin-top: 50px;
+	min-height: 500px;
+	background-color: #fff;
+}
+
+#myhome-inner #fieldperson {
+	padding: 30px 0px 10px 260px;
+	font: 14pt/1.7em "微軟正黑體";
+}
+#myhome-inner .field {
+	padding: 0px 0px 10px 20px;
+	font: 14pt/1.7em "微軟正黑體";
+}
+#myhome-inner .field td {
+	text-indent:50px;
+}
+#myhome-inner legend {
+	margin: 0px;
+	padding-top: 60px;
+}
+
+#myhome-inner {
+	position: relative;
+}
+
+#mypic {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	top: -60px;
+	left: 40px;
+}
+
+#mypic img {
+	width: 200px;
+	height: 200px;
+}
+
+#map-container {
+	height: 650px;
+}
+
+.container.body-content {
+	margin-top: 50px;
+}
+
+a {
+	color: #34373b;
+}
+
+a:hover,a:focus {
+	color: #6b3;
+}
+
+.red {
+	color: red;
+	font-weight: bold;
+}
+
+.orange {
+	color: #f18d00;
+}
+
+.img-thumbnail {
+	width: 96px;
+	height: 96px;
+	overflow: hidden;
+}
+
+.logo a {
+	background: url("../img/bikefunclub.png") no-repeat;
+	display: block;
+	text-indent: -9999px;
+	width: 327px;
+	height: 170px;
+}
+
+.logo a {
+	background: url("../img/bikefunclub.png") no-repeat;
+	display: block;
+	text-indent: -999px;
+	width: 327px;
+	height: 170px;
+}
+
+.loginlogo a {
+	background: url("../img/bikefunclub.png") no-repeat;
+	display: block;
+	text-indent: -9999px;
+	width: 327px;
+	height: 170px;
+	margin: 0 auto;
+}
+/* 登入頁面 */
+.form-signin,.register {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,.form-signin .checkbox {
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.form-signin .checkbox {
+	font-weight: normal;
+}
+
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	margin-bottom: 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.form-control:focus {
+	border-color: #6b3;
+}
+
+.ckeditor {
+	float: left;
+}
+/*發起揪團頁面*/
+.form-gp {
+	padding: 15px;
+}
+
+.form-gp textarea {
+	float: left;
+	margin-bottom: 10px;
+}
+
+.form-gp div>input,.form-gp div>select,.form-gp div>.dash {
+	float: left;
+	margin-bottom: 10px;
+}
+/* 註冊頁面、修改會員資料頁面 */
+.form-register,.form-memmodify {
+	max-width: 730px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-register div,.form-memmodify div,.form-gp div {
+	padding-bottom: 10px;
+}
+
+.form-register>div:last-child,.form-memmodify>div:last-child,.form-gp>div:last-child
+	{
+	max-width: 345px;
+	margin: 0 auto;
+}
+
+.form-register .label,.form-memmodify .label,.form-gp .label {
+	color: #191919;
+	display: block;
+	clear: left;
+	float: left;
+	width: 185px;
+	text-align: right;
+	padding: 7px 15px 0 0;
+	text-transform: uppercase;
+	font-size: 12pt;
+}
+/*註冊表單、修改會員資料、發起揪團頁面驗證*/
+.form-register label.error,.form-memmodify label.error,.form-gp label.error
+	{
+	font-size: 10pt;
+	color: #F00;
+	font-weight: bold;
+	/*   display: block; */
+	margin-left: 10px;
+}
+
+.form-gp label.error {
+	float: left;
+}
+
+.form-register  input.error,.form-memmodify select.error,.form-memmodify  input.error,.form-memmodify select.error,.form-gp select.error,.form-gp input.error,.form-gp textarea.error
+	{
+	/* 	background: #FF9933; */
+	border: 1px solid red;
+}
+
+/*首頁最新公告*/
+ul.ann_index {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.ann_index li {
+	height: 50px;
+	margin: 10px 0px;
+	padding: 5px;
+}
+
+ul.ann_index li p {
+	height: 50px;
+	overflow: hidden;
+}
+
+ul.ann_index li img {
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+}
+
+/*  
+*	註冊表單、修改會員資料頁面圖片上傳預覽#preview
+*/
+.form-register #preview,.form-memmodify #preview {
+	margin-left: 180px;
+}
+
+.form-register #preview img,.form-memmodify #preview img {
+	width: 96px;
+	height: 96px;
+	overflow: hidden;
+}
+
+.form-register #preview #imghead {
+	display: none;
+}
+/*for ie*/
+.form-register #preview img,.form-memmodify #preview img {
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);
+}
+/*好友名單管理、新增好友*/
+#frilist.pull-left,#memlist.pull-left {
+	width: 235px;
+	height: 247px;
+	margin: 2px;
+	border: 1px solid #ccc;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	word-break: break-all; /* 強制文字斷行 */
+}
+
+.btn-primary {
+	background-color: #6b3;
+	border-color: #593;
+}
+
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary
+	{
+	color: #ffffff;
+	background-color: #f90;
+	border-color: #c70;
+}
+
+.header-right {
+	margin-top: 160px;
+}
+
+header {
+	background-color: #fff;
+}
+
+header #menulist li {
+	display: inline-block;
+	padding: 0;
+	margin: 0 10px;
+}
+
+header #menulist li a {
+	color: #000;
+}
+
+header #menulist li a:hover {
+	color: #6b3;
+}
+
+#messagebox {
+	position: relative;
+}
+
+#messagebox-inner {
+	display: none;
+	position: absolute;
+	right: 0;
+	width: 300px;
+	height: 100px;
+	z-index: 100;
+	overflow-x: hidden;
+	overflow-y: auto;
+	border: 1px solid #ccc;
+	background-color: white;
+	-webkit-box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.52);
+	-moz-box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.52);
+	box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.52);
+}
+
+#messagebox-inner ul {
+	list-style-type: none;
+	text-indent: -10px
+}
+
+#carousel {
+	
+}
+
+.badge {
+	background-color: red;
+}
+
+.navbar {
+	border-radius: initial;
+	margin-bottom: 0px;
+	z-index: 1;
+	background-color: #6b3;
+	background: -moz-linear-gradient(top, #2f892a 0%, #5bb136 10%, #5bb136 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2f892a),
+		color-stop(10%, #5bb136), color-stop(100%, #5bb136));
+	/* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #2f892a 0%, #5bb136 10%, #5bb136 100%);
+	/* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #2f892a 0%, #5bb136 10%, #5bb136 100%);
+	/* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #2f892a 0%, #5bb136 10%, #5bb136 100%);
+	/* IE10+ */
+	background: linear-gradient(to bottom, #2f892a 0%, #5bb136 10%, #5bb136 100%);
+	/* W3C */
+	border-width: 0px;
+	height: 70px;
+}
+
+.breadcrumb {
+	background-color: #fff;
+}
+
+#selected_rots {
+	height: 580px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#colmd4-1 .panel-body {
+	height: 350px;
+}
+/* 分頁 */
+.pagination>.active>a,.pagination>.active>span {
+	background-color: #6b3;
+	border-color: #6b3;
+}
+
+.pagination>.active>a:hover,.pagination>.active>span:hover,.pagination>.active>a:focus,.pagination>.active>span:focus
+	{
+	background-color: #f18d00;
+	border-color: #f18d00;
+}
+/*面版*/
+.panel-default>.panel-heading {
+	background-color: #6b3;
+}
+
+.panel-default>.panel-heading h3 {
+	color: #fff;
+}
+
+.tabbedPanels {
+	width: auto;
+}
+
+.tab-content {
+	padding: 15px 0;
+}
+
+.tabs {
+	margin: 0;
+	padding: 0;
+}
+
+.tabs {
+	width: 100%;
+	height: 32px;
+}
+
+.tabs li {
+	float: left;
+	height: 31px;
+	line-height: 31px;
+	overflow: hidden;
+	position: relative;
+	margin-bottom: -1px; /* 讓 li 往下移來遮住 ul 的部份 border-bottom */
+	border: 1px solid #999;
+	background: #e1e1e1;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+.tabs li a {
+	display: block;
+	padding: 0 20px;
+	color: #000;
+	border: 1px solid #fff;
+	text-decoration: none;
+}
+
+.tabs li a:hover {
+	background: rgba(0, 0, 0, 0.05);
+}
+
+.tabs li.active {
+	background: #6b3;
+	border-bottom: 1px solid #fff;
+	font-weight: bold;
+}
+
+.tabs li.active a:hover {
+	background: #6b3;
+	color: #fff;
+}
+
+.tab_container {
+	clear: left;
+	width: 100%;
+	min-height: 316px;
+	padding: 10px;
+	border-top: none;
+	background: #fff;
+	border-top: none;
+}
+
+#colmd4-2 .tab_container .tab_content {
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	height: 300px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.tab_container .tab_content h2 {
+	margin: 0 0 20px;
+}
+/*隱藏dialog*/
+#memmdok,#frijoinok,#delfri-confir {
+	display: none;
+}
+
+footer {
+	background-color: #34373b;
+	color: #fff;
+	height: 105px;
+	margin-top: 30px;
+}
+
+footer .submit {
+	margin: 0;
+}
+
+footer .submit dl dd {
+	display: inline-block;
+	padding: 0;
+	margin: 0 10px;
+}
+
+footer a {
+	color: #6b3;
+}
+
+footer a:hover {
+	color: #fff;
+}

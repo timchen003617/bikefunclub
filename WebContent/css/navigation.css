@@ -1,0 +1,40 @@
+#navigation ul,#navigation li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+#navigation a {
+	border-left: 1px solid #593;
+	border-right: 1px solid #593;
+	background-color: transparent;
+	color: #fff;
+	text-decoration: none;
+	font: bold 20pt Arial, sans-serif;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+
+#navigation a:hover {
+	background-color: #fff;
+	color: #000;
+}
+#navigation .stack>a {
+	background-repeat: no-repeat;
+}
+#navigation .stack>a:hover {
+	border-top: 5px solid #000;
+}
+#navigation li ul li a {
+	border: 0;
+	text-align: left;
+	text-indent: 20px;
+	background-repeat: no-repeat;
+	background-color: #000;
+	color: #fff;
+	font: bold 12pt Arial, sans-serif;
+}
+#navigation li ul li a:hover {
+	background-color: #000;
+	color: #6b3;
+}

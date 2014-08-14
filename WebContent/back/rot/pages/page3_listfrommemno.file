@@ -1,0 +1,24 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<div class="row">
+	<div class="col-md-12">
+		<%if ( pageNumber > 1) {%>
+		<div class="pull-right"> 
+   			<%if (rowsPerPage<rowNumber) {%>
+   		   	<ul class="pagination pagination-sm">
+      	 	<li><A href="<%=request.getContextPath()%>/Rot.do?whichPage=1&action=listRots_frommemno&memno=${memno}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+			<%for (int i=1; i<=pageNumber; i++){%>
+				<%if (i==whichPage) {%>
+		           <li class="active"><a href="<%=request.getContextPath()%>/Rot.do?whichPage=<%=i%>&action=listRots_frommemno&memno=${memno}"><%=i%><span class="sr-only">(current)</span></a></li>
+				   
+				<%} else {%>
+				   <li><a href="<%=request.getContextPath()%>/Rot.do?whichPage=<%=i%>&action=listRots_frommemno&memno=${memno}"><%=i%></a></li>
+				<%}%>
+		    <%}%>       		        		  
+      		 	<li><A href="<%=request.getContextPath()%>/Rot.do?whichPage=<%=pageNumber%>&action=listRots_frommemno&memno=${memno}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+			</ul>         
+            <%}%>
+        </div>
+  	    <%}%>  
+		<div class="clearfix"></div>
+	</div> 
+</div>

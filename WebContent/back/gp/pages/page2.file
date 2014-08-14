@@ -1,0 +1,27 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
+<div class="row">
+	<div class="col-md-12"> 
+		<div class="pull-left">				 
+			<a class="btn btn-warning btn-lg" href='<%=contextpath%>/back/ad/page_add_ad_input.jsp'>新增</a>
+		</div>
+		<%if ( pageNumber > 1) {%>
+		<div class="pull-right">
+			<%if (rowsPerPage<rowNumber) {%>
+			<ul class="pagination pagination-sm">			    
+		        <li><a href="<%=request.getRequestURI()%>?whichPage=1"><span class="glyphicon glyphicon-chevron-left"></span></a></li>			        
+			<%for (int i=1; i<=pageNumber; i++){%>
+				<%if (i==whichPage) {%>
+		           <li class="active"><a href="<%=request.getRequestURI()%>?whichPage=<%=i%>"><%=i%><span class="sr-only">(current)</span></a></li>
+				   
+				<%} else {%>
+				   <li><a href="<%=request.getRequestURI()%>?whichPage=<%=i%>"><%=i%></a></li>
+				<%}%>
+		    <%}%> 		  
+		        <li><a href="<%=request.getRequestURI()%>?whichPage=<%=pageNumber%>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+			</ul> 
+			<%}%>						
+		</div>
+		<%}%>   
+		<div class="clearfix"></div>
+	</div> 
+</div>

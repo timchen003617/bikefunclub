@@ -1,0 +1,45 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%  int attendrowsPerPage = 10;  //每頁的筆數    
+    int attendrowNumber=0;      //總筆數
+    int attendpageNumber=0;     //總頁數      
+    int attendwhichPage=1;      //第幾頁
+    int attendpageIndexArray[]=null;
+    int attendpageIndex=0; 
+%>
+
+<%  
+    attendrowNumber = attendlist.size();
+    if (attendrowNumber%attendrowsPerPage !=0)
+     attendpageNumber=attendrowNumber/attendrowsPerPage +1;
+    else attendpageNumber=attendrowNumber/attendrowsPerPage;    
+
+    attendpageIndexArray=new int[attendpageNumber]; 
+    for (int i=1 ; i<=attendpageIndexArray.length ; i++)
+    attendpageIndexArray[i-1]=i*attendrowsPerPage-attendrowsPerPage;
+%>
+
+<%  try {
+      attendwhichPage = Integer.parseInt(request.getParameter("whichPage2"));
+      attendpageIndex=attendpageIndexArray[attendwhichPage-1];
+    } catch (NumberFormatException e) { //第一次執行的時候
+       attendwhichPage=1;
+       attendpageIndex=0;
+    } catch (ArrayIndexOutOfBoundsException e) { //總頁數之外的錯誤頁數
+         if (attendpageNumber>0){
+              attendwhichPage=attendpageNumber;
+              attendpageIndex=attendpageIndexArray[attendpageNumber-1];
+         }
+    } 
+%>
+
+<%if (attendpageNumber>0){%>
+<div class="row">
+<div class="col-md-12"> 
+<div class="pull-left"> 
+<p><span>第<%=attendwhichPage%>/<%=attendpageNumber%>頁</span>&nbsp&nbsp<span>共<%=attendrowNumber%>筆</span></p>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+<%}%>
+

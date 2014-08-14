@@ -1,0 +1,73 @@
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #111111;
+}
+
+.logo a {
+	background: url("../img/bikefunclub_back_big.png") no-repeat;
+	display: block;
+	text-indent: -999px;
+	width: 327px;
+	height: 170px;
+	margin: 0 auto;
+}
+
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,.form-signin .checkbox {
+	margin-bottom: 10px;
+	font-weight: bold;
+	color:white;
+}
+
+.form-signin .checkbox {
+	font-weight: normal;
+}
+
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	margin-bottom: 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+	z-index: 3;
+}
+
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.form-control:focus {
+	border-color: #f18d00;
+}
+
+.btn-primary {
+	background-color: #f18d00;
+	border-color: #f18d00;
+}
+
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary
+	{
+	color: #ffffff;
+	background-color: #f90;
+	border-color: #c70;
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="bikefunclub">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="activation.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/activation/activation">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="mail.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/mail/mail">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jstl.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/jstl/jstl">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="json-lib-2.4-jdk15.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/json-lib-2.4-jdk15/json-lib-2.4-jdk15">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="standard.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/standard/standard">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="bikefunclub"/>
+        <property name="java-output-path" value="/bikefunclub/build/classes"/>
+    </wb-module>
+</project-modules>

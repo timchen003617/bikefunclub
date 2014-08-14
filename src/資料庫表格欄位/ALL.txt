@@ -1,0 +1,1357 @@
+﻿--會員、好友列表、聊天紀錄、員工、公告、權限功能、員工權限、廣告輪播、會員上線狀態、
+--揪團分類、揪團發起、揪團留言、揪團參加人、路線分類、路線、會員收藏路線、騎車紀錄、相片所屬騎車紀錄、相片所屬揪團
+--相片、相簿分類、相簿、相片所屬相簿、網誌分類、網誌、網誌留言、檢舉
+alter session set deferred_segment_creation=false;
+DROP TABLE AD;
+DROP SEQUENCE ADseq;
+DROP TABLE ANN;
+DROP SEQUENCE ANNseq;
+DROP TABLE CHAT;
+DROP SEQUENCE CHATseq;
+DROP TABLE FRIENDLIST;
+DROP TABLE REPORT;
+DROP SEQUENCE REPORTseq;
+DROP TABLE EMPAUTH;
+DROP TABLE AUTH;
+DROP TABLE EMP;
+DROP SEQUENCE EMPseq;
+DROP TABLE Memos;
+DROP TABLE PHOTOGP;
+DROP TABLE GPCOMM;
+DROP SEQUENCE GPCOMMseq;
+DROP TABLE MEMGP;
+DROP TABLE GP;
+DROP SEQUENCE GPseq;
+DROP TABLE GPCLS;
+DROP SEQUENCE GPCLSseq;
+DROP TABLE MEMROT;
+DROP TABLE ROT;
+DROP SEQUENCE ROTseq;
+DROP TABLE ROTCLS;
+DROP SEQUENCE ROTCLSseq;
+DROP TABLE GPALBUM;
+DROP TABLE ALBUM;
+DROP SEQUENCE ALBUMseq;
+DROP TABLE ALBCLS;
+DROP SEQUENCE ALBCLSseq;
+DROP TABLE PHOTO;
+DROP SEQUENCE PHOTOseq;
+DROP TABLE BLOGCOM;
+DROP SEQUENCE BLOGCOMseq;
+DROP TABLE BLOG;
+DROP SEQUENCE BLOGseq;
+DROP TABLE BLOGCLS;
+DROP SEQUENCE BLOGCLSseq;
+DROP TABLE PHOTOROOT;
+DROP TABLE RIDERECORD;
+DROP SEQUENCE RIDERECORDseq;
+DROP TABLE MEMBER;
+DROP SEQUENCE MEMBERseq;
+--會員
+create table member
+  (
+    MEMNO   NUMBER(6) NOT NULL,
+    MEMACC  VARCHAR2(30) UNIQUE,
+    MEMPW   VARCHAR2(30) NOT NULL,
+    MEMNAME VARCHAR2(20) NOT NULL,
+    MEMID   VARCHAR2(12) UNIQUE,
+    MEMBIRTH DATE NOT NULL,
+    MEMNICKNAME VARCHAR2(30),
+    MEMFILE BLOB,
+    MEMFILENAME VARCHAR2(30),
+    MEMEXTNAME  VARCHAR2(10),
+    MEMEMAIL    VARCHAR2(100) NOT NULL,
+    MEMSEX      VARCHAR2(1) NOT NULL, --F 女   --M  男生
+    MEMZIP      VARCHAR2(5),
+    MEMADDR     VARCHAR2(100),
+    MEMTELH     VARCHAR2(15),
+    MEMTELO     VARCHAR2(15),
+    MEMTELM     VARCHAR2(15),
+    MEMRGDATE DATE,
+    PRIMARY KEY (MEMNO)
+  );
+CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  insert
+  into member values
+    (
+      memberseq.NEXTVAL,
+      'anthony',
+      '12345678',
+      '張三',
+      'F123456789',
+      TO_DATE('1981-11-17','YYYY-MM-DD'),
+      '三張',
+      '',
+      '',
+      '',
+      'anthony@gmail.com',
+      'M',
+      '32042',
+      '桃園縣中壢市中大路72號',
+      '02-265640783',
+      '02-25624563',
+      '0937814569',
+      TO_DATE('2014/07/17 21:02:44', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into member values
+    (
+      memberseq.NEXTVAL,
+      'daniel',
+      '12345678',
+      '李四',
+      'A287654321',
+      TO_DATE('1980-12-17','YYYY-MM-DD'),
+      '四李',
+      '',
+      '',
+      '',
+      'daniel@gmail.com',
+      'M',
+      '32042',
+      '桃園縣中壢市中大路25號',
+      '02-265123483',
+      '02-25698763',
+      '093456769',
+      TO_DATE('2014/07/18 15:10:00', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into member values
+    (
+      memberseq.NEXTVAL,
+      'peter1',
+      '12345678',
+      '彼得1',
+      'F187654001',
+      TO_DATE('1987-01-17','YYYY-MM-DD'),
+      '小一',
+      '',
+      '',
+      '',
+      'peter1@gmail.com',
+      'M',
+      '32042',
+      '桃園縣中壢市中大路72號',
+      '02-265123483',
+      '02-25698763',
+      '093456769',
+      TO_DATE('2014/07/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into member values
+    (
+      memberseq.NEXTVAL,
+      'peter2',
+      '12345678',
+      '彼得2',
+      'B187254002',
+      TO_DATE('1987-02-17','YYYY-MM-DD'),
+      '小二',
+      '',
+      '',
+      '',
+      'peter2@gmail.com',
+      'M',
+      '32042',
+      '桃園縣中壢市中大路72號',
+      '02-265123483',
+      '02-25698763',
+      '093456769',
+      TO_DATE('2014/07/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into member values
+    (
+      memberseq.NEXTVAL,
+      'peter3',
+      '12345678',
+      '彼得3',
+      'B187264003',
+      TO_DATE('1987-03-17','YYYY-MM-DD'),
+      '小三',
+      '',
+      '',
+      '',
+      'peter3@gmail.com',
+      'M',
+      '32042',
+      '桃園縣中壢市中大路72號',
+      '02-265123483',
+      '02-25698763',
+      '093456769',
+      TO_DATE('2014/09/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into member values
+    (
+      memberseq.NEXTVAL,
+      'peter4',
+      '12345678',
+      '彼得4',
+      'B187264004',
+      TO_DATE('1984-04-17','YYYY-MM-DD'),
+      '小四',
+      '',
+      '',
+      '',
+      'peter4@gmail.com',
+      'M',
+      '32042',
+      '桃園縣中壢市中大路72號',
+      '02-265123483',
+      '02-25698763',
+      '093456769',
+      TO_DATE('2014/09/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
+    );
+   insert
+   into member values
+    (
+      memberseq.NEXTVAL,
+      'peter5',
+      '12345678',
+      '彼得5',
+      'B18726405',
+      TO_DATE('1987-05-17','YYYY-MM-DD'),
+      '小五',
+      '',
+      '',
+      '',
+      'peter5@gmail.com',
+      'M',
+      '32042',
+      '桃園縣中壢市中大路72號',
+      '02-265123483',
+      '02-25698763',
+      '093456769',
+      TO_DATE('2014/09/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
+    );
+   insert
+   into member values
+    (
+      memberseq.NEXTVAL,
+      'peter6',
+      '12345678',
+      '彼得6',
+      'B187264006',
+      TO_DATE('1987-06-17','YYYY-MM-DD'),
+      '小六',
+      '',
+      '',
+      '',
+      'peter6@gmail.com',
+      'M',
+      '32042',
+      '桃園縣中壢市中大路72號',
+      '02-265123483',
+      '02-25698763',
+      '093456769',
+      TO_DATE('2014/09/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
+    );
+    insert
+    into member values
+    (
+      memberseq.NEXTVAL,
+      'peter7',
+      '12345678',
+      '彼得7',
+      'B18726400˙',
+      TO_DATE('1987-07-17','YYYY-MM-DD'),
+      '小七',
+      '',
+      '',
+      '',
+      'peter˙@gmail.com',
+      'M',
+      '32042',
+      '桃園縣中壢市中大路72號',
+      '02-265123483',
+      '02-25698763',
+      '093456769',
+      TO_DATE('2014/09/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
+    );                          
+  --會員上線狀態
+  create table Memos
+    (
+      MEMNO  number(6) NOT NULL,
+      MEMCOO varchar2(100) NOT NULL,
+      FOREIGN key (MEMNO) REFERENCES MEMBER(MEMNO),
+      PRIMARY KEY (MEMNO)
+    );
+  --相片
+  CREATE TABLE PHOTO
+    (
+      PHOTONO    NUMBER(6) NOT NULL,
+      MEMNO      NUMBER(6) NOT NULL,
+      PHCOO      VARCHAR2(100) ,
+      PHASS      NUMBER(1) NOT NULL,
+      PHFILENAME VARCHAR2(100),
+      PHEXTNAME  VARCHAR2(10),
+      PHUP DATE NOT NULL,
+      PHFILE BLOB NOT NULL,
+      PRIMARY KEY (PHOTONO),
+      FOREIGN KEY (MEMNO) REFERENCES MEMBER(MEMNO)
+    );
+CREATE SEQUENCE photoseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  INSERT
+  INTO PHOTO
+    (
+      photono,
+      memno,
+      phcoo,
+      phass,
+      phfilename,
+      phextname,
+      phup,
+      phfile
+    )
+    VALUES
+    (
+      photoseq.NEXTVAL,
+      1,
+      '{"lng":121.190915,"lat":24.96650833333333}',
+      1,
+      '1234',
+      'jpg',
+      TO_DATE('2014/07/07 20:00:00','yyyy-mm-dd hh24:mi:ss'),
+      utl_raw.cast_to_raw('你好嗎?')
+    );
+  INSERT
+  INTO PHOTO
+    (
+      photono,
+      memno,
+      phcoo,
+      phass,
+      phfilename,
+      phextname,
+      phup,
+      phfile
+    )
+    VALUES
+    (
+      photoseq.NEXTVAL,
+      2,
+      '{"lng":121.19537666666665,"lat":24.969563333333333}',
+      1,
+      '12345',
+      'jpg',
+      TO_DATE('2014/07/08 21:10:10','yyyy-mm-dd hh24:mi:ss'),
+      utl_raw.cast_to_raw('很不好')
+    );
+  INSERT
+  INTO PHOTO
+    (
+      photono,
+      memno,
+      phcoo,
+      phass,
+      phfilename,
+      phextname,
+      phup,
+      phfile
+    )
+    VALUES
+    (
+      photoseq.NEXTVAL,
+      2,
+      '{"lng":121.18750166666665,"lat":24.973978333333335}',
+      0,
+      'aaaa',
+      'jpg',
+      TO_DATE('2014/05/05 20:12:10','yyyy-mm-dd hh24:mi:ss'),
+      utl_raw.cast_to_raw('烙賽阿')
+    );
+  --相簿分類
+  CREATE TABLE ALBCLS
+    (
+      ALBCLSNO   NUMBER(2) NOT NULL,
+      ALBCLSNAME VARCHAR2(20) NOT NULL,
+      PRIMARY KEY (ALBCLSNO)
+    );
+CREATE SEQUENCE albclsseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  INSERT INTO ALBCLS
+    (albclsno,albclsname
+    ) VALUES
+    (albclsseq.NEXTVAL, '野外'
+    );
+  INSERT INTO ALBCLS
+    (albclsno,albclsname
+    ) VALUES
+    (albclsseq.NEXTVAL, '教室'
+    );
+  --相簿
+  CREATE TABLE ALBUM
+    (
+      ALBNO    NUMBER(6) NOT NULL,
+      MEMNO    NUMBER(6) NOT NULL,
+      ALBCLSNO NUMBER(2) NOT NULL,
+      AUTHNAME VARCHAR2(10) NOT NULL,
+      ALBTITLE VARCHAR2(20) NOT NULL,
+      ALBDESC  VARCHAR2(100) NOT NULL,
+      ALBTIME DATE NOT NULL,
+      PRIMARY KEY (ALBNO),
+      FOREIGN KEY (MEMNO) REFERENCES MEMBER(MEMNO),
+      FOREIGN KEY (ALBCLSNO) REFERENCES ALBCLS(ALBCLSNO)
+    );
+CREATE SEQUENCE albumseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  INSERT
+  INTO ALBUM
+    (
+      albno,
+      memno,
+      albclsno,
+      authname,
+      albtitle,
+      albdesc,
+      albtime
+    )
+    VALUES
+    (
+      albumseq.NEXTVAL,
+      1,
+      1,
+      'PERSONAL',
+      '流出',
+      '就描述',
+      TO_DATE('2014/01/01 00:05:10','yyyy-mm-dd hh24:mi:ss')
+    );
+  INSERT
+  INTO ALBUM
+    (
+      albno,
+      memno,
+      albclsno,
+      authname,
+      albtitle,
+      albdesc,
+      albtime
+    )
+    VALUES
+    (
+      albumseq.NEXTVAL,
+      2,
+      1,
+      'PUBLIC',
+      '流入',
+      '還描述',
+      TO_DATE('2014/02/02 00:10:30','yyyy-mm-dd hh24:mi:ss')
+    );
+  INSERT
+  INTO ALBUM
+    (
+      albno,
+      memno,
+      albclsno,
+      authname,
+      albtitle,
+      albdesc,
+      albtime
+    )
+    VALUES
+    (
+      albumseq.NEXTVAL,
+      2,
+      1,
+      'SHAREFS',
+      'XXX',
+      '...',
+      TO_DATE('2014/03/03 03:10:30','yyyy-mm-dd hh24:mi:ss')
+    );
+  --相片所屬相簿
+  CREATE TABLE GPALBUM
+    (
+      ALBNO   NUMBER(6) NOT NULL,
+      PHOTONO NUMBER(6) NOT NULL,
+      FOREIGN KEY (ALBNO) REFERENCES ALBUM(ALBNO),
+      FOREIGN KEY (PHOTONO) REFERENCES PHOTO(PHOTONO),
+      PRIMARY KEY (ALBNO,PHOTONO)
+    );
+  INSERT INTO GPALBUM VALUES
+    ( 1, 1
+    );
+  --網誌分類
+  CREATE TABLE BLOGCLS
+    (
+      BLOGCLSNO   NUMBER(6) NOT NULL,
+      BLOGCLSNAME VARCHAR2(20) NOT NULL,
+      PRIMARY KEY (BLOGCLSNO)
+    );
+CREATE SEQUENCE blogclsseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  INSERT INTO BLOGCLS VALUES
+    (blogclsseq.NEXTVAL,'休閒'
+    );
+  INSERT INTO BLOGCLS VALUES
+    (blogclsseq.NEXTVAL,'旅遊'
+    );
+  INSERT INTO BLOGCLS VALUES
+    (blogclsseq.NEXTVAL,'夜遊'
+    );
+  INSERT INTO BLOGCLS VALUES
+    (blogclsseq.NEXTVAL,'競賽'
+    );
+  INSERT INTO BLOGCLS VALUES
+    (blogclsseq.NEXTVAL,'登山'
+    );
+  --網誌
+  CREATE TABLE BLOG
+    (
+      BLOGNO    NUMBER(6) NOT NULL,
+      MEMNO     NUMBER(6) NOT NULL,
+      BLOGCLSNO NUMBER(6) NOT NULL,
+      BGTITLE   VARCHAR2(20) NOT NULL,
+      BGTEXT CLOB,
+      BGTIME DATE,
+      AUTHNAME VARCHAR2(20) NOT NULL,
+      PRIMARY KEY (BLOGNO),
+      FOREIGN KEY (MEMNO) REFERENCES MEMBER (MEMNO),
+      FOREIGN KEY (BLOGCLSNO) REFERENCES BLOGCLS (BLOGCLSNO)
+    );
+CREATE SEQUENCE blogseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  INSERT
+  INTO BLOG
+    (
+      blogno,
+      memno,
+      blogclsno,
+      bgtitle,
+      bgtext,
+      bgtime,
+      authname
+    )
+    VALUES
+    (
+      blogseq.NEXTVAL,
+      1,
+      2,
+      '義和團',
+      '神功護體阿',
+      TO_DATE('2014/10/10 10:10:10','yyyy-mm-dd hh24:mi:ss'),
+      'PUBLIC'
+    );
+  INSERT
+  INTO BLOG
+    (
+      blogno,
+      memno,
+      blogclsno,
+      bgtitle,
+      bgtext,
+      bgtime,
+      authname
+    )
+    VALUES
+    (
+      blogseq.NEXTVAL,
+      1,
+      2,
+      '肉蒲團',
+      '阿阿阿',
+      TO_DATE('2014/11/11 11:11:11','yyyy-mm-dd hh24:mi:ss'),
+      'PUBLIC'
+    );
+  --網誌留言
+  CREATE TABLE BLOGCOM
+    (
+      BGCOMNO   NUMBER(6) NOT NULL,
+      BLOGNO    NUMBER(6) NOT NULL,
+      MEMNO     NUMBER(6) NOT NULL,
+      BGCOMTEXT VARCHAR2(500) NOT NULL,
+      BGCOMTIME DATE,
+      PRIMARY KEY (BGCOMNO),
+      FOREIGN KEY (BLOGNO) REFERENCES BLOG (BLOGNO),
+      FOREIGN KEY (MEMNO) REFERENCES MEMBER (MEMNO)
+    );
+CREATE SEQUENCE blogcomseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  INSERT
+  INTO BLOGCOM VALUES
+    (
+      blogcomseq.NEXTVAL,
+      1,
+      1,
+      '雄壯、威武...',
+      TO_DATE('2014/06/06 06:06:06','yyyy-mm-dd hh24:mi:ss')
+    );
+  INSERT
+  INTO BLOGCOM VALUES
+    (
+      blogcomseq.NEXTVAL,
+      2,
+      1,
+      '嚴肅、剛直...',
+      TO_DATE('2014/07/07 07:07:07','yyyy-mm-dd hh24:mi:ss')
+    );
+  INSERT
+  INTO BLOGCOM VALUES
+    (
+      blogcomseq.NEXTVAL,
+      2,
+      1,
+      '安靜、確實...',
+      TO_DATE('2014/08/08 08:08:08','yyyy-mm-dd hh24:mi:ss')
+    );
+  --騎車紀錄
+  CREATE TABLE riderecord
+    (
+      riderecordno NUMBER(6) NOT NULL,
+      memno        number(6) not null,
+      rotno        number(6) not null,
+      stamp date,
+      recordtime date,
+      recorddistence number(8,2),
+      ridetime       number(6),
+      newrotno       number(1),
+      PRIMARY KEY (riderecordno)
+    );
+CREATE SEQUENCE riderecordseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  INSERT
+  INTO riderecord VALUES
+    (
+      riderecordseq.NEXTVAL,
+      1,1,
+      To_date('2014-7-14 05:24:33','yyyy-mm-dd hh24:mi:ss'),
+      To_date('2014-7-14 05:24:33','yyyy-mm-dd hh24:mi:ss'),
+      10000,2,0
+    );
+  INSERT
+  INTO riderecord VALUES
+    (
+      riderecordseq.NEXTVAL,
+      2,2,
+      To_date('2014-7-14 05:25:33','yyyy-mm-dd hh24:mi:ss'),
+      To_date('2014-7-14 05:25:33','yyyy-mm-dd hh24:mi:ss'),
+      10000,2,0
+    );
+  --相片所屬騎車紀錄
+  CREATE TABLE photoroot
+    (
+      riderrecordno NUMBER(6) NOT NULL,
+      photono       NUMBER(6) NOT NULL,
+      PRIMARY KEY (riderrecordno,photono)
+    );
+  INSERT INTO photoroot VALUES
+    (1,1
+    );
+  INSERT INTO photoroot VALUES
+    (1,2
+    );
+  INSERT INTO photoroot VALUES
+    (1,3
+    );
+  INSERT INTO photoroot VALUES
+    (2,1
+    );
+  INSERT INTO photoroot VALUES
+    (2,2
+    );
+  INSERT INTO photoroot VALUES
+    (2,3
+    );
+  --路線分類、路線
+  create table ROTCLS
+    (
+      ROTCLSNO   NUMBER(2) NOT NULL,
+      ROTCLSNAME VARCHAR2(20) NOT NULL,
+      PRIMARY KEY(ROTCLSNO)
+    );
+CREATE SEQUENCE ROTseq START WITH 1 NOCACHE;
+  create table ROT
+    (
+      ROTNO    NUMBER(6) NOT NULL,
+      ROTCLSNO NUMBER(2) NOT NULL,
+      ROTNAME  VARCHAR2(100) NOT NULL,
+      ROTSTART VARCHAR2(100),
+      ROTEND   VARCHAR2(100),
+      ROTLOC CLOB,
+      ROTTAG    VARCHAR2(100),
+      MEMNO     NUMBER(6),
+      ROTSTATUS VARCHAR2(20) NOT NULL,
+      ROTAUTH   VARCHAR2(20),
+      ROTDESC CLOB,
+      PRIMARY KEY(ROTNO),
+      FOREIGN KEY(ROTCLSNO) REFERENCES ROTCLS(ROTCLSNO),
+      FOREIGN KEY(MEMNO) REFERENCES MEMBER(MEMNO)
+    );
+CREATE SEQUENCE ROTCLSseq START WITH 1 NOCACHE;
+  /*新增*/
+  insert into ROTCLS values
+    (ROTCLSseq.NEXTVAL,'北部路線'
+    );
+  insert into ROTCLS values
+    (ROTCLSseq.NEXTVAL,'中部路線'
+    );
+  insert into ROTCLS values
+    (ROTCLSseq.NEXTVAL,'南部路線'
+    );
+  insert into ROTCLS values
+    (ROTCLSseq.NEXTVAL,'東部路線'
+    );
+  insert into ROTCLS values
+    (ROTCLSseq.NEXTVAL,'環島路線'
+    );
+  insert into ROTCLS values
+    (ROTCLSseq.NEXTVAL,'跨縣市路線'
+    );
+  insert into ROTCLS values
+    (ROTCLSseq.NEXTVAL,'其他'
+    );
+  insert into ROTCLS values
+    (ROTCLSseq.NEXTVAL,'休閒型'
+    );
+  insert into ROTCLS values
+    (ROTCLSseq.NEXTVAL,'鍛鍊型'
+    );
+  insert into ROTCLS values
+    (ROTCLSseq.NEXTVAL,'競賽型'
+    );
+  insert
+  into ROT values
+    (
+      ROTseq.NEXTVAL,
+      2,
+      '鐵馬道',
+      '{"lat":24.2731,"lng":120.7422}',
+      '{"lat":24.2952,"lng":120.7352}',
+      '[{"lat":24.2742,"lng":120.7420},{"lat":24.2818,"lng":120.7356},{"lat":24.2903,"lng":120.7351},{"lat":24.2950,"lng":120.7352}]',
+      'TEST1',
+      '',
+      '1',
+      'PUBLIC',
+      '台中后里'
+    );
+  insert
+  into ROT values
+    (
+      ROTseq.NEXTVAL,
+      3,
+      '愛河蓮池潭',
+      '{"lat":22.6717,"lng":120.3094}',
+      '{"lat":22.6837,"lng":120.2988}',
+      '[{"lat":22.6747,"lng":120.3088},{"lat":22.6772,"lng":120.2985},{"lat":22.6782,"lng":120.2978},{"lat":22.6784,"lng":120.2943},{"lat":22.6804,"lng":120.2923},{"lat":22.6810,"lng":120.2919},{"lat":22.6828,"lng":120.2902},{"lat":22.6837,"lng":120.2958}]',
+      'TEST3',
+      '',
+      '1',
+      'PUBLIC',
+      '高雄'
+    );
+  insert
+  into ROT values
+    (
+      ROTseq.NEXTVAL,
+      1,
+      '海八景',
+      '{"lat":24.8483,"lng":120.9279}',
+      '{"lat":24.8474,"lng":120.9275}',
+      '[{"lat":24.8480,"lng":120.9279},{"lat":24.8478,"lng":120.9275}]',
+      'TEST4',
+      '',
+      '1',
+      'PUBLIC',
+      '新竹'
+    );
+  --會員收藏的路線
+  create table MEMROT
+    (
+      MEMNO NUMBER(6) NOT NULL,
+      ROTNO NUMBER(6) NOT NULL,
+      CLTTIME DATE,
+      FOREIGN KEY(ROTNO) REFERENCES ROT(ROTNO),
+      FOREIGN KEY(MEMNO) REFERENCES MEMBER(MEMNO),
+      CONSTRAINT MEMROT_PRIMARY_KEY PRIMARY KEY (ROTNO,MEMNO)
+    );
+  insert
+  into MEMROT values
+    (
+      1,1,
+      TO_DATE('2014/07/17 21:02:44', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into MEMROT values
+    (
+      2,3,
+      TO_DATE('2014/07/01 20:32:52', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into MEMROT values
+    (
+      1,3,
+      TO_DATE('2014/07/16 01:02:48', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into MEMROT values
+    (
+      2,2,
+      TO_DATE('2014/05/17 23:14:05', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  --揪團分類、揪團
+  create table GPCLS
+    (
+      GPCLSNO   NUMBER(2) NOT NULL,
+      GPCLSNAME VARCHAR2(20) NOT NULL,
+      PRIMARY KEY(GPCLSNO)
+    );
+CREATE SEQUENCE GPCLSseq START WITH 1 NOCACHE;
+  create table GP
+    (
+      GPNO    NUMBER(6) NOT NULL,
+      MEMNO   NUMBER(6) NOT NULL,
+      GPCLSNO NUMBER(2) NOT NULL,
+      GPTITLE VARCHAR2(100) NOT NULL,
+      GPDESC CLOB,
+      GPNOTE CLOB,
+      GPBUILDDATE DATE,
+      JOINSTARTDATE DATE,
+      JOINENDDATE DATE,
+      GPSTARTDATE DATE,
+      GPENDDATE DATE,
+      GPMAXNUM NUMBER(3),
+      ROTNO    NUMBER(6) NOT NULL,
+      GPAUTH   VARCHAR2(20),
+      PRIMARY KEY(GPNO),
+      FOREIGN KEY(GPCLSNO) REFERENCES GPCLS(GPCLSNO),
+      FOREIGN KEY(MEMNO) REFERENCES MEMBER(MEMNO),
+      FOREIGN KEY(ROTNO) REFERENCES ROT(ROTNO)
+    );
+CREATE SEQUENCE GPseq START WITH 1 NOCACHE;
+  insert into GPCLS values
+    (GPCLSseq.NEXTVAL,'活動'
+    );
+  insert into GPCLS values
+    (GPCLSseq.NEXTVAL,'練習'
+    );
+  insert into GPCLS values
+    (GPCLSseq.NEXTVAL,'交友'
+    );
+  insert into GPCLS values
+    (GPCLSseq.NEXTVAL,'環島'
+    );
+  insert
+  into GP values
+    (
+      GPseq.NEXTVAL,
+      2,
+      2,
+      '新手上路',
+      '練習',
+      '',
+      TO_DATE('2014/05/17 23:14:05', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/06/17 00:00:00', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/07/15 23:59:59', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/07/18 08:00:00', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/07/18 16:30:00', 'yyyy-mm-dd hh24:mi:ss'),
+      10,
+      3,
+      'PUBLIC'
+    );
+  insert
+  into GP values
+    (
+      GPseq.NEXTVAL,
+      1,
+      2,
+      '鍛鍊身體',
+      '為了保持美好的體態',
+      '',
+      TO_DATE('2014/05/17 23:14:05', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/06/17 00:00:00', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/07/15 23:59:59', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/07/18 08:00:00', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/07/18 16:30:00', 'yyyy-mm-dd hh24:mi:ss'),
+      10,
+      3,
+      'SHAREFS'
+    );
+  insert
+  into GP values
+    (
+      GPseq.NEXTVAL,
+      1,
+      3,
+      '單車聯誼',
+      '※帥哥美女大集合※',
+      '',
+      TO_DATE('2014/05/17 23:14:05', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/06/17 00:00:00', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/07/15 23:59:59', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/07/18 08:00:00', 'yyyy-mm-dd hh24:mi:ss'),
+      TO_DATE('2014/07/18 16:30:00', 'yyyy-mm-dd hh24:mi:ss'),
+      10,
+      3,
+      'PUBLIC'
+    );
+  --揪團參加人
+  create table MEMGP
+    (
+      MEMNO NUMBER(6) NOT NULL,      
+      GPNO  NUMBER(6) NOT NULL,
+      ADDDATE DATE,
+      FOREIGN KEY(GPNO) REFERENCES GP(GPNO),
+      FOREIGN KEY(MEMNO) REFERENCES MEMBER(MEMNO),
+      CONSTRAINT MEMGP_PRIMARY_KEY PRIMARY KEY (GPNO,MEMNO)
+    );
+  insert
+  into MEMGP values
+    (
+      1,1,
+      TO_DATE('2014/07/17 21:02:44', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into MEMGP values
+    (
+      1,2,
+      TO_DATE('2014/07/01 20:32:52', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into MEMGP values
+    (
+      2,1,
+      TO_DATE('2014/07/16 01:02:48', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into MEMGP values
+    (
+      1,3,
+      TO_DATE('2014/05/17 23:14:05', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  --揪團留言
+  create table GPCOMM
+    (
+      GPCOMMNO NUMBER(6) NOT NULL,
+      GPNO     NUMBER(6) NOT NULL,
+      MEMNO    NUMBER(6) NOT NULL,
+      GPCOMM   VARCHAR2(500) NOT NULL,
+      GPCOMMDATE DATE,
+      PRIMARY KEY(GPCOMMNO),
+      FOREIGN KEY(GPNO) REFERENCES GP(GPNO),
+      FOREIGN KEY(MEMNO) REFERENCES MEMBER(MEMNO)
+    );
+CREATE SEQUENCE GPCOMMseq START WITH 1 NOCACHE;
+  insert
+  into GPCOMM values
+    (
+      GPCOMMseq.NEXTVAL,
+      1,2,
+      '我要參加!!!!',
+      TO_DATE('2014/07/17 21:02:44', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into GPCOMM values
+    (
+      GPCOMMseq.NEXTVAL,
+      1,1,
+      '樓上請直接點參加阿!',
+      TO_DATE('2014/07/01 20:32:52', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into GPCOMM values
+    (
+      GPCOMMseq.NEXTVAL,
+      2,1,
+      '我這邊多加2位，我老婆小孩也要跟',
+      TO_DATE('2014/07/16 01:02:48', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  insert
+  into GPCOMM values
+    (
+      GPCOMMseq.NEXTVAL,
+      2,1,
+      '那附近廟口的乾麵很有名，可以去吃一吃',
+      TO_DATE('2014/07/16 01:14:05', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  --相片所屬揪團
+  CREATE TABLE photogp
+    (
+      gpno    NUMBER(6) NOT NULL,
+      photono NUMBER(6) NOT NULL,
+      PRIMARY KEY (gpno,photono)
+    );
+  INSERT INTO photogp VALUES
+    (1,1
+    );
+  INSERT INTO photogp VALUES
+    (1,2
+    );
+  INSERT INTO photogp VALUES
+    (1,3
+    );
+  INSERT INTO photogp VALUES
+    (2,1
+    );
+  INSERT INTO photogp VALUES
+    (2,2
+    );
+  INSERT INTO photogp VALUES
+    (2,3
+    );
+  --好友列表
+  create table FRIENDLIST
+    (
+      MEMNO    NUMBER(6) NOT NULL,
+      YOUNO    NUMBER(6) NOT NULL,
+      ISBLACK  VARCHAR2(1),
+      ISFRIEND VARCHAR2(1),
+      PRIMARY KEY (MEMNO,YOUNO),
+      FOREIGN KEY (MEMNO) REFERENCES MEMBER(MEMNO),
+      FOREIGN KEY (YOUNO) REFERENCES MEMBER(MEMNO)
+    );
+  insert into FRIENDLIST values
+    (1,2,'N','Y'
+    );
+  insert into FRIENDLIST values
+    (2,1,'N','Y'
+    );
+  --聊天紀錄
+  create table CHAT
+    (
+      CHATNO    NUMBER(6) NOT NULL,
+      SENDERNO  NUMBER(6) NOT NULL,
+      RECEIVENO NUMBER(6) NOT NULL,
+      CHATTEXT  VARCHAR2(300),
+      CHATDATE DATE,
+      PRIMARY KEY (CHATNO),
+      FOREIGN KEY (SENDERNO) REFERENCES MEMBER(MEMNO),
+      FOREIGN KEY (RECEIVENO) REFERENCES MEMBER(MEMNO)
+    );
+CREATE SEQUENCE CHATseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  insert
+  into CHAT values
+    (
+      CHATseq.NEXTVAL,
+      1,2,
+      'HI,李四你好',
+      TO_DATE('2014/07/19 15:10:00', 'yyyy-mm-dd hh24:mi:ss')
+    );
+  --員工
+  create table EMP
+    (
+      EMPNO    number(6) NOT NULL ,
+      EMPacc   varchar2(30) unique,
+      EMPpw    varchar2(30) NOT NULL,
+      EMPname  varchar2(20),
+      EMPemail varchar2(60) NOT NULL,
+      EMPaddr  varchar2(70),
+      EMPid    varchar2(12)unique,
+      EMPrgdate DATE,
+      EMPtel varchar2(15),
+      PRIMARY KEY (EMPNO)
+    );
+CREATE SEQUENCE EMPseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  insert
+  into EMP values
+    (
+      EMPseq.NEXTVAL,
+      'timchen',
+      'timchen',
+      'timchen',
+      'timchen@gmail.com',
+      '桃園縣中壢市中央路72號',
+      'B123456789',
+      TO_DATE('2014/07/01 12:10:00', 'yyyy-mm-dd hh24:mi:ss'),
+      '03-26884055'
+    );
+  insert
+  into EMP values
+    (
+      EMPseq.NEXTVAL,
+      'ming456',
+      '789',
+      '王六',
+      'sdk@gmail.com',
+      '新北市南港區55號7樓',
+      'G451234123',
+      TO_DATE('2014/07/01 15:10:00', 'yyyy-mm-dd hh24:mi:ss'),
+      '03-24567055'
+    );
+  --檢舉
+  CREATE TABLE REPORT
+    (
+      REPNO    NUMBER(6) NOT NULL,
+      MEMNO    NUMBER(6) NOT NULL,
+      EMPNO    NUMBER(6),
+      BYREPNO  NUMBER(6) NOT NULL,
+      REPTEXT  VARCHAR2(50),
+      REPCLS   VARCHAR2(2) NOT NULL,
+      REPCLSNO NUMBER(6) NOT NULL,
+      REPDATE DATE,
+      REPLYDATE DATE,
+      REPPROGRESS VARCHAR2(2),
+      REPRESULT   VARCHAR2(200),
+      PRIMARY KEY(REPNO),
+      FOREIGN KEY(MEMNO) REFERENCES MEMBER(MEMNO),
+      FOREIGN KEY(EMPNO) REFERENCES EMP(EMPNO),
+      FOREIGN KEY(BYREPNO) REFERENCES MEMBER(MEMNO)
+    );
+ CREATE SEQUENCE REPORTseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;   
+ --檢舉假資料
+  insert
+  into report values
+    (
+      reportseq.NEXTVAL,
+      1,
+      '',
+      1,
+      'xxxx',
+      3,
+      1,
+      '',
+      '',
+      '',
+      ''
+    );
+  insert
+  into report values
+    (
+      reportseq.NEXTVAL,
+      1,
+      '',
+      1,
+      'xxxx',
+      4,
+      2,
+      '',
+      '',
+      '',
+      ''
+    );
+  --公告
+  create table ANN
+    (
+      ANNNO      NUMBER(4) NOT NULL,
+      EMPNO      NUMBER(6) NOT NULL,
+      ANNTITLE   VARCHAR2(100) NOT NULL,
+      ANNCONTENT VARCHAR2(400) NOT NULL,
+      ANNDATE DATE ,
+      ANNFILE BLOB,
+      ANNFILENAME VARCHAR2(30),
+      ANNEXTNAME  VARCHAR2(10),
+      PRIMARY KEY (ANNNO),
+      FOREIGN KEY (EMPNO)REFERENCES EMP (EMPNO)
+    );
+CREATE SEQUENCE ANNseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  insert
+  into ANN values
+    (
+      ANNseq.NEXTVAL,
+      1,
+      '天氣炎熱，小心中暑',
+      '近期天氣炎熱，本網站提醒各位車友友們:參加活動時，要多補充水分，若身體有異常的警訊要多注意，並且去看醫生，才能避免意外的發生。關心你的管理員上',
+      TO_DATE('2014/07/18 09:10:05', 'yyyy-mm-dd hh24:mi:ss'),
+      '',
+      '',
+      ''
+    );
+        insert
+      into ANN values
+    (
+      ANNseq.NEXTVAL,
+      1,
+      '單車競賽報名開始!!',
+      '知名品牌美利達所舉行的萬人自行車大賽，即將開始報名囉!!!地點在中壢市中大路，中央大學側門口，於8/22日早上9點開始比賽，歡迎各位熱血騎士踴躍參加。躍躍欲試的管理員上',
+      TO_DATE('2014/07/20 09:10:22', 'yyyy-mm-dd hh24:mi:ss'),
+      '',
+      '',
+      ''
+    );
+    insert
+      into ANN values
+    (
+      ANNseq.NEXTVAL,
+      1,
+      '第27屆「台北國際自行車展」',
+      '參觀買主再創新高，共有7,529名來自107個國外買主參觀，較去(2013)年成長4.9%。今(2014)年前10大買主國（地區）依序來自中國大陸（含香港）、日本、美國、韓國、馬來西亞、德國、新加坡、泰國、英國、澳洲。除了歐美日等自行車產業傳統主力市場，買主持續前來參觀，台北國際自行車展也成為亞洲各國自行車買主，最重要的國際交流場合，不但具有採購貿易、尋求聯繫供應鏈上下游的功能，也是發掘產業最新產品及趨勢的最佳舞台。',
+      TO_DATE('2014/07/20 09:10:22', 'yyyy-mm-dd hh24:mi:ss'),
+      '',
+      '',
+      ''
+    );
+    insert
+      into ANN values
+    (
+      ANNseq.NEXTVAL,
+      1,
+      '如何規畫適合自己的練車路線',
+      '失敗的原因有99種，成功只有1個方法。我們可以輕鬆的找到上百種不適合騎車的藉口，只有1條適合騎車的路線。規畫路線的關鍵考量：容易到達：找一條10分鐘內就能到達的路線，將擁擠的交通路段當作熱身。有補給點：你會需要補給，或是有時候不幸發生機械故障，這時候就能向便利店尋求協助。路線難度適中：寬廣筆直、交通順暢的柏油路，適合進行高速巡航訓練；短程(5公里內)的短坡則可反覆進行高強度登山訓練。',
+      TO_DATE('2014/08/01 09:10:22', 'yyyy-mm-dd hh24:mi:ss'),
+      '',
+      '',
+      ''
+    );
+    insert
+      into ANN values
+    (
+      ANNseq.NEXTVAL,
+      1,
+      '打造全方位的單車騎乘觀念',
+      '曾經和一位中年車友閒聊，他半感慨地說道：「以前常問自己可以騎多快、多遠；但現在我只問自己還可以騎多久？」多麼令人深思的一句話！相信許多車友都曾有因騎乘單車而受傷的經驗，無論傷害是因為交通事故或運動過度造成，它都使你被迫休息，更甚者，將無法再度上路。因此，安全且健康的騎乘才是延長車齡的關鍵。',
+      TO_DATE('2014/08/05 09:10:22', 'yyyy-mm-dd hh24:mi:ss'),
+      '',
+      '',
+      ''
+    );
+    
+    
+  --權限功能
+  create table auth
+    (
+      authno       varchar2(4) NOT NULL,
+      authname       varchar2(50) NOT NULL,
+      AUTHURL varchar2(100),
+      BELONGAUTHNO varchar2(1),
+      AUTHLEVEL    varchar2(1),
+      PRIMARY KEY(authno)
+    );
+  insert into auth values
+    ('A','前端網頁管理','','','1'
+    );
+  insert into auth values
+    ('A1','最新公告管理','back/ann/page_listAllAnn.jsp','A','2'
+    );
+  insert into auth values
+    ('A2','廣告輪播管理','back/ad/page_listAllAd.jsp','A','2'
+    );
+  insert into auth values
+    ('B','管理者管理','','','1'
+    );
+  insert into auth values
+    ('B1','員工帳號管理','back/Emp/page_listAllEmp.jsp','B','2'
+    );
+    
+--  insert into auth values('B2','員工權限管理','','B','2'); 
+
+  insert into auth values
+    ('C','會員管理','','','1'
+    );
+  insert into auth values
+    ('C1','會員資料管理','back/mem/page_listAllMem.jsp','C','2'
+    );
+  insert into auth values
+    ('D','單車路線','','','1'
+    );
+  insert into auth values
+    ('D1','路線分類管理','back/rotcls/page_listAllRotcls.jsp','D','2'
+    );    
+  insert into auth values
+    ('D2','推薦路線管理','back/rot/page_listAllSgrots.jsp','D','2'
+    );
+  insert into auth values
+    ('D3','會員路線管理','back/rot/page_select_memrot.jsp','D','2'
+    );
+
+  insert into auth values
+    ('E','揪團','','','1'
+    );
+  insert into auth values
+    ('E1','揪團分類管理','back/gpcls/page_listAllGpcls.jsp','E','2'
+    );
+  insert into auth values
+    ('E2','揪團管理','back/gp/page_select_gp.jsp','E','2'
+    );
+  insert into auth values
+    ('G','相簿','','','1'
+    );
+  insert into auth values
+    ('G1','相簿分類管理','back/albcls/select_page.jsp','G','2'
+    );
+  insert into auth values
+    ('G2','相簿管理','back/album/select_page.jsp','G','2'
+    );
+  insert into auth values
+    ('G3','相片管理','back/photo/select_page.jsp','G','2'
+    );
+  insert into auth values
+    ('H','網誌','','','1'
+    );
+  insert into auth values
+    ('H1','網誌分類管理','back/blogcls/select_page.jsp','H','2'
+    );
+  insert into auth values
+    ('H2','網誌管理','back/blog/page_listAllBlog.jsp','H','2'
+    );
+  --員工權限
+  create table EMPAUTH
+    (
+      EMPNO  number(6) NOT NULL,
+      AUTHNO varchar2(4) NOT NULL,
+      FOREIGN key (EMPNO) REFERENCES emp(EMPNO),
+      FOREIGN key (AUTHNO)REFERENCES auth(AUTHNO),
+      PRIMARY KEY (EMPNO,AUTHNO)
+    );
+  /*新增*/
+  insert into EMPAUTH values
+    (1,'A'
+    );
+  insert into EMPAUTH values
+    (1,'A1'
+    );
+  insert into EMPAUTH values
+    (1,'A2'
+    );
+  insert into EMPAUTH values
+    (1,'B'
+    );
+  insert into EMPAUTH values
+    (1,'B1'
+    );
+
+  insert into EMPAUTH values
+    (1,'C'
+    );
+  insert into EMPAUTH values
+    (1,'C1'
+    );
+  insert into EMPAUTH values
+    (1,'D'
+    );
+  insert into EMPAUTH values
+    (1,'D1'
+    );
+  insert into EMPAUTH values
+    (1,'D2'
+    );
+  insert into EMPAUTH values
+    (1,'D3'
+    );
+  insert into EMPAUTH values
+    (1,'E'
+    );
+  insert into EMPAUTH values
+    (1,'E1'
+    );
+  insert into EMPAUTH values
+    (1,'E2'
+    );
+
+  insert into EMPAUTH values
+    (1,'G'
+    );
+  insert into EMPAUTH values
+    (1,'G1'
+    );
+  insert into EMPAUTH values
+    (1,'G2'
+    );
+  insert into EMPAUTH values
+    (1,'G3'
+    );
+  insert into EMPAUTH values
+    (1,'H'
+    );
+  insert into EMPAUTH values
+    (1,'H1'
+    );
+  insert into EMPAUTH values
+    (1,'H2'
+    );
+  --廣告輪播
+  create table AD
+    (
+      ADNO   number(6) NOT NULL ,
+      ADNAME varchar2(20),
+      ADESC  varchar2(500),
+      ADFILE BLOB,
+      ADFILENAME varchar2(30),
+      ADEXTNAME  varchar2(10),
+      ADURL      varchar2(100),
+      PRIMARY KEY (ADNO)
+    );
+CREATE SEQUENCE ADseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
+  commit;
