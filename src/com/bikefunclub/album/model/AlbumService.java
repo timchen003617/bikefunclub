@@ -63,8 +63,11 @@ public class AlbumService {
 		return dao.getAlbno(albno);
 	}
 	public void deleteGpalbum(Integer photono) {
-		dao.deleteGpalbum(photono);
-		
+		dao.deleteGpalbum(photono);		
+	}
+	public String getAlbtitle(Integer albno){
+		AlbumVO albumVO = dao.findByPrimaryKey(albno);
+		return albumVO.getAlbtitle();
 	}
 	
 }
