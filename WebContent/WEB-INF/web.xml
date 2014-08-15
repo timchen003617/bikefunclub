@@ -106,6 +106,13 @@
         <url-pattern>/back/mem/*</url-pattern>
         <url-pattern>/back/report/*</url-pattern>
         <url-pattern>/back/rot/*</url-pattern>
+        <url-pattern>/back/rotcls/*</url-pattern>
+        <url-pattern>/back/albcls/*</url-pattern>
+        <url-pattern>/back/album/*</url-pattern>
+        <url-pattern>/back/blog/*</url-pattern>
+        <url-pattern>/back/blogcls/*</url-pattern> 
+        <url-pattern>/back/blogcom/*</url-pattern>         
+        <url-pattern>/back/photo/*</url-pattern>                  
   </filter-mapping>
 <!--員工濾器結束-->  
   
