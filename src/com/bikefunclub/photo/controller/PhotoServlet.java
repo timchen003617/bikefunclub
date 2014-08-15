@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import com.oreilly.servlet.MultipartRequest;/**支援圖片上傳*/
+import com.bikefunclub.album.model.AlbumService;
 import com.bikefunclub.album.model.AlbumVO;
 import com.bikefunclub.gpalbum.model.GpalbumVO;
 import com.bikefunclub.photo.model.*;
@@ -43,7 +44,7 @@ public class PhotoServlet extends HttpServlet {
 		PhotoService photoSvc = new PhotoService();
 		String contentType = req.getContentType();
 		// 判斷request的contentType
-		if (contentType != null&&contentType.startsWith("multipart/form-data")) {
+		if (contentType != null && contentType.startsWith("multipart/form-data")) {
 			/** 建立MultipartRequest實體 */
 			multi = new MultipartRequest(req, getServletContext().getRealPath(
 					"img"), 5 * 1024 * 1024, "UTF-8");
@@ -246,7 +247,7 @@ public class PhotoServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("photoVO", photoVO); // 含有輸入格式錯誤的adVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/photo/addPhoto.jsp");
+							.getRequestDispatcher("/front/album/page_addPhoto.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
@@ -254,9 +255,14 @@ public class PhotoServlet extends HttpServlet {
 				/*************************** 2.開始新增資料 *****************************************/
 				Integer albno = new Integer(multi.getParameter("albno").trim());
 				photoSvc.insertWithGpalbum(photoVO , albno);
-
+				AlbumService albumSvc = new AlbumService();
+				AlbumVO albumVO = albumSvc.getOneAlbum(albno);
+				List<PhotoVO> listPohto = albumSvc.getAlbno(albno);
+				
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/back/photo/listAllPhoto.jsp";
+				req.setAttribute("albumVO", albumVO);
+				req.setAttribute("listPohto", listPohto); 
+				String url = "/front/album/page_OneAlbum_TO_PHOTO.jsp?albno="+multi.getParameter("albno");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交page_listAllAd.jsp
 				successView.forward(req, res);
 
@@ -264,7 +270,7 @@ public class PhotoServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back/photo/addPhoto.jsp");
+						.getRequestDispatcher("/front/album/page_addPhoto.jsp");
 				failureView.forward(req, res);
 			}
 		}

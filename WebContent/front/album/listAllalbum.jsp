@@ -45,7 +45,7 @@
 					<th>相簿標題</th>
 					<th>相簿描述</th>
 					<th>建立時間</th>
-					<th>檢視相簿</th>
+					<th>檢視相片</th>
 					<th>修改</th>
 					<th>刪除</th>
 
@@ -65,7 +65,7 @@
 						<td>
 							<FORM METHOD="post"
 								action="<%=request.getContextPath()%>/AlbumServlet">
-								<input type="submit" value="檢視相簿"> <input type="hidden"
+								<input type="submit" value="檢視相片"> <input type="hidden"
 									name="albno" value="${albumVO.albno}"> <input
 									type="hidden" name="action" value="GET_ALBNO_TO_PHOTO">
 							</FORM>

@@ -82,7 +82,7 @@ public class AlbclsServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("albclsVO", albclsVO); // 資料庫取出的empVO物件,存入req
-				String url = "/back/albcls/listOneAlbcls.jsp";
+				String url = "/front/albcls/listOneAlbcls.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -113,7 +113,7 @@ public class AlbclsServlet extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("albclsVO", albclsVO);         // 資料庫取出的empVO物件,存入req
-				String url = "/back/albcls/update_albcls_input.jsp";
+				String url = "/front/albcls/page_update_albcls_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 				successView.forward(req, res);
 
@@ -121,7 +121,7 @@ public class AlbclsServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back/albcls/listAllAlbcls.jsp");
+						.getRequestDispatcher("/front/albcls/page_listAllAlbcls.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -159,7 +159,7 @@ public class AlbclsServlet extends HttpServlet {
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("albclsVO", albclsVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/back/albcls/listOneAlbcls.jsp";
+				String url = "/front/albcls/page_listAllAlbcls.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -200,7 +200,7 @@ public class AlbclsServlet extends HttpServlet {
 				albclsVO = albclsSvc.addAlbcls(albclsname);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back/albcls/listAllAlbcls.jsp";
+				String url = "/front/albcls/page_listAllAlbcls.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
@@ -273,16 +273,16 @@ public class AlbclsServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/albcls/select_page.jsp");
+							.getRequestDispatcher("/back/getOneAlbcls/select_page.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
 				
 				/***************************2.開始查詢資料*****************************************/
 				AlbclsService albclsSvc = new AlbclsService();
-				AlbclsVO albclsVO = new AlbclsVO();
-				albclsVO.setAlbclsno(albclsno);
 				List<AlbumVO> listAlbum = albclsSvc.findByAlbum(albclsno);
+				AlbclsVO albclsVO = new AlbclsVO();
+				albclsVO.setAlbclsno(albclsno);	
 				if (listAlbum == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -297,7 +297,7 @@ public class AlbclsServlet extends HttpServlet {
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("listAlbum", listAlbum); // 資料庫取出的empVO物件,存入req
 				req.setAttribute("albclsVO", albclsVO);
-				String url = "/back/albcls/listOneAlbcls.jsp";
+				String url = "/front/albcls/page_getOneAlbcls.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 

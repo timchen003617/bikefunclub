@@ -115,7 +115,7 @@ public class AlbumServlet extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("albumVO", albumVO);         // 資料庫取出的empVO物件,存入req
-				String url = "/back/album/update_album_input.jsp";
+				String url = "/front/album/page_update_album_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 				successView.forward(req, res);
 
@@ -170,7 +170,7 @@ public class AlbumServlet extends HttpServlet {
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("albumVO", albumVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/back/album/listOneAlbum.jsp";
+				String url = "/front/album/page_listOneAlbum.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 
@@ -220,7 +220,7 @@ public class AlbumServlet extends HttpServlet {
 				albumVO = albumSvc.addAlbum(memno , albclsno , authname , albtitle , albdesc);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back/album/listAllAlbum.jsp";
+				String url = "/front/album/page_AllAlbum.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
@@ -258,7 +258,7 @@ public class AlbumServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back/album/listAllAlbum.jsp");
+						.getRequestDispatcher("/front/albcls/page_getOneAlbcls.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -313,7 +313,7 @@ public class AlbumServlet extends HttpServlet {
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("listPohto", listPohto); // 資料庫取出的empVO物件,存入req
 				req.setAttribute("albumVO", albumVO);
-				String url = "/back/album/OneAlbum_TO_PHOTO.jsp";
+				String url = "/front/album/page_OneAlbum_TO_PHOTO.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
 

@@ -49,4 +49,9 @@ public class AlbclsService {
 	public List<AlbumVO> findByAlbum(Integer albclsno){
 		return dao.findByAlbum(albclsno);
 	}
+	
+	public String getAlbclsname(Integer albclsno){
+		AlbclsVO albclsVO = dao.findByPrimaryKey(albclsno);
+		return albclsVO.getAlbclsname();
+	}
 }
