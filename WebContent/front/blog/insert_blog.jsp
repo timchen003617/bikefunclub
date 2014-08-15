@@ -23,7 +23,12 @@
 		<form class="form-blog" action="<%=path%>/BlogServlet" method="post"
 			id="launchblog_input" name="launchblog_input">
 			<fieldset>
+			<div class="text-right">
+					<input class="btn btn-warning" type="button" value="上一頁"
+						onClick="history.back();return true;" name="button">
+				</div>
 				<legend>網誌新增</legend>
+				
 				<p class="red">*為必填欄位</p>
 				<%-- 錯誤表列 --%>
 				<c:if test="${not empty errorMsgs}">
@@ -37,7 +42,7 @@
 					</div>
 				</c:if>
 				
-				<input type="hidden" name="memno" value="${memVO.memno}">
+				<input type="hidden" name="memno" value="${MemVO.memno}">
 				
 				<jsp:useBean id="blogclsSvc" scope="page"
 					class="com.bikefunclub.blogcls.model.BlogclsService" />
@@ -76,4 +81,4 @@
 		</form>
 	</div>
 </div>
-<ckeditor:replace replace="bgtext" basePath="/Bikefunclub/ckeditor/" />
+<ckeditor:replace replace="bgtext" basePath="/bikefunclub/ckeditor/" />

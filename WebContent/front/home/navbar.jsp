@@ -20,8 +20,8 @@
 					</ul></li>
 					<li><a href="#">網誌</a>
 					<ul>
-						<li><a href="#">瀏覽網誌</a></li>
-						<li><a href="#">網誌管理</a></li>
+						<li><a href="<%=path%>/front/blog/page_listAllblog.jsp">瀏覽網誌</a></li>
+						<li><a href="<%=path%>/front/blog/page_manage_blog.jsp">網誌管理</a></li>
 					</ul></li>
 					<li><a href="#">揪團</a>
 					<ul>
