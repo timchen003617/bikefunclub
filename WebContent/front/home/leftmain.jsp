@@ -61,7 +61,7 @@
 						</a>
 					</c:forEach>
 				</ul>
-				<a href='/bikefunclub/front/ann/page_listAllann.jsp'>
+				<a href='/Bikefunclub/front/ann/page_listAllann.jsp'>
 					<p class="text-right">More</p></a> 
 			</div>
 		</div>
@@ -85,7 +85,7 @@
 							<tbody>
 								<tr style="cursor:pointer">
 									<td rowspan="3">
-									<form id="formhidden" METHOD="post" ACTION="/bikefunclub/front/home/page_mem_info.jsp">
+									<form id="formhidden" METHOD="post" ACTION="/Bikefunclub/front/home/page_mem_info.jsp">
 						                  <input type="hidden" name="memno2" id="memno" value="${memVO.memno}">
 					            	</form>
 									<c:choose>
@@ -107,31 +107,10 @@
 				<div class="clearfix"></div>
 			</div>
 		</div>
-		<!-- 		<div class="tabbedPanels"> -->
-		<!-- 			<ul class="tabs"> -->
-		<!-- 				<li><a href="#panel1">最新揪團</a></li> -->
-		<!-- 				<li><a href="#panel2">推薦路線</a></li> -->
-		<!-- 				<li><a href="#panel3">會員分享路線</a></li> -->
-		<!-- 			</ul> -->
-		<!-- 			<div class="tab_container"> -->
-		<!-- 				<div class="tab_content" id="panel1"> -->
-		<!-- 					<ul> -->
-		<!-- 						<li><a href="#">news1</a></li> -->
-		<!-- 						<li><a href="#">news2</a></li> -->
-		<!-- 						<li><a href="#">news3</a></li> -->
-		<!-- 					</ul> -->
-		<!-- 				</div> -->
-		<!-- 				<div class="tab_content" id="panel2"> -->
-		<!-- 					<p>Panel 2 content</p> -->
-		<!-- 				</div> -->
-		<!-- 				<div class="tab_content" id="panel3"> -->
-		<!-- 					<p>Panel 3 content</p> -->
-		<!-- 				</div> -->
-		<%-- 					<form id="formhiddenannno" METHOD="post" ACTION="<%=contextpath%>/AnnServlet"> --%>
-		<!-- 						<input type="hidden" name="action" value="getAnn_info"> -->
-		<!-- 						<input type="hidden" name="annno" id="annno"> -->
-		<!-- 					</form> -->
-		<!-- 			</div> -->
-		<!-- 		</div> -->
+
+							<form id="formhiddenannno" METHOD="post" ACTION="<%=contextpath%>/AnnServlet">
+								<input type="hidden" name="action" value="getAnn_info">
+								<input type="hidden" name="annno" id="annno">
+							</form>
 	</div>
 </div>

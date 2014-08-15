@@ -101,7 +101,7 @@
 												<input type="hidden" name="whichPage" value="<%=whichPage%>">
 												<!--送出當前是第幾頁給Controller-->
 												<input type="hidden"
-													name="action" value="launchblog_info">
+													name="action" value="getBlog_info">
 											</form>
 										</td>
 									</tr>

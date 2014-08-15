@@ -425,6 +425,8 @@ public class GpServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		
 		if ("gpdetail".equals(action)) {// 瀏覽揪團詳細資料,來自page_listAllgp.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
