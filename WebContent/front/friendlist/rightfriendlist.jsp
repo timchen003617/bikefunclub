@@ -12,7 +12,7 @@
 	<div class="tabbedPanels">
 		<ul class="tabs">
 			<li><a href="#panel1" onclick="setTabNum(0)">好友管理</a></li>
-			<li><a href="#panel2" onclick="setTabNum(1)">關注好友</a></li>
+			<li><a href="#panel2" onclick="setTabNum(1)">關注會員</a></li>
 		</ul>
 		<div class="tab_container">
 			<!--所有好友-->

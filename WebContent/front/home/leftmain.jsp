@@ -52,8 +52,7 @@
 					<c:forEach var="annVO" items="${list}" begin="0" end="4">
 						<li><span style="color: #f90;">【<fmt:formatDate
 									value="${annVO.anndate}" pattern="yyyy-MM-dd" />】
-						</span><br>
-						<a href='#${annVO.annno}' value='${annVO.annno}'> <c:if
+						</span><br> <a href='#${annVO.annno}' value='${annVO.annno}'> <c:if
 									test="${not empty annVO.annfile}">
 									<div>
 										<img
@@ -113,12 +112,11 @@
 					<div class="clearfix"></div>
 				</div>
 			</div>
-
-			<form id="formhiddenannno" method="post"
-				action="<%=contextpath%>/AnnServlet">
-				<input type="hidden" name="action" value="getAnn_info"> <input
-					type="hidden" name="annno" id="annno">
-			</form>
 		</div>
 	</c:if>
+	<form id="formhiddenannno" method="post"
+		action="<%=contextpath%>/AnnServlet">
+		<input type="hidden" name="action" value="getAnn_info"> <input
+			type="hidden" name="annno" id="annno">
+	</form>
 </div>

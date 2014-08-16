@@ -31,8 +31,8 @@
 								</c:otherwise>
 							</c:choose>
 						</li>
-						<li><a href="#">訊息<span
-								class="glyphicon glyphicon-envelope"></span> <span class="badge">2</span></a></li>
+<!-- 						<li><a href="#">訊息<span -->
+<!-- 								class="glyphicon glyphicon-envelope"></span> <span class="badge">2</span></a></li> -->
 					</ul>
 					<div id="messagebox">
 						<div id="messagebox-inner">

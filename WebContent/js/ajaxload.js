@@ -1,35 +1,40 @@
 $(document).ready(function() {
-	$("#btnallfrilist").click(function() {
-		var request = $.ajax({
-			type : "post",
-			url : "/bikefunclub/FriendListServlet",
-			data : fricreatQueryString(),
-			dataType : "html",
+	$("#friname").keypress(function(e) {
+		if (e.keyCode == 13 && !e.shiftKey) {//按下enter
+			e.preventDefault();
+			var request = $.ajax({
+				type : "post",
+				url : "/bikefunclub/FriendListServlet",
+				data : fricreatQueryString(),
+				dataType : "html",
 
-		});
-		request.done(function(msg) {
-			$(".tab_content#panel1").html(msg);
-		});
-		request.fail(function(jqXHR, textStatus) {
-			alert("Request failed: " + textStatus);
-		});
+			});
+			request.done(function(msg) {
+				$(".tab_content#panel1").html(msg);
+			});
+			request.fail(function(jqXHR, textStatus) {
+				alert("Request failed: " + textStatus);
+			});
+		}
 
 	});
-	$("#btnnotfrimemlist").click(function() {
-		var request = $.ajax({
-			type : "post",
-			url : "/bikefunclub/FriendListServlet",
-			data : memcreatQueryString(),
-			dataType : "html",
+	$("#memname").keypress(function(e) {
+		if (e.keyCode == 13 && !e.shiftKey) {
+			e.preventDefault();
+			var request = $.ajax({
+				type : "post",
+				url : "/bikefunclub/FriendListServlet",
+				data : memcreatQueryString(),
+				dataType : "html",
 
-		});
-		request.done(function(msg) {
-			$(".tab_content#panel2").html(msg);
-		});
-		request.fail(function(jqXHR, textStatus) {
-			alert("Request failed: " + textStatus);
-		});
-
+			});
+			request.done(function(msg) {
+				$(".tab_content#panel2").html(msg);
+			});
+			request.fail(function(jqXHR, textStatus) {
+				alert("Request failed: " + textStatus);
+			});
+		}
 	});
 });
 

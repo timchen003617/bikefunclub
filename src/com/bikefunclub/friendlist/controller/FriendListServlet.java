@@ -107,7 +107,6 @@ public class FriendListServlet extends HttpServlet {
 		if ("getmemname_For_Display".equals(action)) {
 			/** 1.接收請求參數 */
 			String memname = req.getParameter("memname");
-			String tabNum = req.getParameter("tabNum");
 			req.setAttribute("memname", memname);
 			// 模糊查詢
 			memname = "%" + memname + "%";
