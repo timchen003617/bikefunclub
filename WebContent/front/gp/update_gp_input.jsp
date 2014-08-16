@@ -119,4 +119,4 @@
 		</form>
 	</div>
 </div>
-<ckeditor:replace replace="gpdesc" basePath="/Bikefunclub/ckeditor/" />
+<ckeditor:replace replace="gpdesc" basePath="/bikefunclub/ckeditor/" />

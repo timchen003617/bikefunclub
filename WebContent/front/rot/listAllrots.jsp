@@ -13,7 +13,7 @@
 		$('#select_rotclsno').change(function() {
 			$.ajax({
 				type : "GET",
-				url : "/Bikefunclub/Rot.do",
+				url : "/bikefunclub/Rot.do",
 				data : {
 					"action" : "getSelected_rots",
 					"rotclsno" : $(this).val()
@@ -49,7 +49,7 @@
 			strAry = $(this).attr("href").split("#");
 			$.ajax({
 				type : "GET",
-				url : "/Bikefunclub/Rot.do",
+				url : "/bikefunclub/Rot.do",
 				data : {
 					"action" : "getSelected_rotinfo",
 					"rotno" : strAry[1]

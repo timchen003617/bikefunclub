@@ -25,7 +25,7 @@
 	$(document).ready(function() {
 		$.ajax({
 			type : "GET",
-			url : "/Bikefunclub/Rot.do",
+			url : "/bikefunclub/Rot.do",
 			data : {
 				"action" : "getSelected_rotinfo",
 				"rotno" :  '${rotno}'

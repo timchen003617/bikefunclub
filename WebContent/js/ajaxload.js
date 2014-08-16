@@ -2,7 +2,7 @@ $(document).ready(function() {
 	$("#btnallfrilist").click(function() {
 		var request = $.ajax({
 			type : "post",
-			url : "/Bikefunclub/FriendListServlet",
+			url : "/bikefunclub/FriendListServlet",
 			data : fricreatQueryString(),
 			dataType : "html",
 
@@ -18,7 +18,7 @@ $(document).ready(function() {
 	$("#btnnotfrimemlist").click(function() {
 		var request = $.ajax({
 			type : "post",
-			url : "/Bikefunclub/FriendListServlet",
+			url : "/bikefunclub/FriendListServlet",
 			data : memcreatQueryString(),
 			dataType : "html",
 

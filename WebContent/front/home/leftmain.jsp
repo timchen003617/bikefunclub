@@ -17,6 +17,9 @@
 	MemService memSvc = new MemService();
 	List<MemVO> memlist = memSvc.getAll();
 	pageContext.setAttribute("memlist", memlist);
+	
+	MemVO loginmemVO = (MemVO)session.getAttribute("memVO");
+	pageContext.setAttribute("loginmemVO", loginmemVO);
 %>
 <script type="text/javascript">
 	$(document).ready(
@@ -47,71 +50,75 @@
 			<div class="panel-body">
 				<ul class="ann_index">
 					<c:forEach var="annVO" items="${list}" begin="0" end="4">
-						<li><span style="color:#f90;">【<fmt:formatDate value="${annVO.anndate}" pattern="yyyy-MM-dd" />】</span><br><a
-							href='#${annVO.annno}' value='${annVO.annno}'> <c:if
+						<li><span style="color: #f90;">【<fmt:formatDate
+									value="${annVO.anndate}" pattern="yyyy-MM-dd" />】
+						</span><br>
+						<a href='#${annVO.annno}' value='${annVO.annno}'> <c:if
 									test="${not empty annVO.annfile}">
 									<div>
 										<img
 											src="<%=contextpath%>/AnnreadimgServlet?annno=${annVO.annno}">
 									</div>
-								</c:if><strong><c:out value="${fn:substring(annVO.anntitle,0,25)}" /></strong>
+								</c:if><strong><c:out
+										value="${fn:substring(annVO.anntitle,0,25)}" /></strong>
 						</a></li>
 					</c:forEach>
 				</ul>
 				<div class="text-right">
-					<a href='/Bikefunclub/front/ann/page_listAllann.jsp'>更多》</a>
+					<a href='<%=contextpath%>/front/ann/page_listAllann.jsp'>更多》</a>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div id="colmd4-2">
-		<!-- Nav tabs -->
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<span class="glyphicon glyphicon-user"></span>線上會員
-				</h3>
-			</div>
-			<div class="panel-body">
-				<div id="memlist" class="text-center">
-					<c:forEach var="memVO" items="${memlist}">
-					<div class="pull-left">
-						<table class="table table-hover">
-							<thead></thead>
-							<tbody>
-								<tr>
-									<td>
-										<form id="formhidden" method="post"
-											action="/Bikefunclub/front/home/page_mem_info.jsp">
-											<input type="hidden" name="memno" id="memno"
-												value="${memVO.memno}">
-										</form> <c:choose>
-											<c:when test="${memVO.memfile==null}">
-												<a href="#"><img class="img-thumbnail"
-													src="<%=contextpath%>/img/photo.jpg"></a>
-											</c:when>
-											<c:otherwise>
-												<a href="#"><img class="img-thumbnail"
-													src="<%=contextpath%>/MemreadimgServlet?memno=${memVO.memno}"></a>
-											</c:otherwise>
-										</c:choose>
-									</td>
-									<td><p>${memVO.memname}</p></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>	
-					</c:forEach>
+	<c:if test="${not empty loginmemVO}">
+		<div id="colmd4-2">
+			<!-- Nav tabs -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<span class="glyphicon glyphicon-user"></span>線上會員
+					</h3>
 				</div>
-				<div class="clearfix"></div>
+				<div class="panel-body">
+					<div id="memlist" class="text-center">
+						<c:forEach var="memVO" items="${memlist}">
+							<div class="pull-left">
+								<table class="table table-hover">
+									<thead></thead>
+									<tbody>
+										<tr>
+											<td>
+												<form id="formhidden" method="post"
+													action="<%=contextpath%>/front/home/page_mem_info.jsp">
+													<input type="hidden" name="memno" id="memno"
+														value="${memVO.memno}">
+												</form> <c:choose>
+													<c:when test="${memVO.memfile==null}">
+														<a href="#"><img class="img-thumbnail"
+															src="<%=contextpath%>/img/photo.jpg"></a>
+													</c:when>
+													<c:otherwise>
+														<a href="#"><img class="img-thumbnail"
+															src="<%=contextpath%>/MemreadimgServlet?memno=${memVO.memno}"></a>
+													</c:otherwise>
+												</c:choose>
+											</td>
+											<td><p>${memVO.memname}</p></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</c:forEach>
+					</div>
+					<div class="clearfix"></div>
+				</div>
 			</div>
-		</div>
 
-		<form id="formhiddenannno" methods="post"
-			action="<%=contextpath%>/AnnServlet">
-			<input type="hidden" name="action" value="getAnn_info"> <input
-				type="hidden" name="annno" id="annno">
-		</form>
-	</div>
+			<form id="formhiddenannno" method="post"
+				action="<%=contextpath%>/AnnServlet">
+				<input type="hidden" name="action" value="getAnn_info"> <input
+					type="hidden" name="annno" id="annno">
+			</form>
+		</div>
+	</c:if>
 </div>

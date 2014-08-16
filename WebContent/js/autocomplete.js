@@ -5,7 +5,7 @@ $(document).ready(function() {
 		source : function(request, response) {
 			$.ajax({
 				type: "post",
-				url : "/Bikefunclub/Friautocomplete",
+				url : "/bikefunclub/Friautocomplete",
 				dataType : "json",
 				data: request,
 				success : function(data, textStatus, jqXHR) {
@@ -26,7 +26,7 @@ $(document).ready(function() {
 		source : function(request, response) {
 			$.ajax({
 				type: "post",
-				url : "/Bikefunclub/Memautocomplete",
+				url : "/bikefunclub/Memautocomplete",
 				dataType : "json",
 				data: request,
 				success : function(data, textStatus, jqXHR) {

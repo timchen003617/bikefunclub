@@ -20,7 +20,7 @@ $(document).ready(function() {
 		function setmap() {
 			$.ajax({
 				type : "GET",
-				url : "/Bikefunclub/Rot.do",
+				url : "/bikefunclub/Rot.do",
 				data : {
 					"action" : "getSelected_rotinfo",
 					"rotno" : $('#selected_rot').val()
