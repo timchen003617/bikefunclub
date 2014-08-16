@@ -58,8 +58,8 @@
 										<img
 											src="<%=contextpath%>/AnnreadimgServlet?annno=${annVO.annno}">
 									</div>
-								</c:if><strong><c:out
-										value="${fn:substring(annVO.anntitle,0,25)}" /></strong>
+								</c:if><div><strong><c:out
+										value="${fn:substring(annVO.anntitle,0,25)}" /></strong></div>
 						</a></li>
 					</c:forEach>
 				</ul>

@@ -238,10 +238,12 @@ ul.ann_index {
 }
 
 ul.ann_index li {
-	height: 50px;
+	height: 70px;
 	margin: 5px 0px;
 }
-
+ul.ann_index li a{
+	display:block;
+}
 ul.ann_index li p {
 	height: 50px;
 	overflow: hidden;
@@ -385,7 +387,7 @@ header #menulist li a:hover {
 }
 
 #colmd4-1 .panel-body {
-	height: 350px;
+	height: 425ppx;
 }
 /* 分頁 */
 .pagination>.active>a,.pagination>.active>span {
