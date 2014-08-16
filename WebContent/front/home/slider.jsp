@@ -31,11 +31,11 @@
 						<ul>
 							<c:forEach var="memVO2" items="${memSvc.all}">
 								<c:if test="${friVO.youno==memVO2.memno}">								
-									<c:if test="${memVO2.memfile==null}">
+									<c:if test="${empty memVO2.memfile}">
 											<li><img class="img-thumbnail"
 												src="<%=path%>/img/photo.jpg">${memVO2.memname}</li>
 									</c:if>
-									<c:if test="${memVO2.memfile!=null}">
+									<c:if test="${not empty memVO2.memfile}">
 											<li><img class="img-thumbnail"
 												src="<%=path%>/MemreadimgServlet?memno=${memVO2.memno}">${memVO2.memname}</li>
 									</c:if>								

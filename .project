@@ -3,11 +3,6 @@
 	<name>bikefunclub</name>
 	<comment></comment>
 	<projects>
-		<project>activation</project>
-		<project>mail</project>
-		<project>jstl</project>
-		<project>json-lib-2.4-jdk15</project>
-		<project>standard</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

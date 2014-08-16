@@ -12,13 +12,13 @@
 		<div class="navbar-header"></div>
 		<div class="navbar-collapse collapse">
 			<h3 class="logo">
-				<a href="<%=path%>/back/home/admin.jsp">bikefunclub</a>
+				<a href="<%=path%>/back/home/admin.jsp">Bikefunclub</a>
 			</h3>
-			<h3>單車俱樂部後台管理系統</h3>
-			<div class="text-right">
+			<h3 style="letter-spacing: 3px; font-weight:bold;">單車俱樂部後台管理系統</h3>
+			<p class="text-right">
 				<strong>${empVO.empname},你好!</strong> 
 				<a href="<%=path%>/EmpLoginOut">登出</a>
-			</div>
+			</p>
 
 		</div>
 	</div>

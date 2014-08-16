@@ -96,7 +96,11 @@
 				</div>
 				<!--預覽圖片顯示區域 -->
 				<div id="preview">
-					<c:if test="${not empty memVO.memfilename}">
+					<c:if test="${empty memVO.memfile}">
+						<img id="imgheadmd"
+							src="<%=path%>/img/photo.jpg">
+					</c:if>
+					<c:if test="${not empty memVO.memfile}">
 						<img id="imgheadmd"
 							src="<%=path%>/MemreadimgServlet?memno=${memVO.memno}">
 					</c:if>

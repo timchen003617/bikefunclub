@@ -63,6 +63,8 @@
     <url-pattern>/front/mem/update_mem_input.jsp</url-pattern>
     <url-pattern>/front/mem/page_myhome.jsp</url-pattern>
     <url-pattern>/front/mem/myhome.jsp</url-pattern>
+    <url-pattern>/front/home/mem_info.jsp</url-pattern>
+    <url-pattern>/front/home/page_mem_info.jsp</url-pattern>
     <url-pattern>/front/gp/*</url-pattern>
     <url-pattern>/front/rot/*</url-pattern>
   </filter-mapping>

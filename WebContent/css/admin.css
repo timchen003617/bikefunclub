@@ -27,7 +27,7 @@ a:hover,a:focus {
 }
 
 .logo a {
-	background: url("../img/bikefunclub_back.png") no-repeat;
+	background: url("../img/bikefunclub_back.png") no-repeat ;
 	display: block;
 	text-indent: -999px;
 	width: 140px;
@@ -45,7 +45,8 @@ ul.nav.navbar-nav.navbar-right {
 }
 
 #back {
-	border-bottom: 5px solid #c70;
+	border-bottom: 3px solid #a90329;
+	background:url(../img/back_headerbg.jpg) no-repeat right top;
 }
 
 .page-header {
@@ -136,7 +137,7 @@ ul.nav.navbar-nav.navbar-right {
  */
 .navbar-fixed-top {
 	color: #fff;
-	background-color: #34373b;
+	background-color: #000;
 	border: 0;
 }
 

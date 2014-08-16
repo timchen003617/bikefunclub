@@ -47,14 +47,14 @@
 			<div class="panel-body">
 				<ul class="ann_index">
 					<c:forEach var="annVO" items="${list}" begin="0" end="4">
-						<li>【<fmt:formatDate value="${annVO.anndate}" pattern="yyyy-MM-dd" />】<br><a
+						<li><span style="color:#f90;">【<fmt:formatDate value="${annVO.anndate}" pattern="yyyy-MM-dd" />】</span><br><a
 							href='#${annVO.annno}' value='${annVO.annno}'> <c:if
-									test="${annVO.annfile!=null}">
+									test="${not empty annVO.annfile}">
 									<div>
 										<img
 											src="<%=contextpath%>/AnnreadimgServlet?annno=${annVO.annno}">
 									</div>
-								</c:if> <c:out value="${fn:substring(annVO.anntitle,0,25)}" />
+								</c:if><strong><c:out value="${fn:substring(annVO.anntitle,0,25)}" /></strong>
 						</a></li>
 					</c:forEach>
 				</ul>
