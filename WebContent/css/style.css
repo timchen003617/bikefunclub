@@ -76,10 +76,17 @@ a:hover,a:focus {
 	height: 50px;
 	overflow: hidden;	
 }
-
+#notfrimemlist .img-thumbnail{
+	width: 96px;
+	height: 96px;
+	overflow: hidden;	
+}
 #memlist .table{
 	width:160px;
 	margin-bottom:5px;
+}
+#memlist .table tr{
+	cursor: pointer;
 }
 .img-thumbnail {
 	width: 96px;
@@ -268,7 +275,7 @@ ul.ann_index li img {
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);
 }
 /*好友名單管理、新增好友*/
-#frilist.pull-left,#memlist.pull-left {
+#frilist.pull-left,#notfrimemlist.pull-left {
 	width: 235px;
 	height: 247px;
 	margin: 2px;
@@ -397,6 +404,7 @@ header #menulist li a:hover {
 }
 
 .panel-default>.panel-heading h3 {
+	font-weight:bold;
 	color: #fff;
 }
 

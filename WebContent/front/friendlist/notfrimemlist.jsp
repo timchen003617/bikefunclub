@@ -38,7 +38,7 @@
 	<%@ include file="pages/page3.file"%>
 	<c:forEach var="memVO" items="${memlist}" begin="<%=mempageIndex%>"
 		end="<%=mempageIndex+memrowsPerPage-1%>">
-		<div id="memlist" class="pull-left">
+		<div id="notfrimemlist" class="pull-left">
 			<form method="post" action="<%=path%>/FriendListServlet" class="ins"
 				name="insfri">
 				<table class="table table-condensed">

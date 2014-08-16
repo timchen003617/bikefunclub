@@ -80,11 +80,11 @@
 						<table class="table table-hover">
 							<thead></thead>
 							<tbody>
-								<tr style="cursor: pointer">
+								<tr>
 									<td>
 										<form id="formhidden" method="post"
 											action="/Bikefunclub/front/home/page_mem_info.jsp">
-											<input type="hidden" name="memno2" id="memno"
+											<input type="hidden" name="memno" id="memno"
 												value="${memVO.memno}">
 										</form> <c:choose>
 											<c:when test="${memVO.memfile==null}">

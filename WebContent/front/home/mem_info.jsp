@@ -9,10 +9,10 @@
 <%@ page import="com.bikefunclub.rot.model.*"%>
 <%
 	String path = request.getContextPath();
-    Integer memno = Integer.parseInt(request.getParameter("memno2"));
+    Integer memno = Integer.parseInt(request.getParameter("memno"));
 	MemService memSvc2 = new MemService();
-	MemVO loginmemVO =memSvc2.getOnemem(memno);
-	pageContext.setAttribute("loginmemVO", loginmemVO);
+	MemVO memVO =memSvc2.getOnemem(memno);
+	pageContext.setAttribute("memVO", memVO);
 
 	//會員好友清單
 	FriendListService friSvc = new FriendListService();
@@ -35,12 +35,12 @@
 		<div id="myhome">
 			<div id="myhome-inner">
 				<div id="mypic">
-					<c:if test="${loginmemVO.memfile==null}">
+					<c:if test="${memVO.memfile==null}">
 						<img class="img-thumbnail" src="<%=path%>/img/photo.jpg">
 					</c:if>
-					<c:if test="${loginmemVO.memfile!=null}">
+					<c:if test="${memVO.memfile!=null}">
 						<img class="img-thumbnail"
-							src="<%=path%>/MemreadimgServlet?memno=${loginmemVO.memno}">
+							src="<%=path%>/MemreadimgServlet?memno=${memVO.memno}">
 					</c:if>
 				</div>
 				<div id="fieldperson">
@@ -54,14 +54,14 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>姓名: ${loginmemVO.memname}</td>
-								<td>綽號: ${loginmemVO.memnickname}</td>
-								<td>性別: ${loginmemVO.memsex=="M"?"男":"女"}</td>
-								<td>生日: ${loginmemVO.membirth}</td>
+								<td>姓名: ${memVO.memname}</td>
+								<td>綽號: ${memVO.memnickname}</td>
+								<td>性別: ${memVO.memsex=="M"?"男":"女"}</td>
+								<td>生日: ${memVO.membirth}</td>
 							</tr>
 							<tr>
-								<td>地址: ${loginmemVO.memaddr}</td>
-								<td>手機: ${loginmemVO.memtelm}</td>
+								<td>地址: ${memVO.memaddr}</td>
+								<td>手機: ${memVO.memtelm}</td>
 							</tr>
 						</tbody>
 					</table>

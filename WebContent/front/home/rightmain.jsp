@@ -100,7 +100,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<form id="formhiddengp" METHOD="post" ACTION="/Bikefunclub/Gp.do">
+				<form id="formhiddengp" method="post" action="/Bikefunclub/Gp.do">
 					<input type="hidden" name="action" value="gpdetail"> <input
 						type="hidden" name="gpno" id="gpno">
 				</form>
@@ -138,7 +138,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<form id="formhiddenrot" METHOD="post" ACTION="/Bikefunclub/Rot.do">
+				<form id="formhiddenrot" method="post" action="/Bikefunclub/Rot.do">
 					<input type="hidden" name="action" value="getRot_info"> <input
 						type="hidden" name="rotno" id="rotno">
 				</form>
@@ -176,8 +176,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<form id="formhiddenblog" METHOD="post"
-					ACTION="/Bikefunclub/BlogServlet">
+				<form id="formhiddenblog" method="post"
+					action="/Bikefunclub/BlogServlet">
 					<input type="hidden" name="action" value="getBlog_info"> <input
 						type="hidden" name="blogno" id="blogno">
 				</form>
