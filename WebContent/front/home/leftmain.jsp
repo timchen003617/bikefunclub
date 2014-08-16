@@ -28,11 +28,10 @@
 									$(this).attr("value"));
 							$("#formhiddenannno").submit();
 						});
-				$("#memlist").find("tr").click(
-						function() {
-							//$(this).attr("value");
-							$(this).find("#formhidden").submit();
-						});
+				$("#memlist").find("tr").click(function() {
+					//$(this).attr("value");
+					$(this).find("#formhidden").submit();
+				});
 			});
 </script>
 
@@ -48,21 +47,20 @@
 			<div class="panel-body">
 				<ul class="ann_index">
 					<c:forEach var="annVO" items="${list}" begin="0" end="4">
-						<a href='#${annVO.annno}' value='${annVO.annno}'>
-							<li><c:if test="${annVO.annfile!=null}">
+						<li>【<fmt:formatDate value="${annVO.anndate}" pattern="yyyy-MM-dd" />】<br><a
+							href='#${annVO.annno}' value='${annVO.annno}'> <c:if
+									test="${annVO.annfile!=null}">
 									<div>
 										<img
 											src="<%=contextpath%>/AnnreadimgServlet?annno=${annVO.annno}">
 									</div>
-								</c:if>
-								<p>
-									<c:out value="${fn:substring(annVO.anntitle,0,25)}......" />
-								</p></li>
-						</a>
+								</c:if> <c:out value="${fn:substring(annVO.anntitle,0,25)}" />
+						</a></li>
 					</c:forEach>
 				</ul>
-				<a href='/Bikefunclub/front/ann/page_listAllann.jsp'>
-					<p class="text-right">More</p></a> 
+				<div class="text-right">
+					<a href='/Bikefunclub/front/ann/page_listAllann.jsp'>更多》</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -77,18 +75,18 @@
 			</div>
 			<div class="panel-body">
 				<div id="memlist" class="text-center">
-				<c:forEach var="memVO" items="${memlist}">
+					<c:forEach var="memVO" items="${memlist}">
+					<div class="pull-left">
 						<table class="table table-hover">
-						<thead>
-
-						</thead>
+							<thead></thead>
 							<tbody>
-								<tr style="cursor:pointer">
-									<td rowspan="3">
-									<form id="formhidden" METHOD="post" ACTION="/Bikefunclub/front/home/page_mem_info.jsp">
-						                  <input type="hidden" name="memno2" id="memno" value="${memVO.memno}">
-					            	</form>
-									<c:choose>
+								<tr style="cursor: pointer">
+									<td>
+										<form id="formhidden" method="post"
+											action="/Bikefunclub/front/home/page_mem_info.jsp">
+											<input type="hidden" name="memno2" id="memno"
+												value="${memVO.memno}">
+										</form> <c:choose>
 											<c:when test="${memVO.memfile==null}">
 												<a href="#"><img class="img-thumbnail"
 													src="<%=contextpath%>/img/photo.jpg"></a>
@@ -97,20 +95,23 @@
 												<a href="#"><img class="img-thumbnail"
 													src="<%=contextpath%>/MemreadimgServlet?memno=${memVO.memno}"></a>
 											</c:otherwise>
-										</c:choose></td>
-									<td><h3>${memVO.memname}</h3></td>	
+										</c:choose>
+									</td>
+									<td><p>${memVO.memname}</p></td>
 								</tr>
 							</tbody>
 						</table>
-				</c:forEach>
+					</div>	
+					</c:forEach>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
 
-							<form id="formhiddenannno" METHOD="post" ACTION="<%=contextpath%>/AnnServlet">
-								<input type="hidden" name="action" value="getAnn_info">
-								<input type="hidden" name="annno" id="annno">
-							</form>
+		<form id="formhiddenannno" methods="post"
+			action="<%=contextpath%>/AnnServlet">
+			<input type="hidden" name="action" value="getAnn_info"> <input
+				type="hidden" name="annno" id="annno">
+		</form>
 	</div>
 </div>

@@ -1,7 +1,9 @@
 $(function() {
+
 	var showTab;
 
-	showTab = ($("#tabNum").val() == null)?"0":$("#tabNum").val();// 預設顯示第1個 Tab
+	showTab = ($("#tabNum").val() == null) ? "0" : $("#tabNum").val();// 預設顯示第1個
+																		// Tab
 
 	var $defaultLi = $(".tabs li").eq(showTab).addClass("active");
 	$('.tab_content').eq($defaultLi.index()).siblings().hide();
@@ -24,4 +26,5 @@ $(function() {
 			}).find('a').focus(function() {
 		this.blur();
 	});
+
 });

@@ -71,7 +71,16 @@ a:hover,a:focus {
 .orange {
 	color: #f18d00;
 }
+#memlist .img-thumbnail{
+	width: 50px;
+	height: 50px;
+	overflow: hidden;	
+}
 
+#memlist .table{
+	width:160px;
+	margin-bottom:5px;
+}
 .img-thumbnail {
 	width: 96px;
 	height: 96px;
@@ -223,8 +232,7 @@ ul.ann_index {
 
 ul.ann_index li {
 	height: 50px;
-	margin: 10px 0px;
-	padding: 5px;
+	margin: 5px 0px;
 }
 
 ul.ann_index li p {
