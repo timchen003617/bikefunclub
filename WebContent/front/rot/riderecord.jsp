@@ -61,9 +61,19 @@
 						</tr>
 						<tr>
 							<td>平均時速</td>
-							<td><span style="font-weight: bold"><fmt:formatNumber
-										value="${sumdistence/sumtime}" groupingUsed="false"
-										type="number" /></span></td>
+							<td><span style="font-weight: bold">
+                                    <c:choose>
+										<c:when test="${sumtime!=0}">
+											<fmt:formatNumber value="${sumdistence/sumtime}"
+												groupingUsed="false" type="number" />
+										</c:when>
+
+										<c:otherwise><fmt:formatNumber value="${0}"
+												groupingUsed="false" type="number" /></c:otherwise>
+									</c:choose>
+
+
+							</span></td>
 							<td>km/hr</td>
 						</tr>
 						<tr>
@@ -82,12 +92,12 @@
 					<div class="table-responsive">
 						<table class="table table-hover">
 							<thead>
-									<tr>
+								<tr>
 									<td><fmt:formatDate value="${riderecordVO.stamp}"
 											pattern="yyyy-MM-dd HH:mm:ss" /></td>
 									<td></td>
 									<td></td>
-																		<td>
+									<td>
 										<FORM METHOD="post" ACTION="<%=path%>/Rot.do">
 											<input class="btn btn-success" type="submit" value="查看路線資料">
 											<input type="hidden" name="rotno"
@@ -114,13 +124,12 @@
 												value="${recorddistence/ridetime}" groupingUsed="false"
 												type="number" /></span> km/hr
 									</td>
-									<td></td>				
+									<td></td>
 								</tr>
-								<tr><td>
-									消耗卡路里
-									<span style="font-weight: bold"><fmt:formatNumber
-											value="${ridetime*184.0}" groupingUsed="false" type="number" /></span>
-									卡路里
+								<tr>
+									<td>消耗卡路里 <span style="font-weight: bold"><fmt:formatNumber
+												value="${ridetime*184.0}" groupingUsed="false" type="number" /></span>
+										卡路里
 									</td>
 									<td></td>
 									<td></td>

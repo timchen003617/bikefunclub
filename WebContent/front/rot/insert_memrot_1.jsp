@@ -229,7 +229,7 @@ var rendererOptions = {
 				<div class="panel-heading">
 					<h3 class="panel-title">路線資料</h3>
 				</div>
-  		 	    <p>Total Distance: <span id="total"></span></p>
+  		 	    <h4 class="text-center">總距離: <span id="total"></span></h4>
 				<div class="panel-body" id="selected_rots"></div>
 				
 			</div>
