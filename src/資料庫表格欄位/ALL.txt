@@ -67,6 +67,7 @@ create table member
     MEMTELH     VARCHAR2(15),
     MEMTELO     VARCHAR2(15),
     MEMTELM     VARCHAR2(15),
+  	MEMGETMAILYN  VARCHAR2(1),
     MEMRGDATE DATE,
     PRIMARY KEY (MEMNO)
   );
@@ -91,6 +92,7 @@ CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
       '02-265640783',
       '02-25624563',
       '0937814569',
+      'Y',
       TO_DATE('2014/07/17 21:02:44', 'yyyy-mm-dd hh24:mi:ss')
     );
   insert
@@ -113,6 +115,7 @@ CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
       '02-265123483',
       '02-25698763',
       '093456769',
+      'Y',
       TO_DATE('2014/07/18 15:10:00', 'yyyy-mm-dd hh24:mi:ss')
     );
   insert
@@ -135,6 +138,7 @@ CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
       '02-265123483',
       '02-25698763',
       '093456769',
+      'Y',
       TO_DATE('2014/07/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
     );
   insert
@@ -157,6 +161,7 @@ CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
       '02-265123483',
       '02-25698763',
       '093456769',
+      'Y',
       TO_DATE('2014/07/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
     );
   insert
@@ -179,6 +184,7 @@ CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
       '02-265123483',
       '02-25698763',
       '093456769',
+      'Y',
       TO_DATE('2014/09/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
     );
   insert
@@ -201,6 +207,7 @@ CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
       '02-265123483',
       '02-25698763',
       '093456769',
+      'Y',
       TO_DATE('2014/09/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
     );
    insert
@@ -223,6 +230,7 @@ CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
       '02-265123483',
       '02-25698763',
       '093456769',
+      'Y',
       TO_DATE('2014/09/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
     );
    insert
@@ -245,6 +253,7 @@ CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
       '02-265123483',
       '02-25698763',
       '093456769',
+      'Y',
       TO_DATE('2014/09/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
     );
     insert
@@ -267,6 +276,7 @@ CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
       '02-265123483',
       '02-25698763',
       '093456769',
+      'Y',
       TO_DATE('2014/09/18 18:10:00', 'yyyy-mm-dd hh24:mi:ss')
     );                          
   --會員上線狀態
@@ -372,12 +382,12 @@ CREATE SEQUENCE albclsseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
   INSERT INTO ALBCLS
     (albclsno,albclsname
     ) VALUES
-    (albclsseq.NEXTVAL, '野外'
+    (albclsseq.NEXTVAL, '揪團'
     );
   INSERT INTO ALBCLS
     (albclsno,albclsname
     ) VALUES
-    (albclsseq.NEXTVAL, '教室'
+    (albclsseq.NEXTVAL, '路線'
     );
   --相簿
   CREATE TABLE ALBUM
@@ -411,8 +421,8 @@ CREATE SEQUENCE albumseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
       1,
       1,
       'PERSONAL',
-      '流出',
-      '就描述',
+      '后里鐵馬道一日遊',
+      '后里鐵馬道一日遊',
       TO_DATE('2014/01/01 00:05:10','yyyy-mm-dd hh24:mi:ss')
     );
   INSERT
@@ -432,8 +442,8 @@ CREATE SEQUENCE albumseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
       2,
       1,
       'PUBLIC',
-      '流入',
-      '還描述',
+      '單車環島全紀錄',
+      '單車環島全紀錄',
       TO_DATE('2014/02/02 00:10:30','yyyy-mm-dd hh24:mi:ss')
     );
   INSERT

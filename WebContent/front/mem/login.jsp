@@ -25,7 +25,7 @@
 			<a href="<%=path%>/front/home/index.jsp">BikeFunclub</a>
 		</h1>
 		<form id="login" class="form-signin" action="<%=path%>/LoginHandler"
-method="post">
+			method="post">
 			<input type="text" class="form-control" name="account"
 				placeholder="帳號" required autofocus> <input type="password"
 				class="form-control" name="password" placeholder="密碼" required>
@@ -35,7 +35,7 @@ method="post">
 				</label>
 				<c:if test="${not empty errorLogin}">
 					<p class="red">
-						<span class="glyphicon glyphicon-exclamation-sign"></span>帳號或密碼無效!
+						<span class="glyphicon glyphicon-exclamation-sign"></span>${errorLogin}
 					</p>
 				</c:if>
 			</div>

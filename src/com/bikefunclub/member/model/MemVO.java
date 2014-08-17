@@ -4,6 +4,10 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class MemVO implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3921844258819247565L;
 	private Integer memno;
 	private String memacc;
 	private String mempw;
@@ -21,6 +25,7 @@ public class MemVO implements java.io.Serializable {
 	private String memtelh;
 	private String memtelo;
 	private String memtelm;
+	private String memgetmailyn;
 	private Timestamp memrgdate;
 	
 	public Integer getMemno() {
@@ -125,12 +130,19 @@ public class MemVO implements java.io.Serializable {
 	public void setMemtelm(String memtelm) {
 		this.memtelm = memtelm;
 	}
+	public String getMemgetmailyn() {
+		return memgetmailyn;
+	}
+	public void setMemgetmailyn(String memgetmailyn) {
+		this.memgetmailyn = memgetmailyn;
+	}
 	public Timestamp getMemrgdate() {
 		return memrgdate;
 	}
 	public void setMemrgdate(Timestamp memrgdate) {
 		this.memrgdate = memrgdate;
 	}
+
 
 
 }

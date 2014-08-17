@@ -24,7 +24,7 @@ public class MemDAO implements Mem_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO member(memno,memacc,mempw,memname,memid,membirth,memnickname,memfile,memfilename,memextname,mememail,memsex,memzip,memaddr,memtelh,memtelo,memtelm, memrgdate) VALUES(memberseq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO member(memno,memacc,mempw,memname,memid,membirth,memnickname,memfile,memfilename,memextname,mememail,memsex,memzip,memaddr,memtelh,memtelo,memtelm,memgetmailyn,memrgdate) VALUES(memberseq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM member order by memno";
 	private static final String GET_ONE_STMT = "SELECT * FROM member where memno = ?";
 	private static final String DELETE = "DELETE FROM member where memno = ?";
@@ -60,7 +60,8 @@ public class MemDAO implements Mem_interface {
 			pstmt.setString(14, memVO.getMemtelh());
 			pstmt.setString(15, memVO.getMemtelo());
 			pstmt.setString(16, memVO.getMemtelm());
-			pstmt.setTimestamp(17, memVO.getMemrgdate());
+			pstmt.setString(17, memVO.getMemgetmailyn());
+			pstmt.setTimestamp(18, memVO.getMemrgdate());
 
 			pstmt.executeUpdate();
 
@@ -207,7 +208,7 @@ public class MemDAO implements Mem_interface {
 				memVO.setMempw(rs.getString("mempw"));
 				memVO.setMemname(rs.getString("memname"));
 				memVO.setMemid(rs.getString("memid"));
-				memVO.setMembirth(rs.getDate("Membirth"));
+				memVO.setMembirth(rs.getDate("membirth"));
 				memVO.setMemnickname(rs.getString("memnickname"));
 				memVO.setMemfile(rs.getBytes("memfile"));
 				memVO.setMemfilename(rs.getString("memfilename"));
@@ -215,10 +216,11 @@ public class MemDAO implements Mem_interface {
 				memVO.setMememail(rs.getString("mememail"));
 				memVO.setMemsex(rs.getString("memsex"));
 				memVO.setMemzip(rs.getString("memzip"));
-				memVO.setMemaddr(rs.getString("Memaddr"));
+				memVO.setMemaddr(rs.getString("memaddr"));
 				memVO.setMemtelh(rs.getString("memtelh"));
 				memVO.setMemtelo(rs.getString("memtelo"));
-				memVO.setMemtelm(rs.getString("Memtelm"));
+				memVO.setMemtelm(rs.getString("memtelm"));
+				memVO.setMemgetmailyn(rs.getString("memgetmailyn"));
 				memVO.setMemrgdate(rs.getTimestamp("memrgdate"));
 			}
 
@@ -277,7 +279,7 @@ public class MemDAO implements Mem_interface {
 				memVO.setMempw(rs.getString("mempw"));
 				memVO.setMemname(rs.getString("memname"));
 				memVO.setMemid(rs.getString("memid"));
-				memVO.setMembirth(rs.getDate("Membirth"));
+				memVO.setMembirth(rs.getDate("membirth"));
 				memVO.setMemnickname(rs.getString("memnickname"));
 				memVO.setMemfile(rs.getBytes("memfile"));
 				memVO.setMemfilename(rs.getString("memfilename"));
@@ -285,10 +287,11 @@ public class MemDAO implements Mem_interface {
 				memVO.setMememail(rs.getString("mememail"));
 				memVO.setMemsex(rs.getString("memsex"));
 				memVO.setMemzip(rs.getString("memzip"));
-				memVO.setMemaddr(rs.getString("Memaddr"));
+				memVO.setMemaddr(rs.getString("memaddr"));
 				memVO.setMemtelh(rs.getString("memtelh"));
 				memVO.setMemtelo(rs.getString("memtelo"));
-				memVO.setMemtelm(rs.getString("Memtelm"));
+				memVO.setMemtelm(rs.getString("memtelm"));
+				memVO.setMemgetmailyn(rs.getString("memgetmailyn"));
 				memVO.setMemrgdate(rs.getTimestamp("memrgdate"));
 			}
 
@@ -344,7 +347,7 @@ public class MemDAO implements Mem_interface {
 				memVO.setMempw(rs.getString("mempw"));
 				memVO.setMemname(rs.getString("memname"));
 				memVO.setMemid(rs.getString("memid"));
-				memVO.setMembirth(rs.getDate("Membirth"));
+				memVO.setMembirth(rs.getDate("membirth"));
 				memVO.setMemnickname(rs.getString("memnickname"));
 				memVO.setMemfile(rs.getBytes("memfile"));
 				memVO.setMemfilename(rs.getString("memfilename"));
@@ -352,10 +355,11 @@ public class MemDAO implements Mem_interface {
 				memVO.setMememail(rs.getString("mememail"));
 				memVO.setMemsex(rs.getString("memsex"));
 				memVO.setMemzip(rs.getString("memzip"));
-				memVO.setMemaddr(rs.getString("Memaddr"));
+				memVO.setMemaddr(rs.getString("memaddr"));
 				memVO.setMemtelh(rs.getString("memtelh"));
 				memVO.setMemtelo(rs.getString("memtelo"));
-				memVO.setMemtelm(rs.getString("Memtelm"));
+				memVO.setMemtelm(rs.getString("memtelm"));
+				memVO.setMemgetmailyn(rs.getString("memgetmailyn"));
 				memVO.setMemrgdate(rs.getTimestamp("memrgdate"));
 
 				list.add(memVO); // Store the row in the list
@@ -416,7 +420,7 @@ public class MemDAO implements Mem_interface {
 				memVO.setMempw(rs.getString("mempw"));
 				memVO.setMemname(rs.getString("memname"));
 				memVO.setMemid(rs.getString("memid"));
-				memVO.setMembirth(rs.getDate("Membirth"));
+				memVO.setMembirth(rs.getDate("membirth"));
 				memVO.setMemnickname(rs.getString("memnickname"));
 				memVO.setMemfile(rs.getBytes("memfile"));
 				memVO.setMemfilename(rs.getString("memfilename"));
@@ -424,10 +428,11 @@ public class MemDAO implements Mem_interface {
 				memVO.setMememail(rs.getString("mememail"));
 				memVO.setMemsex(rs.getString("memsex"));
 				memVO.setMemzip(rs.getString("memzip"));
-				memVO.setMemaddr(rs.getString("Memaddr"));
+				memVO.setMemaddr(rs.getString("memaddr"));
 				memVO.setMemtelh(rs.getString("memtelh"));
 				memVO.setMemtelo(rs.getString("memtelo"));
-				memVO.setMemtelm(rs.getString("Memtelm"));
+				memVO.setMemtelm(rs.getString("memtelm"));
+				memVO.setMemgetmailyn(rs.getString("memgetmailyn"));
 				memVO.setMemrgdate(rs.getTimestamp("memrgdate"));
 				list.add(memVO); // Store the row in the list
 			}
@@ -486,7 +491,7 @@ public class MemDAO implements Mem_interface {
 				memVO.setMempw(rs.getString("mempw"));
 				memVO.setMemname(rs.getString("memname"));
 				memVO.setMemid(rs.getString("memid"));
-				memVO.setMembirth(rs.getDate("Membirth"));
+				memVO.setMembirth(rs.getDate("membirth"));
 				memVO.setMemnickname(rs.getString("memnickname"));
 				memVO.setMemfile(rs.getBytes("memfile"));
 				memVO.setMemfilename(rs.getString("memfilename"));
@@ -494,10 +499,11 @@ public class MemDAO implements Mem_interface {
 				memVO.setMememail(rs.getString("mememail"));
 				memVO.setMemsex(rs.getString("memsex"));
 				memVO.setMemzip(rs.getString("memzip"));
-				memVO.setMemaddr(rs.getString("Memaddr"));
+				memVO.setMemaddr(rs.getString("memaddr"));
 				memVO.setMemtelh(rs.getString("memtelh"));
 				memVO.setMemtelo(rs.getString("memtelo"));
-				memVO.setMemtelm(rs.getString("Memtelm"));
+				memVO.setMemtelm(rs.getString("memtelm"));
+				memVO.setMemgetmailyn(rs.getString("memgetmailyn"));
 				memVO.setMemrgdate(rs.getTimestamp("memrgdate"));
 				
 				list.add(memVO); // Store the row in the list
