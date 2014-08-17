@@ -34,6 +34,7 @@
 						<li><a href="<%=path%>/front/rot/page_listAllrots.jsp">瀏覽路線</a></li>
 						<li><a href="<%=path%>/front/rot/page_insert_memrot_1.jsp">規劃路線</a></li>
 						<li><a href="<%=path%>/front/rot/page_rots_manage.jsp">路線管理</a></li>
+						<li><a href="<%=path%>/front/rot/page_riderecord.jsp">騎乘紀錄</a></li>
 					</ul>
 				</li>
 			</ul>
