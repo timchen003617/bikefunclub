@@ -28,6 +28,11 @@
 	List<RotVO> rotlist = rotSvc.getrotsBymemnoFromMemrot(memno);
 	pageContext.setAttribute("rotlist", rotlist);
 %>
+<script>
+window.onload = function(){
+	document.title = $("#fieldperson .table tr td:first input[type='hidden']").val();
+};
+</script>
 <jsp:useBean id="memSvc" scope="page"
 	class="com.bikefunclub.member.model.MemService" />
 <div class="container body-content">
@@ -54,7 +59,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>姓名: ${memVO.memname}</td>
+								<td>姓名: ${memVO.memname}<input type="hidden" value="${memVO.memname}"></td>
 								<td>綽號: ${memVO.memnickname}</td>
 								<td>性別: ${memVO.memsex=="M"?"男":"女"}</td>
 								<td>生日: ${memVO.membirth}</td>
@@ -84,7 +89,7 @@
 										</c:if>
 										<c:forEach var="memVO" items="${memSvc.all}">
 											<c:if test="${friVO.youno==memVO.memno}">
-												<span>${memVO.memname} </span>
+												<a href="<%=path%>/front/home/page_mem_info.jsp?memno=${memVO.memno}" target="_blank">${memVO.memname} </a>
 											</c:if>
 										</c:forEach>
 										<c:set var="i" value="${i+1}"></c:set>

@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>個人首頁</title>
+<title>Bikefunclub</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,6 +30,7 @@
 <script src="<%=path%>/js/tabs.js"></script>
 <script src="<%=path%>/js/slider.js"></script>
 <script src="<%=path%>/js/chat.js"></script>
+
 </head>
 <body>
 	<!-- slider -->

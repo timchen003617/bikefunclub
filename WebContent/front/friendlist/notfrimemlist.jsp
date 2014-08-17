@@ -52,11 +52,11 @@
 						<tr>
 							<td rowspan="3"><c:choose>
 									<c:when test="${memVO.memfile==null}">
-										<a href="#"><img class="img-thumbnail"
+										<a href="<%=path%>/front/home/page_mem_info.jsp?memno=${memVO.memno}" target="_blank"><img class="img-thumbnail"
 											src="<%=path%>/img/photo.jpg"></a>
 									</c:when>
 									<c:otherwise>
-										<a href="#"><img class="img-thumbnail"
+										<a href="<%=path%>/front/home/page_mem_info.jsp?memno=${memVO.memno}" target="_blank"><img class="img-thumbnail"
 											src="<%=path%>/MemreadimgServlet?memno=${memVO.memno}"></a>
 									</c:otherwise>
 								</c:choose></td>

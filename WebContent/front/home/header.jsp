@@ -34,14 +34,14 @@
 <!-- 						<li><a href="#">訊息<span -->
 <!-- 								class="glyphicon glyphicon-envelope"></span> <span class="badge">2</span></a></li> -->
 					</ul>
-					<div id="messagebox">
-						<div id="messagebox-inner">
-							<ul>
-								<li><h3>first</h3></li>
-								<li><h3>second</h3></li>
-							</ul>
-						</div>
-					</div>
+<!-- 					<div id="messagebox"> -->
+<!-- 						<div id="messagebox-inner"> -->
+<!-- 							<ul> -->
+<!-- 								<li><h3>first</h3></li> -->
+<!-- 								<li><h3>second</h3></li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 		</div>

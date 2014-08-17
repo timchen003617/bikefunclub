@@ -23,6 +23,7 @@
 %>
 <script src="<%=path%>/js/tabNum.js"></script>
 <script src="<%=path%>/js/dialog.js"></script>
+
 <jsp:useBean id="memSvc" scope="page"
 	class="com.bikefunclub.member.model.MemService" />
 <div id="delfri-confirm" title="刪除好友確認" style="display:none;">
@@ -48,11 +49,11 @@
 									<c:if test="${friVO.youno==memVO.memno}">
 										<c:choose>
 											<c:when test="${memVO.memfile==null}">
-												<a href="#"><img class="img-thumbnail"
+												<a href="<%=path%>/front/home/page_mem_info.jsp?memno=${memVO.memno}" target="_blank"><img class="img-thumbnail"
 													src="<%=path%>/img/photo.jpg"></a>
 											</c:when>
 											<c:otherwise>
-												<a href="#"><img class="img-thumbnail"
+												<a href="<%=path%>/front/home/page_mem_info.jsp?memno=${memVO.memno}" target="_blank"><img class="img-thumbnail"
 													src="<%=path%>/MemreadimgServlet?memno=${memVO.memno}"></a>
 											</c:otherwise>
 										</c:choose>

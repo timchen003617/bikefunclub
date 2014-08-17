@@ -82,7 +82,7 @@
 										</c:if>
 										<c:forEach var="memVO" items="${memSvc.all}">
 											<c:if test="${friVO.youno==memVO.memno}">
-												<span>${memVO.memname} </span>
+												<a href="<%=path%>/front/home/page_mem_info.jsp?memno=${memVO.memno}" target="_blank">${memVO.memname}</a>
 											</c:if>
 										</c:forEach>
 										<c:set var="i" value="${i+1}"></c:set>
