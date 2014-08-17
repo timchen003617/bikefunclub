@@ -72,6 +72,7 @@ public class MemberServlet extends HttpServlet {
 				String memtelm = multi.getParameter("telm").trim();
 				String memtelh = "";
 				String memtelo = "";
+				String memgetmailyn = "N";//預設為未通過認證
 				String mememail = multi.getParameter("email").trim();
 				// 會員帳號=會員email的@前面字元
 				int dotPos = mememail.indexOf('@');
@@ -149,8 +150,18 @@ public class MemberServlet extends HttpServlet {
 				memVO = memSvc.addmem(memacc, mempw, memname, memid, membirth,
 						memnickname, memfile, memfilename, memextname,
 						mememail, memsex, memzip, memaddr, memtelh, memtelo,
-						memtelm, memrgdate);
+						memtelm,memgetmailyn,memrgdate);
 				/*************************** 4.新增完成,準備轉交(Send the Success view) ***********/
+				//使用者認證的連結
+				String getmailurl = "http://localhost:8081"+req.getContextPath()+req.getServletPath()+"?action='updategetmailyn'&memgetmailyn=Y";
+				
+				req.setAttribute("getmailurl", getmailurl);
+				
+				req.setAttribute("option", "include");
+				RequestDispatcher dispathcher = req
+						.getRequestDispatcher("/front/mem/JavaMailProccess.jsp");
+				dispathcher.include(req, res);
+				
 				String url = "/front/home/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -163,6 +174,11 @@ public class MemberServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		if ("updategetmailyn".equals(action)) {// 來自使用者信箱內文超連結的請求
+			String memgetmailyn = req.getParameter("memgetmailyn");
+			
+		}
+		
 		if ("update".equals(action)) {// 來自update_mem_input.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to

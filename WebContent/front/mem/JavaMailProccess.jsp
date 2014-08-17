@@ -3,22 +3,31 @@
 <%@ page import="javax.mail.*"%>
 <%@ page import="javax.mail.internet.*"%>
 <%@ page import="javax.activation.*"%>
-
-<!-- 會員註冊發送認證信 -->
+<%@ page import="com.oreilly.servlet.MultipartRequest"%>
+<!-- 會員註冊發送認證信 ，點選連結完成認證-->
 <%!InternetAddress[] address = null;%>
 
 <%
-	String ch_name = request.getParameter("memacc");
-	; //String ch_name = request.getParameter("ch_name");
-	String passRandom = (String) request.getAttribute("mempw"); //String passRandom = request.getParameter("passRandom");
+/** 建立MultipartRequest實體 */
+	MultipartRequest multi = new MultipartRequest(request, getServletContext().getRealPath(
+		"img"), 5 * 1024 * 1024, "UTF-8");
 
+	String ch_name = multi.getParameter("name").trim(); 
+	String getmailurl = (String)request.getAttribute("getmailurl");
+	
 	String mailserver = "140.115.236.9";
 	String From = "Bikefunclub@test.com";
-	String to = request.getParameter("mememail"); //String to = request.getParameter("email");
-	String Subject = "您的密碼";
-	String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom
-			+ "\n" + " (已經啟用)";
-
+	String to = multi.getParameter("email").trim(); //String to = request.getParameter("email");
+	String Subject = "Bikefunclub會員註冊認證信";
+    
+	MimeBodyPart textPart = new MimeBodyPart();
+	StringBuffer messageText = new StringBuffer();
+	messageText.append("<h3>Hello!"+ch_name+"你好!!</h3><br>");
+	messageText.append("<h3>請點選此連結，完成信箱認證:</h3><br>");
+	messageText.append("<a href='"+getmailurl+"'>請點選此連結，完成信箱認證:"+getmailurl+"</a>");
+    textPart.setContent(messageText.toString(), "text/html; charset=UTF-8");
+	
+	
 	boolean sessionDebug = false;
 
 	try {
@@ -48,7 +57,8 @@
 		msg.setSentDate(new Date());
 
 		// 設定傳送信的MIME Type
-		msg.setText(messageText);
+		Multipart email = new MimeMultipart();
+        email.addBodyPart(textPart);
 
 		// 送信
 		Transport.send(msg);

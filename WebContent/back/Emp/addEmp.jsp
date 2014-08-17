@@ -32,13 +32,6 @@
 							<td><input type="text" name="empacc" value="${empVO2.empacc}"  placeholder="請輸入帳號" 
 								required></td>
 						</tr>
-<!-- 						<tr> -->
-
-<!-- 							<th>密碼:</th> -->
-<%-- 							<td><input type="text" name="emppw" value="${empVO2.emppw}" --%>
-<!-- 								></td> -->
-
-<!-- 						</tr> -->
 						<tr>
 							<th>姓名:</th>
 							<td><input type="text" name="empname"

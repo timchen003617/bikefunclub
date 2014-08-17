@@ -16,7 +16,7 @@ public class MemService {
 			String memid, Date membirth, String memnickname, byte[] memfile,
 			String memfilename, String memextname, String mememail,
 			String memsex, String memzip, String memaddr, String memtelh,
-			String memtelo, String memtelm, Timestamp memrgdate) {
+			String memtelo, String memtelm,String memgetmailyn,Timestamp memrgdate) {
 		MemVO memVO = new MemVO();
 
 		memVO.setMemacc(memacc);
@@ -35,6 +35,7 @@ public class MemService {
 		memVO.setMemtelh(memtelh);
 		memVO.setMemtelo(memtelo);
 		memVO.setMemtelm(memtelm);
+		memVO.setMemgetmailyn(memgetmailyn);
 		memVO.setMemrgdate(memrgdate);
 
 		dao.insert(memVO);
