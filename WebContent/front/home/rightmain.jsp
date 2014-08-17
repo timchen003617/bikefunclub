@@ -60,6 +60,21 @@
 
 			});
 </script>
+<script type="text/javascript">
+$(function(){
+    $('td').countdown(function(s, d){
+        var items = $(this).find('span');
+        items.eq(4).text(d.total);
+        items.eq(3).text(d.second);
+        items.eq(2).text(d.minute);
+        items.eq(1).text(d.hour);
+        items.eq(0).text(d.day);
+    });
+});
+</script>
+<jsp:useBean id="nowDate" class="java.util.Date"/>
+<fmt:formatDate var="now" value="${nowDate}" pattern="yyyy-MM-dd HH:mm:ss" /> 
+
 <div class="col-md-8">
 	<div id="colmd4-1">
 		<!-- Nav tabs -->
@@ -80,6 +95,7 @@
 					</thead>
 					<tbody id="gp">
 						<c:forEach var="gpVO" items="${gplist}" begin="0" end="5">
+						<c:if test="${gpVO.joinenddate>nowDate}">
 							<tr style="cursor: pointer">
 								<jsp:useBean id="gpclsSvc" scope="page"
 									class="com.bikefunclub.gpcls.model.GpclsService" />
@@ -95,9 +111,14 @@
 										<c:when test="${rs.rowCount>=gpVO.gpmaxnum}">已滿</c:when>
 										<c:otherwise>未滿</c:otherwise>
 									</c:choose></td>
-								<td>${gpVO.gpmaxnum}</td>
+								<fmt:parseDate var="endDate" value="${gpVO.joinenddate}" pattern="yyyy-MM-dd HH:mm:ss"/>						
+	
+								<td class="red" data-seconds="${(endDate.time-nowDate.time)/1000}">
+								<span></span>天   <span> </span>時 <span>:</span>分<span>:</span>秒</td>
 							</tr>
+							</c:if>
 						</c:forEach>
+
 					</tbody>
 				</table>
 				<form id="formhiddengp" method="post" action="<%=contextpath %>/Gp.do">

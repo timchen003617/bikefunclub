@@ -33,6 +33,7 @@
 <script src="<%=path%>/js/slider.js"></script>
 <script src="<%=path%>/js/chat.js"></script>
 <script src="<%=path%>/js/dialog.js"></script>
+<script src="<%=path%>/js/counterdown.js"></script>
 <%-- 會員資料修改成功 --%>
 <c:if test="${success=='success'}">
 <script src="<%=path%>/js/dialogopen.js"></script>

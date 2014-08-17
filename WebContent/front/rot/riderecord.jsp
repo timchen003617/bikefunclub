@@ -63,7 +63,7 @@
 							<td>平均時速</td>
 							<td><span style="font-weight: bold">
                                     <c:choose>
-										<c:when test="${sumtime!=0}">
+										<c:when test="${sumtime!=0.0}">
 											<fmt:formatNumber value="${sumdistence/sumtime}"
 												groupingUsed="false" type="number" />
 										</c:when>
