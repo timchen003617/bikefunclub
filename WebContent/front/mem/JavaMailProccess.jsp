@@ -7,7 +7,6 @@
 <%!InternetAddress[] address = null;%>
 
 <%
-
 	String memname = (String) request.getAttribute("memname"); 
 	String getmailurl = (String)request.getAttribute("getmailurl");
 	
@@ -18,9 +17,9 @@
     
 	MimeBodyPart textPart = new MimeBodyPart();
 	StringBuffer messageText = new StringBuffer();
-	messageText.append("<h3>Hello!"+memname+"你好，歡迎加入Bikefunclub</h3>");
-	messageText.append("<h3>請點選此連結，完成信箱認證:</h3>");
-	messageText.append("<a href='"+getmailurl+"'>"+getmailurl+"</a>");
+	messageText.append("<h3>Hello!"+memname+"你好!!</h3>");
+ 	messageText.append("<p>歡迎加入BikeFunclub單車俱樂部，我們提供車友一個完整服務的單車平台。</p>");
+	messageText.append("<a href='"+getmailurl+"'>"+">>請點選此連結，完成信箱認證"+"</a>");
     textPart.setContent(messageText.toString(), "text/html; charset=UTF-8");
 	
 	
@@ -35,7 +34,7 @@
 
 		// 產生新的Session 服務
 		javax.mail.Session mailSession = javax.mail.Session
-				.getDefaultInstance(props, null);
+		.getDefaultInstance(props, null);
 		mailSession.setDebug(sessionDebug);
 
 		Message msg = new MimeMessage(mailSession);

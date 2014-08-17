@@ -71,7 +71,15 @@ public class MemService {
 
 		return memVO;
 	}
-
+	public MemVO updateMem_getmailyn(Integer memno,String memgetmailyn){
+		MemVO memVO = new MemVO();
+		
+		memVO.setMemno(memno);
+		memVO.setMemgetmailyn(memgetmailyn);
+		dao.update_getmailyn(memVO);
+		
+		return memVO;
+	}
 	public void deletemem(Integer memno) {
 		dao.delete(memno);
 	}

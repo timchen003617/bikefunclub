@@ -32,6 +32,7 @@ public class MemDAO implements Mem_interface {
 	private static final String GET_ONE_STMT_ACCOUNT = "SELECT * FROM member where memacc = ?";
 	private static final String GET_ONE_STMT_AllFORNEWFRI = "SELECT * FROM member where memno not in(select youno from friendlist where memno = ?)";
 	private static final String GET_ONE_STMT_AllFORNEWFRIBYMEMNAME = "SELECT * FROM member where memno not in(select youno from friendlist where memno = ?) and memname like ?";
+	private static final String UPDATE_GETMAILYN = "update member set memgetmailyn=? where memno=?";
 	
 	@Override
 	public void insert(MemVO memVO) {
@@ -537,5 +538,46 @@ public class MemDAO implements Mem_interface {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void update_getmailyn(MemVO memVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_GETMAILYN);
+
+			pstmt.setString(1, memVO.getMemgetmailyn());
+			pstmt.setInt(2, memVO.getMemno());
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 	}	
 }

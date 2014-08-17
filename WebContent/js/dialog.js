@@ -3,8 +3,8 @@ $(function() {
 	$("#memmdok").dialog({
 		autoOpen : false,
 	});
-	// 加入好友成功訊息
-	$("#frijoinok").dialog({
+	// 信箱認證成功訊息
+	$("#mailok").dialog({
 		autoOpen : false,
 	});
 	// 是否刪除好友提示

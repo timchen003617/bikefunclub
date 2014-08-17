@@ -3,10 +3,13 @@ package com.bikefunclub.member.model;
 import java.util.*;
 
 public interface Mem_interface {
+	//會員註冊
 	public void insert(MemVO memVO);
-
+	//會員修改個人資料
 	public void update(MemVO memVO);
-
+	//信箱認證
+	public void update_getmailyn(MemVO memVO);
+	
 	public void delete(Integer memno);
 
 	public MemVO findByPrimaryKey(Integer memVO);

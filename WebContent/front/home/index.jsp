@@ -33,14 +33,21 @@
 <script src="<%=path%>/js/slider.js"></script>
 <script src="<%=path%>/js/chat.js"></script>
 <script src="<%=path%>/js/dialog.js"></script>
-<%-- 修改成功 --%>
+<%-- 會員資料修改成功 --%>
 <c:if test="${success=='success'}">
 <script src="<%=path%>/js/dialogopen.js"></script>
+</c:if>
+<%-- 信箱認證成功 --%>
+<c:if test="${getmailstatus=='success'}">
+<script src="<%=path%>/js/dialogopenmail.js"></script>
 </c:if>
 </head>
 <body>
 	<div id="memmdok" title="訊息" style="display:none">
 		<p>會員資料修改成功，請重新登入!</p>
+	</div>
+	<div id="mailok" title="訊息" style="display:none">
+		<p>信箱認證成功!</p>
 	</div>
 	<!-- slider -->
 	<jsp:include page="slider.jsp"></jsp:include>

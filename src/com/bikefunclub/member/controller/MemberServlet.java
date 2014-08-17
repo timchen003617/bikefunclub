@@ -32,15 +32,15 @@ public class MemberServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		
+
 		String action = null;
 		MultipartRequest multi = null;
 		// instance AdService
 		MemService memSvc = new MemService();
 		String contentType = req.getContentType();
 		// 判斷request的contentType
-		if (contentType != null&& contentType.startsWith("multipart/form-data")
-				) {
+		if (contentType != null
+				&& contentType.startsWith("multipart/form-data")) {
 			/** 建立MultipartRequest實體 */
 			multi = new MultipartRequest(req, getServletContext().getRealPath(
 					"img"), 5 * 1024 * 1024, "UTF-8");
@@ -72,7 +72,7 @@ public class MemberServlet extends HttpServlet {
 				String memtelm = multi.getParameter("telm").trim();
 				String memtelh = "";
 				String memtelo = "";
-				String memgetmailyn = "N";//預設為未通過認證
+				String memgetmailyn = "N";// 預設為未通過認證
 				String mememail = multi.getParameter("email").trim();
 				// 會員帳號=會員email的@前面字元
 				int dotPos = mememail.indexOf('@');
@@ -81,8 +81,10 @@ public class MemberServlet extends HttpServlet {
 					memacc = mememail.substring(0, dotPos);
 				}
 				// 判斷會員帳號是否已被使用
-				Boolean flag = isusedaccount(memSvc, memacc);
-
+				Boolean flagacc = isusedaccount(memSvc, memacc);
+				//判斷會員身分證是否已被使用
+				Boolean flagid = isusedmemid(memSvc, memid);
+				
 				String mempw = multi.getParameter("password").trim();
 				String memzip = multi.getParameter("zip").trim();
 				String memaddr = multi.getParameter("addr").trim();
@@ -97,8 +99,11 @@ public class MemberServlet extends HttpServlet {
 				String memfilename = "";
 				String memextname = "";
 				/** 2 輸入格式的錯誤處理 **/
-				if (flag == true) {
+				if (flagacc == true) {
 					errorMsgs.add("此帳號已經被使用!");
+				}
+				if (flagid == true) {
+					errorMsgs.add("此身分證已經被使用!");
 				}
 				if (memname.isEmpty()) {
 					errorMsgs.add("請輸入姓名!");
@@ -117,7 +122,7 @@ public class MemberServlet extends HttpServlet {
 				memfile = memVO.getMemfile();
 				memfilename = memVO.getMemfilename();
 				memextname = memVO.getMemextname();
-				
+
 				memVO.setMemno(memno);
 				memVO.setMemacc(memacc);
 				memVO.setMempw(mempw);
@@ -137,6 +142,7 @@ public class MemberServlet extends HttpServlet {
 				memVO.setMemtelm(memtelm);
 				memVO.setMemrgdate(memrgdate);
 				
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO); // 含有輸入格式錯誤的memVO物件,也存入req
@@ -150,19 +156,24 @@ public class MemberServlet extends HttpServlet {
 				memVO = memSvc.addmem(memacc, mempw, memname, memid, membirth,
 						memnickname, memfile, memfilename, memextname,
 						mememail, memsex, memzip, memaddr, memtelh, memtelo,
-						memtelm,memgetmailyn,memrgdate);
-				/*************************** 4.新增完成,準備轉交(Send the Success view) ***********/
-				//使用者認證的連結
-				String getmailurl = "http://localhost:8081"+req.getContextPath()+req.getServletPath()+"?action='updategetmailyn'&memgetmailyn=Y";
+						memtelm, memgetmailyn, memrgdate);
+				/*************************** 4.新增完成,準備轉交(Send the Success view) ***********/				
+				//取得剛新增成功的會員編號
+				 MemVO memVOmail= memSvc.findByAccount(memacc);				 
+				 Integer aftermemno = memVOmail.getMemno();
+				// 使用者信箱認證的連結
+				String getmailurl = "http://localhost:8081"
+						+ req.getContextPath() + req.getServletPath()
+						+ "?action=updategetmailyn&memno=" + aftermemno
+						+ "&memgetmailyn=Y";
 				req.setAttribute("memname", memname);
 				req.setAttribute("mememail", mememail);
 				req.setAttribute("getmailurl", getmailurl);
-				
-				req.setAttribute("option", "include");
+
 				RequestDispatcher dispathcher = req
 						.getRequestDispatcher("/front/mem/JavaMailProccess.jsp");
 				dispathcher.include(req, res);
-				
+
 				String url = "/front/home/index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -176,10 +187,22 @@ public class MemberServlet extends HttpServlet {
 			}
 		}
 		if ("updategetmailyn".equals(action)) {// 來自使用者信箱內文超連結的請求
+			
+			/** 1接收請求參數 ***/
+			Integer memno = new Integer(req.getParameter("memno"));
 			String memgetmailyn = req.getParameter("memgetmailyn");
 			
+			/**2開始修改會員認證狀態為Y**/
+			memSvc.updateMem_getmailyn(memno,memgetmailyn);
+			
+			/**3.修改完成,準備轉交(Send the Success view)**/
+			req.setAttribute("getmailstatus", "success");
+			
+			String url = "/front/home/index.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
 		}
-		
+
 		if ("update".equals(action)) {// 來自update_mem_input.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -344,6 +367,19 @@ public class MemberServlet extends HttpServlet {
 		for (MemVO memVO : list) {
 			String memoldacc = memVO.getMemacc();
 			if (memoldacc.equals(memacc)) {
+				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
+	/* 判斷新會員的身分證是否已經被舊會員使用;被使用回傳true,未被使用回傳false */
+	public Boolean isusedmemid(MemService memSvc, String memid) {
+		Boolean flag = false;
+		List<MemVO> list = memSvc.getAll();
+		for (MemVO memVO : list) {
+			String memoldid = memVO.getMemid();
+			if (memoldid.equals(memid)) {
 				flag = true;
 				break;
 			}
