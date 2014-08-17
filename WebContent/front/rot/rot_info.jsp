@@ -75,23 +75,22 @@
 					computeTotalDistance(directionsDisplay.getDirections());
 				}
 			});
-		} /*else {
-						readtype = 0;
-						var lng=parseFloat(obj.rotstart.lng);
-						var lat=parseFloat(obj.rotstart.lat);
-						waypts.push(new google.maps.LatLng(lng,lat));
-						alert(lng);
-						alert(lat);
-						for (var i = 0; i < wayptsArray.length; i++) {
-							var lng=parseFloat(wayptsArray[i].lng);
-							var lat=parseFloat(wayptsArray[i].lat);
-							waypts.push(new google.maps.LatLng(lng,lat));
-						}
-						var lng=parseFloat(obj.rotstart.lng);
-						var lat=parseFloat(obj.rotstart.lat);			
-						waypts.push(new google.maps.LatLng(lng,lat));
+		} else {
+			var request = {
+					origin : start,
+					destination : end,
+					optimizeWaypoints : true,
+					avoidHighways : true,
+					avoidTolls : true,
+					travelMode : google.maps.TravelMode.DRIVING
+				};
+				directionsService.route(request, function(response, status) {
+					if (status == google.maps.DirectionsStatus.OK) {
+						directionsDisplay.setDirections(response);
+						computeTotalDistance(directionsDisplay.getDirections());
 					}
-					    flightPlanCoordinates =waypts;*/
+				});
+					}
 	}
 
 	function init_map() {

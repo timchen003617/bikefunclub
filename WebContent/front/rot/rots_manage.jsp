@@ -57,7 +57,7 @@
 								 class="com.bikefunclub.rotcls.model.RotclsService" />
 								<td><c:forEach var="rotclsVO" items="${rotclsSvc.all}">
 								<c:if test="${rotVO.rotclsno==rotclsVO.rotclsno}">
-	                       				    ${rotVO.rotclsno}【<font color=orange>${rotclsVO.rotclsname}</font>】
+	                       				    【<font color=orange>${rotclsVO.rotclsname}</font>】
                     			</c:if>
 								</c:forEach></td>
 								<td>
@@ -117,7 +117,7 @@
 								 class="com.bikefunclub.rotcls.model.RotclsService" />
 								<td><c:forEach var="rotclsVO" items="${rotclsSvc2.all}">
 								<c:if test="${rotVO2.rotclsno==rotclsVO.rotclsno}">
-	                       				    ${rotVO2.rotclsno}【<font color=orange>${rotclsVO.rotclsname}</font>】
+	                       				    【<font color=orange>${rotclsVO.rotclsname}</font>】
                     			</c:if>
 								</c:forEach></td>
 								<td>

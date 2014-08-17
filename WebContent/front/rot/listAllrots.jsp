@@ -97,7 +97,22 @@
 					directionsDisplay.setDirections(response);
 				}
 			});
-		}
+		} else {
+			var request = {
+					origin : start,
+					destination : end,
+					optimizeWaypoints : true,
+					avoidHighways : true,
+					avoidTolls : true,
+					travelMode : google.maps.TravelMode.DRIVING
+				};
+				directionsService.route(request, function(response, status) {
+					if (status == google.maps.DirectionsStatus.OK) {
+						directionsDisplay.setDirections(response);
+						computeTotalDistance(directionsDisplay.getDirections());
+					}
+				});
+					}
 	}
 	function HomeControl(controlDiv, map) {
 

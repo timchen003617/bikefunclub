@@ -60,7 +60,22 @@ $(document).ready(function() {
 						directionsDisplay.setDirections(response);
 					}
 				});
-			} 
+			} else {
+				var request = {
+						origin : start,
+						destination : end,
+						optimizeWaypoints : true,
+						avoidHighways : true,
+						avoidTolls : true,
+						travelMode : google.maps.TravelMode.DRIVING
+					};
+					directionsService.route(request, function(response, status) {
+						if (status == google.maps.DirectionsStatus.OK) {
+							directionsDisplay.setDirections(response);
+							computeTotalDistance(directionsDisplay.getDirections());
+						}
+					});
+						} 
 			
 			directionsDisplay = new google.maps.DirectionsRenderer();
 			var myLocation = new google.maps.LatLng(24.967881, 121.1917015);

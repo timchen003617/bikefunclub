@@ -24,5 +24,10 @@ public class RideRecordService {
     public List<RideRecordVO> getAll() {
 		return dao.getAll();
 	}
+    
+    public List<RideRecordVO> getrotrcds_bymemno(Integer memno){
+		
+    	return dao.getrotrcds_bymemno(memno);    	
+    }
 
 }

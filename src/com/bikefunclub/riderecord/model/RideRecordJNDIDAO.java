@@ -343,4 +343,10 @@ public class RideRecordJNDIDAO implements RideRecordDAO_interface {
 //			System.out.println();
 //		}
 	}
+
+	@Override
+	public List<RideRecordVO> getrotrcds_bymemno(Integer memno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

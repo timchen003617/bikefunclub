@@ -1,7 +1,6 @@
 package com.bikefunclub.riderecord.model;
 
 import java.sql.*;
-import java.sql.Date;
 import java.util.*;
 
 import javax.naming.Context;
@@ -24,7 +23,71 @@ public class RideRecordDAO implements RideRecordDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT riderecordno,memno,rotno,stamp,recordtime,recorddistence,ridetime,newrotno FROM riderecord where riderecordno = ?";
 	private static final String DELETE = "DELETE FROM riderecord where riderecordno = ?";
 	private static final String UPDATE = "UPDATE riderecord set memno=?, rotno=?, stamp=?, recordtime=?, recorddistence=?, ridetime=?,newrotno=? where riderecordno = ?";
+	private static final String GET_RCDSBYMEMNO_STMT = "SELECT riderecordno,memno,rotno,stamp,recordtime,recorddistence,ridetime,newrotno FROM riderecord where memno=? order by riderecordno desc";
 
+	
+	public List<RideRecordVO> getrotrcds_bymemno(Integer memno) {
+		List<RideRecordVO> list = new ArrayList<RideRecordVO>();
+		RideRecordVO rideRecordVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_RCDSBYMEMNO_STMT);
+			pstmt.setInt(1, memno);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				rideRecordVO = new RideRecordVO();
+				rideRecordVO.setRiderecordno(rs.getInt("rideRecordno"));
+				rideRecordVO.setMemno(rs.getInt("Memno"));
+				rideRecordVO.setRotno(rs.getInt("Rotno"));
+				rideRecordVO.setStamp(rs.getTimestamp("Stamp"));
+				rideRecordVO.setRecordtime(rs.getTimestamp("Recordtime"));
+				rideRecordVO.setRecorddistence(rs.getDouble("Recorddistence"));
+				rideRecordVO.setRidetime(rs.getLong("Ridetime"));
+				rideRecordVO.setNewrotno(rs.getInt("Newrotno"));
+				list.add(rideRecordVO); // Store the row in the vector
+			}
+
+			// Handle any driver errors
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	
+	
 	@Override
 	public int insert(RideRecordVO rideRecordVO) {
 		int updateCount = 0;

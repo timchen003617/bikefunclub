@@ -580,7 +580,7 @@ public class RotServlet extends HttpServlet {
 		}
 		
 		
-		if (("getRot_info".equals(action))||("back_getRot_info".equals(action))) {
+		if (("getRot_info".equals(action))||("back_getRot_info".equals(action))||("getRotrecord_info").equals(action)) {
 
 				/*************************** 1.接收請求參數 ****************************************/	
 					
@@ -596,6 +596,8 @@ public class RotServlet extends HttpServlet {
 					 url = "/front/rot/page_rot_info.jsp";
 				}else if("back_getRot_info".equals(action)){
 					 url = "/back/rot/page_rot_info.jsp";	
+				}else if("getRotrecord_info".equals(action)){
+					 url = "/front/rot/page_rotrecord_info.jsp";	
 				}
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

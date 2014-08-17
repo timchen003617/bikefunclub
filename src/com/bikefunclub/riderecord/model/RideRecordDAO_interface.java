@@ -8,4 +8,5 @@ public interface RideRecordDAO_interface {
     public int delete(Integer riderecordno);
     public RideRecordVO findByPrimaryKey(Integer riderecordno);
     public List<RideRecordVO> getAll();
+    public List<RideRecordVO> getrotrcds_bymemno(Integer memno);
 }
