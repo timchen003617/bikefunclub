@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>網誌新增</title>
+<title>網誌列表</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +33,7 @@
 <script src="<%=path%>/js/previewimage.js"></script>
 <script src="<%=path%>/js/messages.js"></script>
 <script src="<%=path%>/js/validate_for_bgtitle(blog).js"></script>
+
 </head>
 <body>
 	<!-- slider -->
@@ -42,7 +43,7 @@
 	<!-- navbar -->
 	<jsp:include page="/front/home/navbar.jsp"></jsp:include>
  	<!--main-->
-  	<jsp:include page="insert_blog.jsp"></jsp:include>
+  	<jsp:include page="update_blog_input.jsp"></jsp:include>
 	<!-- footer -->
  	<jsp:include page="/front/home/footer.jsp"></jsp:include>
 </body>

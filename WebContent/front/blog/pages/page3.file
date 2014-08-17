@@ -21,4 +21,6 @@
 		<%}%>   
 		<div class="clearfix"></div>
 	</div> 
+	<%if (pageNumber>0){%>
+<%}%>
 </div>

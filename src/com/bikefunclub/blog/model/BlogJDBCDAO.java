@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.Date;
 import java.sql.*;
 
+import com.bikefunclub.gp.model.GpVO;
+
 public class BlogJDBCDAO implements BlogDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:orcl";
@@ -295,6 +297,24 @@ public class BlogJDBCDAO implements BlogDAO_interface {
 
 	@Override
 	public List<BlogVO> getBlogs_frommemno(Integer memno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GpVO> getBlogsBymemno(Integer memno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GpVO> getBlogsByblogclsno(Integer blogclsno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GpVO> getBlogsBymemnoFromMemblog(Integer memno) {
 		// TODO Auto-generated method stub
 		return null;
 	}

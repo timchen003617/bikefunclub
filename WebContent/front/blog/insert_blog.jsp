@@ -14,6 +14,7 @@
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 	Integer memno = memVO.getMemno();
 	
+   
 	
 	
 %>
@@ -21,7 +22,7 @@
 <div class="container body-content">
 	<div class="row">
 		<form class="form-blog" action="<%=path%>/BlogServlet" method="post"
-			id="launchblog_input" name="launchblog_input">
+			id="insert" name="insert">
 			<fieldset>
 			<div class="text-right">
 					<input class="btn btn-warning" type="button" value="上一頁"
@@ -42,7 +43,7 @@
 					</div>
 				</c:if>
 				
-				<input type="hidden" name="memno" value="${MemVO.memno}">
+			
 				
 				<jsp:useBean id="blogclsSvc" scope="page"
 					class="com.bikefunclub.blogcls.model.BlogclsService" />
@@ -61,7 +62,7 @@
 						value="${blogVO.bgtitle}" placeholder="請輸入網誌標題" />
 				</div>
 				<div>
-					<label for="bgtext" class="label"><span class="red">*網誌內容</span></label>
+					<label for="bgtext" class="label"><span class="red"></span></label>
 					<div class="ckeditor">
 						<textarea class="ckeditor" name="bgtext" id="bgtext"
 							placeholder="請輸入網誌內容">${blogVO.bgtext}</textarea>
@@ -71,10 +72,11 @@
 			</fieldset>
 			<br>
 			<div>
-			
+			    <input type="hidden" name="memno" value="${memVO.memno}">
+			    <input  type="hidden" name="blogno" value="${blogVO.blogno}">
 				<!--authname先寫死為公開 -->
 				<input type="hidden" name="authname" value="PUBLIC"> <input
-					type="hidden" name="action" value="launchblog"><input
+					type="hidden" name="action" value="insert"><input
 					id="insertblog" class="btn btn-primary btn-lg" type="submit"
 					value="確定發文">
 			</div>

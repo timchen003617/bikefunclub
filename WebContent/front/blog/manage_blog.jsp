@@ -44,7 +44,7 @@
 								<tr>
 									<th>網誌分類</th>
 									<th>網誌名稱</th>
-			                        <th>網誌發起時間</th>
+			                        <th>網誌修改時間</th>
 									<th>修改</th>
 									<th>刪除</th>
 									<th>詳細資料</th>
@@ -55,7 +55,7 @@
 								<c:forEach var="blogVO" items="${list}" begin="<%=pageIndex%>"
 									end="<%=pageIndex+rowsPerPage-1%>">
 									<tr
-										${(gpVO.blogno==param.blogno) ? 'style="background-color:#f5f0e9;"' : ''}>
+										${(blogVO.blogno==param.blogno) ? 'style="background-color:#f5f0e9;"' : ''}>
 										<jsp:useBean id="blogclsSvc" scope="page"
 											class="com.bikefunclub.blogcls.model.BlogclsService" />
 										<td><c:forEach var="blogclsVO" items="${blogclsSvc.all}">
@@ -68,14 +68,14 @@
 										<td>
 											<form method="post" action="<%=path%>/BlogServlet">
 												<input class="btn btn-primary" type="submit" value="修改">
-												<input type="hidden" name="gpno" value="${blogVO.blogno}">
+												<input type="hidden" name="blogno" value="${blogVO.blogno}">
 												<input type="hidden" name="requestURL"
 													value="<%=servletpath%>">
 												<!--送出本網頁的路徑給Controller-->
 												<input type="hidden" name="whichPage" value="<%=whichPage%>">
 												<!--送出當前是第幾頁給Controller-->
 												<input type="hidden" name="action"
-													value="getOne_for_updatelaunchgp">
+													value="getOne_For_Update">
 											</form>
 										</td>
 										<td>
@@ -87,7 +87,7 @@
 												<!--送出本網頁的路徑給Controller-->
 												<input type="hidden" name="whichPage" value="<%=whichPage%>">
 												<!--送出當前是第幾頁給Controller-->
-												<input type="hidden" name="action" value="delete_launchgp">
+												<input type="hidden" name="action" value="delete_launchblog">
 											</form>
 										</td>
 										<td>

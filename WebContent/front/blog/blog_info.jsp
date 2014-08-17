@@ -24,9 +24,17 @@
 %>
 <div class="container body-content">
 	<div class="row">
+	 <div class="text-right">
+					<input class="btn btn-warning" type="button" value="上一頁"
+						onClick="history.back();return true;" name="button">
+				    </div>
+	     
+	     
 		<div id="backmain" class="col-md-10">
 			<h1 class="page-header">網誌詳細資訊</h1>
 			<div class="panel panel-warning">
+			    
+			     
 				<div class="panel-heading">
 					<h3 class="panel-title">網誌資料</h3>
 				</div>
@@ -35,7 +43,7 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<td class="col-md-1"><b>網誌編號</b></td>
+									<td class="col-md-3"><b>網誌編號</b></td>
 									<td class="col-md-9">${blogVO.blogno}</td>
 								</tr>
 							</thead>
@@ -70,7 +78,7 @@
 									<td>${blogVO.bgtext}</td>
 								</tr>
 								<tr>
-									<th>網誌發佈時間</th>
+									<th>網誌更改時間</th>
 									<td><fmt:formatDate value="${blogVO.bgtime}"
 											pattern="yyyy-MM-dd HH:mm:ss" /></td>
 								</tr>

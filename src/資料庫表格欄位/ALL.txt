@@ -533,8 +533,8 @@ CREATE SEQUENCE blogseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
       blogseq.NEXTVAL,
       1,
       2,
-      '義和團',
-      '神功護體阿',
+      '我的單車日誌1',
+      '今天氣好，出去騎了一趟淡水自行車道，享受在大自然的陽光下，瞬間讓我忘了一週的煩惱。',
       TO_DATE('2014/10/10 10:10:10','yyyy-mm-dd hh24:mi:ss'),
       'PUBLIC'
     );
@@ -554,8 +554,8 @@ CREATE SEQUENCE blogseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
       blogseq.NEXTVAL,
       1,
       2,
-      '肉蒲團',
-      '阿阿阿',
+      '我的單車日誌2',
+      '今天來到中央大學，享受著與大自然相接觸美好的時光，如此美好的人生，哪裡找!!!!!!',
       TO_DATE('2014/11/11 11:11:11','yyyy-mm-dd hh24:mi:ss'),
       'PUBLIC'
     );

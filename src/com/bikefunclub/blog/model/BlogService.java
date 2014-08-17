@@ -43,7 +43,8 @@ public class BlogService {
 
 		return blogVO;
 	}
-
+    
+	//先刪除關係，再刪除網誌本身
 	public void deleteBlog(Integer blogno) {
 		dao.delete(blogno);
 	}
@@ -59,5 +60,16 @@ public class BlogService {
 	public List<BlogVO> getBlogs_frommemno(Integer memno){
 	     return	dao.getBlogs_frommemno(memno);
 	    }
+	
+	public BlogVO findByPrimaryKey(Integer blogno) {
+	return dao.findByPrimaryKey(blogno);
+	}
+	//先刪關係後刪網誌
+    public void delete(Integer blogno) {
+		dao.delete(blogno);
+		
+	}
+	
+	
 	
 }

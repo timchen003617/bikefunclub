@@ -10,7 +10,7 @@
 <%
 	String path = request.getContextPath();
 	BlogVO blogVO = (BlogVO) request.getAttribute("blogVO");
-	Integer gpno = blogVO.getBlogno();
+	
 
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 	pageContext.setAttribute("memVO", memVO);
@@ -36,8 +36,8 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<td class="col-md-2"><strong>網誌編號</strong></td>
-								<td class="col-md-10">${blogVO.blogno}</td>
+								<td class="col-md-3"><strong>網誌編號</strong></td>
+								<td class="col-md-9">${blogVO.blogno}</td>
 							</tr>
 						</thead>
 						<tbody>

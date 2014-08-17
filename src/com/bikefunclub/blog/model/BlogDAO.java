@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.bikefunclub.gp.model.GpVO;
+
 public class BlogDAO implements BlogDAO_interface {
 
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
@@ -33,6 +35,9 @@ public class BlogDAO implements BlogDAO_interface {
 		"UPDATE blog set memno=?, blogclsno=?, bgtitle=?, bgtext=?, authname=?, bgtime=? where blogno = ?";
 	private static final String GET_ALL_MEMNO = 
 			"SELECT * FROM blog where memno=? order by blogno desc";
+	private static final String DELETE_MEMBLOG = "DELETE FROM memblog where blogno=?";	
+	private static final String DELETE_BLOGCOM = "DELETE FROM blogcom where blogno=?";
+	private static final String DELETE_BLOG = "DELETE FROM blog where blogno=?";	
 	
 
 	@Override
@@ -132,12 +137,17 @@ public class BlogDAO implements BlogDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE);
-
+			con.setAutoCommit(false);
+			//先刪關係(網誌留言)
+			pstmt = con.prepareStatement(DELETE_BLOGCOM);
 			pstmt.setInt(1, blogno);
-
 			pstmt.executeUpdate();
-
+			// 再刪除網誌本身
+			pstmt = con.prepareStatement(DELETE_BLOG);
+			pstmt.setInt(1, blogno);
+			pstmt.executeUpdate();
+            con.commit();
+            con.setAutoCommit(true);
 			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -340,5 +350,23 @@ public class BlogDAO implements BlogDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public List<GpVO> getBlogsBymemno(Integer memno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GpVO> getBlogsByblogclsno(Integer blogclsno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GpVO> getBlogsBymemnoFromMemblog(Integer memno) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

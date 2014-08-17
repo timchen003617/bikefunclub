@@ -10,6 +10,7 @@
 <%
 	String servletpath = request.getServletPath();
 	String path = request.getContextPath();
+	BlogVO blogVO = new BlogVO();
 	BlogService blogSvc = new BlogService();
 	List<BlogVO> list = blogSvc.getAll();
 	pageContext.setAttribute("list", list);
@@ -81,22 +82,28 @@
 
 										</FORM>
 									</td>
+									
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-		    <FORM METHOD="post" ACTION="<%=path%>/BlogServlet">
-			<input type="submit" value="發表網誌"> <input
-			type="hidden" name="blogno" value="${blogVO.blogno}"> <input
-			type="hidden" name="requestURL" value="<%=servletpath%>">
-            <!--送出本網頁的路徑給Controller -->
-			<input type="hidden" name="whichPage"
-			value="<%=whichPage%>">
-            <!--送出當前是第幾頁給Controller -->
-			<input type="hidden" name="action" value="insert">
-			</FORM>
+				<%@ include file="pages/page3.file"%>
+<%-- 		    <FORM METHOD="post" ACTION="<%=path%>/BlogServlet"> --%>
+<!-- 			<input type="submit" value="發表網誌"> <input -->
+<%-- 			type="hidden" name="blogno" value="${blogVO.blogno}"> <input --%>
+<%-- 			type="hidden" name="requestURL" value="<%=servletpath%>"> --%>
+<!--             送出本網頁的路徑給Controller -->
+<!-- 			<input type="hidden" name="whichPage" -->
+<%-- 			value="<%=whichPage%>"> --%>
+<!--             送出當前是第幾頁給Controller -->
+<!-- 			<input type="hidden" name="action" value="insert"> -->
+<!-- 			</FORM> -->
+            <a href="<%=path%>/front/blog/page_insert_blog.jsp"><button>新增網誌</button></a> 
+            
 			</div>
+			
 		</div>
+		
 	</div>
 </div>
