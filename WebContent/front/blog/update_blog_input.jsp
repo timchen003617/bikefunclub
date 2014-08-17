@@ -17,7 +17,7 @@
 <div class="container body-content">
 	<div class="row">
 		<form class="form-blog" action="<%=path%>/BlogServlet" method="post"
-			id="launchblog_input" name="launchblog_input">
+			id="blog_update" name="launchblog_input">
 			<fieldset>
 				<legend>網誌修改</legend>
 				<p class="red">*為必填欄位</p>

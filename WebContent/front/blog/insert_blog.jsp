@@ -22,7 +22,7 @@
 <div class="container body-content">
 	<div class="row">
 		<form class="form-blog" action="<%=path%>/BlogServlet" method="post"
-			id="insert" name="insert">
+			id="blog_insert" name="insert">
 			<fieldset>
 			<div class="text-right">
 					<input class="btn btn-warning" type="button" value="上一頁"

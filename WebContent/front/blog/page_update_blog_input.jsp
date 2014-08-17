@@ -32,7 +32,7 @@
 <%-- <script src="<%=path%>/js/validate.js"></script> --%>
 <script src="<%=path%>/js/previewimage.js"></script>
 <script src="<%=path%>/js/messages.js"></script>
-<script src="<%=path%>/js/validate_for_bgtitle(blog).js"></script>
+<script src="<%=path%>/js/validate_for_blog.js"></script>
 
 </head>
 <body>
