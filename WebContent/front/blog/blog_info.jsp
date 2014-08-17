@@ -24,21 +24,16 @@
 %>
 <div class="container body-content">
 	<div class="row">
-	 <div class="text-right">
-					<input class="btn btn-warning" type="button" value="上一頁"
-						onClick="history.back();return true;" name="button">
-				    </div>
-	     
-	     
 		<div id="backmain" class="col-md-10">
-			<h1 class="page-header">網誌詳細資訊</h1>
-			<div class="panel panel-warning">
-			    
-			     
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">網誌資料</h3>
 				</div>
 				<div class="panel-body">
+					<div class="text-right">
+						<input class="btn btn-warning" type="button" value="上一頁"
+							onClick="history.back();return true;" name="button">
+					</div>
 					<div class="table-responsive">
 						<table class="table table-hover">
 							<thead>

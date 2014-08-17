@@ -35,7 +35,7 @@
 				<jsp:useBean id="blogclsSvc" scope="page"
 					class="com.bikefunclub.blogcls.model.BlogclsService" />
 				<div>
-					<label for="blogclsno" class="label"><span class="red"></span></label>
+					<label for="blogclsno" class="label"><span class="red">*網誌分類</span></label>
 					<select size="1" name="blogclsno">
 						<c:forEach var="blogclsVO" items="${blogclsSvc.all}">
 							<option value="${blogclsVO.blogclsno}"
