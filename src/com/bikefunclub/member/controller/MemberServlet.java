@@ -154,7 +154,8 @@ public class MemberServlet extends HttpServlet {
 				/*************************** 4.新增完成,準備轉交(Send the Success view) ***********/
 				//使用者認證的連結
 				String getmailurl = "http://localhost:8081"+req.getContextPath()+req.getServletPath()+"?action='updategetmailyn'&memgetmailyn=Y";
-				
+				req.setAttribute("memname", memname);
+				req.setAttribute("mememail", mememail);
 				req.setAttribute("getmailurl", getmailurl);
 				
 				req.setAttribute("option", "include");
