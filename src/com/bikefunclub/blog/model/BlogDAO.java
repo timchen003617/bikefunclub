@@ -26,7 +26,7 @@ public class BlogDAO implements BlogDAO_interface {
 	private static final String INSERT_STMT = 
 		"INSERT INTO blog (blogno,memno,blogclsno,bgtitle,bgtext,authname,bgtime) VALUES (blogseq.NEXTVAL, ?, ?, ?, ?, ?, sysdate)";
 	private static final String GET_ALL_STMT = 
-			"SELECT blogno,memno,blogclsno,bgtitle,bgtext,authname,to_char(bgtime,'YYYY-MM-DD HH24:MI:SS') bgtime FROM blog order by blogno";
+			"SELECT blogno,memno,blogclsno,bgtitle,bgtext,authname,to_char(bgtime,'YYYY-MM-DD HH24:MI:SS') bgtime FROM blog order by blogno desc";
 	private static final String GET_ONE_STMT = 
 		"SELECT blogno,memno,blogclsno,bgtitle,bgtext,authname,to_char(bgtime,'YYYY-MM-DD HH24:MI:SS') bgtime FROM blog where blogno = ?";
 	private static final String DELETE = 
