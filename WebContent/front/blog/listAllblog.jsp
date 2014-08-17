@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.bikefunclub.blogcls.model.*"%>
 <%@ page import="com.bikefunclub.blog.model.*"%>
@@ -66,13 +67,14 @@
 									<!--網誌標題-->
 									<td>${blogVO.bgtitle}</td>
 									<!--網誌標題-->
-									<td>${blogVO.bgtext}</td>
+									<td><c:out
+										value="${fn:substring(blogVO.bgtext,0,25)}......" /></td>
 									<!--發佈時間-->
 									<td><fmt:formatDate value="${blogVO.bgtime}"
 											pattern="yyyy-MM-dd HH:mm:ss" /> <!--詳細資料-->
 									<td>
 										<FORM METHOD="post" ACTION="<%=path%>/BlogServlet">
-											<input type="submit" value="詳細資料"> <input
+											<input type="submit" class="btn btn-primary" value="詳細資料"> <input
 												type="hidden" name="blogno" value="${blogVO.blogno}">
 											<input type="hidden" name="requestURL"
 												value="<%=servletpath%>">
@@ -99,7 +101,7 @@
 <!--             送出當前是第幾頁給Controller -->
 <!-- 			<input type="hidden" name="action" value="insert"> -->
 <!-- 			</FORM> -->
-            <a href="<%=path%>/front/blog/page_insert_blog.jsp"><button>新增網誌</button></a> 
+            <a href="<%=path%>/front/blog/page_insert_blog.jsp"><button class="btn btn-primary btn-lg">新增網誌</button></a> 
             
 			</div>
 			
