@@ -37,7 +37,6 @@
 								<th>網誌分類</th>
 								<th>發佈會員</th>
 								<th>網誌標題</th>
-								<th>網誌內容</th>
 								<th>發佈時間</th>
 								<th>詳細資料</th>
 							</tr>
@@ -66,9 +65,6 @@
 									 </td>
 									<!--網誌標題-->
 									<td>${blogVO.bgtitle}</td>
-									<!--網誌標題-->
-									<td><c:out
-										value="${fn:substring(blogVO.bgtext,3,25)}......" /></td>
 									<!--發佈時間-->
 									<td><fmt:formatDate value="${blogVO.bgtime}"
 											pattern="yyyy-MM-dd HH:mm:ss" /> <!--詳細資料-->
