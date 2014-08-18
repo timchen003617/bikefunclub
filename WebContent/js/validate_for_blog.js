@@ -1,4 +1,13 @@
 $(function() {
+	$('#blog_insert,#blog_update').submit(
+			function() {
+				$("textarea.ckeditor").each(
+						function() {
+							var $textarea = $(this);
+							$textarea.val(CKEDITOR.instances[$textarea
+									.attr("name")].getData());
+						});
+			});
 	$("#blog_insert,#blog_update").validate({
 		rules : {
 			bgtitle : {

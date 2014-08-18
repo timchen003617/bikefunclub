@@ -68,7 +68,7 @@
 									<td>${blogVO.bgtitle}</td>
 									<!--網誌標題-->
 									<td><c:out
-										value="${fn:substring(blogVO.bgtext,0,25)}......" /></td>
+										value="${fn:substring(blogVO.bgtext,3,25)}......" /></td>
 									<!--發佈時間-->
 									<td><fmt:formatDate value="${blogVO.bgtime}"
 											pattern="yyyy-MM-dd HH:mm:ss" /> <!--詳細資料-->

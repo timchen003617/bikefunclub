@@ -14,6 +14,10 @@
 	
 %>
 
+
+
+
+
 <div class="container body-content">
 	<div class="row">
 		<form class="form-blog" action="<%=path%>/BlogServlet" method="post"

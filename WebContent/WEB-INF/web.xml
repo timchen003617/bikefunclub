@@ -67,6 +67,13 @@
     <url-pattern>/front/home/page_mem_info.jsp</url-pattern>
     <url-pattern>/front/gp/*</url-pattern>
     <url-pattern>/front/rot/*</url-pattern>
+    <!--網誌(新增.修改.網誌會員管理面)-->
+    <url-pattern>/front/blog/manage_blog.jsp</url-pattern>
+    <url-pattern>/front/blog/page_manage_blog.jsp</url-pattern>
+    <url-pattern>/front/blog/insert_blog.jsp</url-pattern>
+    <url-pattern>/front/blog/page_insert_blog.jsp</url-pattern>
+    <url-pattern>/front/blog/update_blog_input.jsp</url-pattern>
+    <url-pattern>/front/blog/page_update_blog_input.jsp</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>SetContentTypeFilter</filter-name>
