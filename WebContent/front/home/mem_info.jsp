@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.bikefunclub.riderecord.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.bikefunclub.friendlist.model.*"%>
 <%@ page import="com.bikefunclub.member.model.*"%>
@@ -27,6 +28,11 @@
 	RotService rotSvc = new RotService();
 	List<RotVO> rotlist = rotSvc.getrotsBymemnoFromMemrot(memno);
 	pageContext.setAttribute("rotlist", rotlist);
+	
+	//騎乘過的路線
+	RideRecordService recordSvc = new RideRecordService();
+	List<RideRecordVO> recordlist = recordSvc.getrotrcds_bymemno(memno);
+	pageContext.setAttribute("recordlist", recordlist);
 %>
 <script>
 window.onload = function(){
@@ -151,7 +157,35 @@ window.onload = function(){
 						</tbody>
 					</table>
 				</div>
+				<div class="field">
+					<table class="table">
+						<thead>
+							<tr>
+								<th><h3>
+										<strong>騎乘過的路線</strong>
+									</h3></th>
+							</tr>
+						</thead>
+						<tbody>
 
+							<c:forEach var="riderecordVO" items="${recordlist}">
+
+								<tr>
+									<td>
+										<form action="<%=path%>/Rot.do" method="post">
+											<a href="javascript:;" onclick="parentNode.submit();">【騎乘日期】<fmt:formatDate
+													value="${riderecordVO.stamp}" pattern="yyyy-MM-dd" /></a>
+											<input type="hidden" name="action" value="getRotrecord_info">
+											<input type="hidden" name="rotno"
+												value="${riderecordVO.rotno}">
+										</form>
+									</td>
+								</tr>
+
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
