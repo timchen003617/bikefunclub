@@ -7,6 +7,8 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.bikefunclub.blog.model.BlogService;
+import com.bikefunclub.blog.model.BlogVO;
 import com.bikefunclub.blogcom.model.*;
 
 import javax.servlet.annotation.WebServlet;
@@ -178,47 +180,78 @@ public class BlogcomServlet extends HttpServlet {
 			}
 		}
 
-        if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
+        if ("insert".equals(action)) { 
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL");
+			req.setAttribute("requestURL", requestURL);
 
+			String whichPage = req.getParameter("whichPage");
+			req.setAttribute("whichPage", whichPage);
+			
+			BlogService blogSvc = new  BlogService();
+			
+			
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-				Integer blogno = new Integer(req.getParameter("blogno").trim());	
+				
+				Integer blogno = new Integer(req.getParameter("blogno").trim());
+				
 				Integer memno = new Integer(req.getParameter("memno").trim());
+				
 				String bgcomtext = req.getParameter("bgcomtext").trim();
-
+				
+				//留言時間
+				Date date = new Date(System.currentTimeMillis());
+				
+				Timestamp bgcomtime = Timestamp
+						.valueOf(new java.text.SimpleDateFormat(
+								"yyyy-MM-dd HH:mm:ss").format(date));
+				
+				
+				
+				
 				BlogcomVO blogcomVO = new BlogcomVO();
 				blogcomVO.setBlogno(blogno);
 				blogcomVO.setMemno(memno);
 				blogcomVO.setBgcomtext(bgcomtext);
-
+				blogcomVO.setBgcomtime(bgcomtime);
+				
+				
+				
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("blogcomVO", blogcomVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/blogcom/addBlogcom.jsp");
+							.getRequestDispatcher("/front/blog/page_listAllblog.jsp");
+					
 					failureView.forward(req, res);
 					return;
 				}
 				
 				/***************************2.開始新增資料***************************************/
-				BlogcomService blogcomSvc = new BlogcomService();
-				blogcomVO = blogcomSvc.addBlogcom(blogno , memno , bgcomtext);
 				
+				BlogcomService blogcomSvc = new BlogcomService();
+				
+				blogcomVO = blogcomSvc.addBlogcom(blogno , memno , bgcomtext);
+				BlogVO blogVO = blogSvc.findByPrimaryKey(blogno);
+				req.setAttribute("blogVO", blogVO);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back/blogcom/listAllBlogcom.jsp";
+				String url = "/front/blog/page_blog_info.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back/blogcom/addBlogcom.jsp");
+						.getRequestDispatcher("/front/blog/page_blog_info.jsp");
+				
 				failureView.forward(req, res);
 			}
 		}

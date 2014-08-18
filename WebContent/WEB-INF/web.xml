@@ -74,6 +74,8 @@
     <url-pattern>/front/blog/page_insert_blog.jsp</url-pattern>
     <url-pattern>/front/blog/update_blog_input.jsp</url-pattern>
     <url-pattern>/front/blog/page_update_blog_input.jsp</url-pattern>
+    <url-pattern>/front/blog/blog_info.jsp</url-pattern>
+    <url-pattern>/front/blog/page_blog_info.jsp</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>SetContentTypeFilter</filter-name>
