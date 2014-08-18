@@ -152,8 +152,10 @@
 											var="memgpmemname" items="${memgpVO}">
 											<c:if test="${i>0}">
 												<span>、</span>
-											</c:if>								
-									${memgpmemname.memname}<input type="hidden" name="attendmemno"
+											</c:if>
+											<a href="<%=path%>/front/home/page_mem_info.jsp?memno=${memgpmemname.memno}"
+												target="_blank">${memgpmemname.memname}</a>
+											<input type="hidden" name="attendmemno"
 												value="${memgpmemname.memno}" />
 											<c:set var="i" value="${i+1}"></c:set>
 										</c:forEach></td>
