@@ -10,6 +10,12 @@
 <%
 	String path = request.getContextPath();
 	MemVO loginmemVO = (MemVO) session.getAttribute("memVO");
+	if (loginmemVO == null) {
+		RequestDispatcher successView = request
+				.getRequestDispatcher("/front/mem/login.jsp");
+		successView.include(request, response);
+		return;
+	}
 	pageContext.setAttribute("loginmemVO", loginmemVO);
 	GpVO gpVO = (GpVO) request.getAttribute("gpVO");
 	Integer gpno = gpVO.getGpno();

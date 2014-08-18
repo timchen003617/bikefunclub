@@ -14,6 +14,13 @@
 	pageContext.setAttribute("rotno", rotVO.getRotno());
 	MemrotService memrotSvc = new MemrotService();
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
+	if (memVO == null) {
+		RequestDispatcher successView = request
+				.getRequestDispatcher("/front/mem/login.jsp");
+		successView.include(request, response);
+		return;
+	}
+
 	Integer memno = memVO.getMemno();
 	pageContext.setAttribute("memno", memno);
 	MemrotVO memrotVO = memrotSvc.findByPrimaryKey(memno,
@@ -28,7 +35,7 @@
 			url : "/bikefunclub/Rot.do",
 			data : {
 				"action" : "getSelected_rotinfo",
-				"rotno" :  '${rotno}'
+				"rotno" : '${rotno}'
 			},
 			dataType : "json",
 			success : function(dataobj) {
@@ -38,12 +45,12 @@
 				alert("error");
 			}
 		});
-		
+
 	});
 
 	var directionsDisplay;
-// 	var flightPath;
-// 	var flightPlanCoordinates;
+	// 	var flightPath;
+	// 	var flightPlanCoordinates;
 	var directionsService = new google.maps.DirectionsService();
 	var map;
 	var readtype = 1;//0:polyline,1:directionsService
@@ -77,20 +84,20 @@
 			});
 		} else {
 			var request = {
-					origin : start,
-					destination : end,
-					optimizeWaypoints : true,
-					avoidHighways : true,
-					avoidTolls : true,
-					travelMode : google.maps.TravelMode.DRIVING
-				};
-				directionsService.route(request, function(response, status) {
-					if (status == google.maps.DirectionsStatus.OK) {
-						directionsDisplay.setDirections(response);
-						computeTotalDistance(directionsDisplay.getDirections());
-					}
-				});
-					}
+				origin : start,
+				destination : end,
+				optimizeWaypoints : true,
+				avoidHighways : true,
+				avoidTolls : true,
+				travelMode : google.maps.TravelMode.DRIVING
+			};
+			directionsService.route(request, function(response, status) {
+				if (status == google.maps.DirectionsStatus.OK) {
+					directionsDisplay.setDirections(response);
+					computeTotalDistance(directionsDisplay.getDirections());
+				}
+			});
+		}
 	}
 
 	function init_map() {
@@ -118,16 +125,16 @@
 					.setPanel(document.getElementById('selected_rots'));
 
 		}
-// 		 else if (readtype == 0) {		    
-// 						              flightPath = new google.maps.Polyline({
-// 						              path: flightPlanCoordinates,
-// 						              geodesic: true,
-// 						              strokeColor: '#FF0000',
-// 						              strokeOpacity: 1.0,
-// 						              strokeWeight: 2
-// 						            });
-// 									flightPath.setMap(map);
-// 								} 
+		// 		 else if (readtype == 0) {		    
+		// 						              flightPath = new google.maps.Polyline({
+		// 						              path: flightPlanCoordinates,
+		// 						              geodesic: true,
+		// 						              strokeColor: '#FF0000',
+		// 						              strokeOpacity: 1.0,
+		// 						              strokeWeight: 2
+		// 						            });
+		// 									flightPath.setMap(map);
+		// 								} 
 
 	}
 
@@ -140,7 +147,7 @@
 		total = total / 1000.0;
 		document.getElementById('total').innerHTML = total + ' km';
 	}
-	
+
 	google.maps.event.addDomListener(window, 'load', init_map);
 </script>
 <div class="container body-content">
@@ -155,16 +162,17 @@
 		</c:forEach>
 	</h1>
 
-			<form action="<%=path%>/Rot.do" method="post">
-				<div class="text-right">
+	<form action="<%=path%>/Rot.do" method="post">
+		<div class="text-right">
 
-					<input type="hidden" name="action" value="add_memrot"/> 
-					<input type="hidden" name="rotno" value="${rotno}"/>					
-					<input type="hidden" name="memno" value="${memno}"/> 
-					<input class="btn btn-success btn-lg" type="submit" value="收藏此路線" <%= (memrotVO==null)?"":"disabled" %>/>
+			<input type="hidden" name="action" value="add_memrot" /> <input
+				type="hidden" name="rotno" value="${rotno}" /> <input type="hidden"
+				name="memno" value="${memno}" /> <input
+				class="btn btn-success btn-lg" type="submit" value="收藏此路線"
+				<%=(memrotVO == null) ? "" : "disabled"%> />
 
-				</div>
-			</form>
+		</div>
+	</form>
 
 	<div class="row">
 		<div class="col-md-3">
@@ -173,7 +181,9 @@
 					<h3 class="panel-title">路線資訊</h3>
 				</div>
 				<div class="panel-body" id="selected_rots">
-				<h4 class="text-center">總距離: <span id="total"></span></h4>
+					<h4 class="text-center">
+						總距離: <span id="total"></span>
+					</h4>
 				</div>
 			</div>
 		</div>
