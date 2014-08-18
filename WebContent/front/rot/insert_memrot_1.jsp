@@ -148,12 +148,14 @@ var rendererOptions = {
 		set_map(markers,'map-container');
 		startedit=document.getElementById("startedit");
 		endedit=document.getElementById("endedit");
-/* 		clearedit=document.getElementById("clearedit"); */
+ 		clearedit=document.getElementById("clearedit");
+ 		deleteedit=document.getElementById("deleteedit"); 
 		home=document.getElementById("home");
 		
 		startedit.addEventListener('click',clickstartedit,false);
 		endedit.addEventListener('click',clickendedit,false);
-/* 		clearedit.addEventListener('click',clickclearedit,false); */
+ 		clearedit.addEventListener('click',clickclearedit,false); 
+ 		deleteedit.addEventListener('click',clickdeleteedit,false); 
 		home.addEventListener('click',clickhome,false);	
 
 	}
@@ -176,12 +178,16 @@ var rendererOptions = {
 		if(startflag==1){
 			startedit.disabled='disabled';
 			endedit.disabled='';
-/* 			clearedit.disabled=''; */
+ 			clearedit.disabled=''; 
+ 			deleteedit.disabled='';
 			home.disabled='';
 			startflag=0;
 	        google.maps.event.addListener(map, 'click', function(e) {
 	    	    /* placeMarker(e.latLng, map); */
 	        	 //map.setCenter(e.latLng);
+	    	     if(markers){
+	    	    	 directionsDisplay.setMap(map);
+	    	     }
 	        	 markers.push(e.latLng);
 	        	 if(markers.length>=1){
 	        		 set_map(markers,'map-container');
@@ -194,10 +200,11 @@ var rendererOptions = {
 		if (startflag == 0) {
 			startedit.disabled = '';
 			endedit.disabled = 'disabled';
-/* 			clearedit.disabled = 'disabled'; */
+			clearedit.disabled = 'disabled';
+			deleteedit.disabled='disabled';
 			home.disabled = 'disabled';
 			startflag = 1;
-			google.maps.event.clearListeners(map, 'click');
+// 			google.maps.event.clearListeners(map, 'click');
 		}
 	}
 
@@ -206,21 +213,31 @@ var rendererOptions = {
 			map.setCenter(markers[0]);
 		}
 	}
-/* 	// Sets the map on all markers in the array.
-	function setAllMap(map) {
-		for (var i = 0; i < markers.length; i++) {
-			markers[i].setMap(map);
-		}
-	}
 
-	// Removes the markers from the map, but keeps them in the array.
-	function clearMarkers() {
-		setAllMap(null);
-	}
+	function clickdeleteedit() {
+   	 markers.pop();
+   	 
+   	 if(markers.length>=1){
+   		 set_map(markers,'map-container');
+   	 }else{
+   		 $('#selected_rots').empty();       		 
+   		 directionsDisplay.setMap(null);
+   	 }
+
+} 
 	function clickclearedit() {
- 		clearMarkers();
-		markers = [];
-	} */
+// 		for(var i=0;i<markers.length;i++){
+// 			markers.pop();
+// 		}
+		while(markers.length > 0) {
+			markers.pop();
+		}
+       $('#selected_rots').empty();
+       map.setZoom(15);
+       map.setCenter(new google.maps.LatLng(24.967881, 121.1917015));
+       directionsDisplay.setMap(null);
+       document.getElementById('total').innerHTML = '0' + ' km';
+	} 
 </script>
 <div class="container body-content">
 	<div class="row">
@@ -237,8 +254,9 @@ var rendererOptions = {
 		<div class="btn-group">
 			<button type="button" id="startedit" class="btn btn-success">開始編輯</button>
 			<button type="button" id="endedit" disabled="disabled" class="btn btn-success">結束編輯</button>
-<!-- 			<button type="button" id="clearedit" disabled="disabled" class="btn btn-default">刪除全部節點</button>
- -->			<button type="button" id="home" disabled="disabled" class="btn btn-success">返回起點</button>
+			<button type="button" id="deleteedit" disabled="disabled" class="btn btn-success">刪除最後節點</button>
+			<button type="button" id="clearedit" disabled="disabled" class="btn btn-success">刪除全部節點</button>
+			<button type="button" id="home" disabled="disabled" class="btn btn-success">返回起點</button>
 		</div>
 
 
