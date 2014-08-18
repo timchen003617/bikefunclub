@@ -480,4 +480,10 @@ public class AlbumJDBCDAO implements AlbumDAO_interface {
 			System.out.println();
 		}
 	}
+
+	@Override
+	public List<AlbumVO> getAlbclsno(Integer albclsno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

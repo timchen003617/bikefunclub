@@ -31,12 +31,16 @@ public class AlbumDAO implements AlbumDAO_interface {
 			"SELECT albno,memno,albclsno,authname,albtitle,albdesc,to_char(albtime,'YYYY-MM-DD HH24:MI:SS')albtime FROM album where albno = ?";
 		private static final String DELETE = 
 			"DELETE FROM album where albno = ?";
+
 		private static final String UPDATE = 
 			"UPDATE album set memno=?, albclsno=?, authname=?, albtitle=?, albdesc=?, albtime=? where albno = ?";
 		private static final String GET_ALBNO_TO_GPALBUM = 
 			"select * from photo where photono = any(select photono from gpalbum where albno=?)";
 		private static final String DELETE_GPALBUM = 
 				"DELETE FROM gpalbum where photono = ?";
+		//取得該分類所有相簿;新增相簿後,轉送到該分類所有相簿
+		private static final String GET_ALBCLSNO_TO_ALBUM = 
+				"SELECT * from album where albclsno=? order by albno desc";
 		
 
 	@Override
@@ -386,5 +390,65 @@ public class AlbumDAO implements AlbumDAO_interface {
 			}
 		}
 
+	}
+	
+	@Override
+	public List<AlbumVO> getAlbclsno(Integer albclsno) {
+		List<AlbumVO> list = new ArrayList<AlbumVO>();
+		AlbumVO albumVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALBCLSNO_TO_ALBUM);
+			pstmt.setInt(1, albclsno);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				albumVO = new AlbumVO();
+				albumVO.setAlbno(rs.getInt("albno"));
+				albumVO.setMemno(rs.getInt("memno"));
+				albumVO.setAlbclsno(rs.getInt("albclsno"));
+				albumVO.setAuthname(rs.getString("authname"));
+				albumVO.setAlbtitle(rs.getString("albtitle"));
+				albumVO.setAlbdesc(rs.getString("albdesc"));
+				albumVO.setAlbtime(rs.getTimestamp("albtime"));
+				list.add(albumVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 }

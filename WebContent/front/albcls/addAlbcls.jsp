@@ -30,7 +30,7 @@
 		<table border="0">
 
 			<tr>
-				<td>相簿分類名稱:</td>
+				<td>新增相簿分類:</td>
 				<td><input type="TEXT" name="albclsname" size="45"
 					value="${param.albclsname}" /></td>
 				<td>${errorMsgs.albclsname}</td>

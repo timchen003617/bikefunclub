@@ -238,7 +238,7 @@ public class AlbclsServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back/albcls/listAllAlbcls.jsp");
+						.getRequestDispatcher("/front/albcls/page_listAllAlbcls.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -297,8 +297,8 @@ public class AlbclsServlet extends HttpServlet {
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("listAlbum", listAlbum); // 資料庫取出的empVO物件,存入req
 				req.setAttribute("albclsVO", albclsVO);
-				String url = "/front/albcls/page_getOneAlbcls.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				String url = "/front/albcls/page_getOneAlbcls.jsp"; //列出該相簿分類所有相簿
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交getOneAlbcls.jsp
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/

@@ -4,6 +4,7 @@
 <%@ page import="com.bikefunclub.photo.model.*"%>
 <%@ page import="com.bikefunclub.album.model.*"%>
 <%@ page import="com.bikefunclub.gpalbum.model.*"%>
+<%@ page import="com.bikefunclub.member.model.*"%>
 <%-- 此頁採用 JSTL 與 EL 取值 --%>
 
 <%
@@ -12,6 +13,7 @@
 // List<PhotoVO> listPohto = albumSvc.getAlbno(albumVO.getAlbno());
 	List<PhotoVO> list = (List<PhotoVO>)request.getAttribute("listPohto");
 	AlbumVO albumVO = (AlbumVO)request.getAttribute("albumVO");
+	MemVO memVO = (MemVO)session.getAttribute("memVO");
 %>
 
 <div class="container body-content">
@@ -35,6 +37,10 @@
 			<th>相片檔案</th>
 			<td><FORM METHOD="post" action="<%=request.getContextPath()%>/front/photo/page_addPhoto.jsp">
 			     <input type="submit" value="新增相片">
+			     <input type="hidden" name="albno" value="${albumVO.albno}">
+			</FORM></td>
+			<td><FORM METHOD="post" action="<%=request.getContextPath()%>/front/albcls/page_listAllAlbcls.jsp">
+			     <input type="submit" value="回到分類相簿">
 			     <input type="hidden" name="albno" value="${albumVO.albno}">
 			</FORM></td>
 
@@ -79,3 +85,7 @@
 		</div>
 	</div>
 </div>
+
+
+
+

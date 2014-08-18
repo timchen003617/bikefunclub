@@ -7,6 +7,8 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.bikefunclub.albcls.model.AlbclsService;
+import com.bikefunclub.albcls.model.AlbclsVO;
 import com.bikefunclub.album.model.*;
 import com.bikefunclub.photo.model.PhotoVO;
 
@@ -123,7 +125,7 @@ public class AlbumServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back/album/listAllAlbum.jsp");
+						.getRequestDispatcher("/front/albcls/page_getOneAlbcls.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -159,7 +161,7 @@ public class AlbumServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("albumVO", albumVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/album/update_album_input.jsp");
+							.getRequestDispatcher("/front/album/page_update_album_input.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -178,7 +180,7 @@ public class AlbumServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back/album/update_album_input.jsp");
+						.getRequestDispatcher("/front/album/page_update_album_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -240,25 +242,41 @@ public class AlbumServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-	
+			String url = req.getParameter("requestURL");
+			String whichPage = req.getParameter("whichPage");
 			try {
 				/***************************1.接收請求參數***************************************/
 				Integer albno = new Integer(req.getParameter("albno"));
-				
+				Integer albclsno = new Integer(req.getParameter("albclsno"));
 				/***************************2.開始刪除資料***************************************/
 				AlbumService albumSvc = new AlbumService();
-				albumSvc.deleteAlbum(albno);
+				AlbclsService albclsSvc = new AlbclsService();
+				if (albumSvc.getAlbno(albno) == null) {						
+					albumSvc.deleteAlbum(albno);				
+				}else{
+					errorMsgs.add("刪除資料失敗:"+"相簿內仍有照片!!");	
+				}
+				AlbclsVO albclsVO = new AlbclsVO();
+				albclsVO.setAlbclsno(albclsno);
+				req.setAttribute("albclsVO", albclsVO);
 				
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = req.getParameter("requestURL");
+				
+				List<AlbumVO> listAlbum = albclsSvc.findByAlbum(albclsno);
+
+				
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/	
+				req.setAttribute("listAlbum", listAlbum); // 資料庫取出的empVO物件,存入req
+			
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
-				errorMsgs.add("刪除資料失敗:"+e.getMessage());
+				errorMsgs.add("刪除資料失敗:"+"相簿內仍有照片!!");
+				System.out.println(url); 
+
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front/albcls/page_getOneAlbcls.jsp");
+						.getRequestDispatcher(url);
 				failureView.forward(req, res);
 			}
 		}
@@ -326,6 +344,7 @@ public class AlbumServlet extends HttpServlet {
 			}
 		}
 		
+		//刪除相簿內的相片
 		if ("GET_ALBNO_TO_Delete".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -361,5 +380,64 @@ public class AlbumServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		 if ("Albcls_AddAlbum".equals(action)) { // 來自addAlbum.jsp的請求  
+				
+				List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				req.setAttribute("errorMsgs", errorMsgs);
+
+				try {
+					/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+					Integer memno = new Integer(req.getParameter("memno").trim());
+					Integer albclsno = new Integer(req.getParameter("albclsno").trim());
+					
+					String authname = req.getParameter("authname");
+					String albtitle = req.getParameter("albtitle");
+					String albdesc = req.getParameter("albdesc");
+
+
+					AlbumVO albumVO = new AlbumVO();
+					albumVO.setMemno(memno);
+					albumVO.setAlbclsno(albclsno);
+					albumVO.setAuthname(authname);
+					albumVO.setAlbtitle(albtitle);
+					albumVO.setAlbdesc(albdesc);
+
+					// Send the use back to the form, if there were errors
+					if (!errorMsgs.isEmpty()) {
+						req.setAttribute("albumVO", albumVO); // 含有輸入格式錯誤的empVO物件,也存入req
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/front/albcls/getOneAlbcls.jsp");
+						failureView.forward(req, res);
+						return;
+					}
+					
+					/***************************2.開始新增資料***************************************/
+					AlbumService albumSvc = new AlbumService();
+					albumVO = albumSvc.addAlbum(memno , albclsno , authname , albtitle , albdesc);
+					
+					
+					/***************************3.新增完成,準備轉交(Send the Success view)***********/
+					AlbclsService albclsSvc = new AlbclsService();
+					AlbclsVO albclsVO =  albclsSvc.getOneAlbcls(albclsno);
+					
+					List<AlbumVO> listAlbum = albumSvc.getAlbclsno(albclsno);
+					
+				    req.setAttribute("albclsVO", albclsVO);
+					req.setAttribute("listAlbum", listAlbum);
+					String url = "/front/albcls/page_getOneAlbcls.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交Albcls_Allalbum.jsp
+					successView.forward(req, res);				
+					/***************************其他可能的錯誤處理**********************************/
+				} catch (Exception e) {
+					errorMsgs.add(e.getMessage());
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back/album/addAlbum.jsp");
+					failureView.forward(req, res);
+				}
+			}
+		 
 	}
 }

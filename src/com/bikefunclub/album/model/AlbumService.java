@@ -3,6 +3,7 @@ package com.bikefunclub.album.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.bikefunclub.albcls.model.AlbclsVO;
 import com.bikefunclub.photo.model.PhotoVO;
 
 public class AlbumService {
@@ -68,6 +69,10 @@ public class AlbumService {
 	public String getAlbtitle(Integer albno){
 		AlbumVO albumVO = dao.findByPrimaryKey(albno);
 		return albumVO.getAlbtitle();
+	}
+	//取得該分類所有相簿;新增相簿後,轉送到該分類所有相簿
+	public List<AlbumVO> getAlbclsno(Integer albclsno){
+		return dao.getAlbclsno(albclsno);
 	}
 	
 }
