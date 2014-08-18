@@ -129,17 +129,20 @@
 										</c:if>
 									</c:forEach></td>
 							</tr>
-							<tr>
-								<th>參加會員</th>
-								<td><c:set var="i" value="0"></c:set> <c:forEach
-										var="memgpmemname" items="${memgpVO}">
-										<c:if test="${i>0}">
-											<span>、</span>
-										</c:if>								
-									${memgpmemname.memname}
-									<c:set var="i" value="${i+1}"></c:set>
-									</c:forEach></td>
-							</tr>
+								<tr>
+									<th>參加會員</th>
+									<td><c:set var="i" value="0"></c:set> <c:forEach
+											var="memgpmemname" items="${memgpVO}">
+											<c:if test="${i>0}">
+												<span>、</span>
+											</c:if>
+											<a href="<%=path%>/front/home/page_mem_info.jsp?memno=${memgpmemname.memno}"
+												target="_blank">${memgpmemname.memname}</a>
+											<input type="hidden" name="attendmemno"
+												value="${memgpmemname.memno}" />
+											<c:set var="i" value="${i+1}"></c:set>
+										</c:forEach></td>
+								</tr>
 						</tbody>
 					</table>
 
