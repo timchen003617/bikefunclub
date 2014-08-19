@@ -20,7 +20,7 @@
 %>
 
 <div class="container body-content">
-	<div class="col-md-13">
+	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">騎車紀錄</h3>

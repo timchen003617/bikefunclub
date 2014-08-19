@@ -99,7 +99,6 @@ public class AlbumServlet extends HttpServlet {
 			}
 		}
 		
-		
 		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -323,7 +322,7 @@ public class AlbumServlet extends HttpServlet {
 				// if (errorMsgs不是空的)
 				if (!errorMsgs.isEmpty()) {  
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/album/select_page.jsp");
+							.getRequestDispatcher("/front/album/page_Allalbum.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -339,7 +338,7 @@ public class AlbumServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/album/select_page.jsp");
+						.getRequestDispatcher("/front/album/page_Allalbum.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -438,6 +437,42 @@ public class AlbumServlet extends HttpServlet {
 					failureView.forward(req, res);
 				}
 			}
+		 if("getOneAlbcls_For_Display".equals(action)){
+				List<String> errorMsgs = new LinkedList<String>();
+				req.setAttribute("errorMsgs", errorMsgs);
+				
+				try {
+					Integer albclsno = new Integer(req.getParameter("albclsno"));
+					
+					/***************************2.開始查詢資料*****************************************/
+					AlbumService albumSvc = new AlbumService();
+					List<AlbumVO> albumVO = albumSvc.getAlbclsno(albclsno);
+					
+					if (albumVO == null) {
+						errorMsgs.add("查無資料");
+					}
+					if (!errorMsgs.isEmpty()) {  
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/front/album/page_Allalbum.jsp");
+						failureView.forward(req, res);
+						return;//程式中斷
+					}
+					
+					req.setAttribute("albumVO", albumVO);
+					req.setAttribute("albclsno", albclsno);
+					
+					String url = "/front/album/page_Allalbum.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+					successView.forward(req, res);	
+					
+				} catch (Exception e) {
+					errorMsgs.add(e.getMessage());
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front/album/page_Allalbum.jsp");
+					failureView.forward(req, res);
+				}
+			 
+		 }
 		 
 	}
 }
