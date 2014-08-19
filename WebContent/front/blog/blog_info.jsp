@@ -66,8 +66,8 @@
 				</div>
 				<div class="panel-body">
 					<div class="text-right">
-						<input class="btn btn-warning" type="button" value="上一頁"
-							onClick="history.back();return true;" name="button">
+						<a class="btn btn-primary"
+						href="<%=path%>/front/blog/page_listAllblog.jsp">回瀏覽網誌</a>
 					</div>
 					<div class="table-responsive">
 						<table class="table table-hover">
@@ -131,11 +131,11 @@
                
 				<!--此區塊為會員顯示區 -->
 				<div id="blogcomlist" class="text-center">
-				   
+				    <!--我是分隔線-->
 					<hr style="height: 3px; border: none; border-top: 2px ridge #6b3" />
 					
 					
-						
+					<!--判斷網誌留言是否屬這個網誌(P.140行的判斷句) -->	
 					<c:forEach var="blogcomVO" items="${blogcomlist}">
                         <c:if test="${blogVO.blogno == blogcomVO.blogno}">
 						   <table class="table table-hover">
@@ -172,7 +172,7 @@
 									<td class="col-md-7"
 										style="word-wrap: break-word; word-break: break-all;">${blogcomVO.bgcomtext}</td>
 									<td>
-                                    <!-- 判斷此流言是否是由同一個會員 -->
+                                    <!-- 判斷此留言是否是由同一個會員 -->
 									
 										<FORM method="post" action="<%=path%>/BlogcomServlet">
 										<c:if test="${blogcomVO.memno == memVO.memno}">
