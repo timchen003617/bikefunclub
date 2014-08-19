@@ -210,7 +210,9 @@ public class BlogcomServlet extends HttpServlet {
 				Timestamp bgcomtime = Timestamp
 						.valueOf(new java.text.SimpleDateFormat(
 								"yyyy-MM-dd HH:mm:ss").format(date));
-				
+				if(bgcomtext == null){
+					errorMsgs.add("請輸入網誌內容");
+				}
 				
 				
 				
@@ -242,7 +244,7 @@ public class BlogcomServlet extends HttpServlet {
 				req.setAttribute("blogVO", blogVO);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/front/blog/page_blog_info.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				
 				successView.forward(req, res);				
 				
@@ -263,6 +265,11 @@ public class BlogcomServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL");
+			req.setAttribute("requestURL", requestURL);
+
+			String whichPage = req.getParameter("whichPage");
+			req.setAttribute("whichPage", whichPage);
 	
 			try {
 				/***************************1.接收請求參數***************************************/
@@ -285,5 +292,57 @@ public class BlogcomServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		
+		if ("delete_fromFront".equals(action)) { // 來自listAllEmp.jsp
+            
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL");
+			req.setAttribute("requestURL", requestURL);
+			
+			String whichPage = req.getParameter("whichPage");
+			req.setAttribute("whichPage", whichPage);
+			
+			
+			BlogService blogSvc = new  BlogService();
+			
+			try {
+				/***************************1.接收請求參數***************************************/
+				Integer bgcomno = new Integer(req.getParameter("bgcomno"));
+				Integer blogno = new Integer(req.getParameter("blogno"));			
+				/***************************2.開始刪除資料***************************************/
+				BlogcomService blogcomSvc = new BlogcomService();
+				blogcomSvc.deleteBlogcom_fromFront(bgcomno);
+				
+				
+				BlogVO blogVO = blogSvc.findByPrimaryKey(blogno);
+				req.setAttribute("blogVO", blogVO);
+				
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+				
+				
+				String url = req.getParameter("requestURL");
+				
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				
+				
+				
+				
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:"+e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front/blog/page_blog_info.jsp");
+				
+				failureView.forward(req, res);
+			}
+		}
+		
+		
 	}
 }

@@ -6,6 +6,7 @@ public interface BlogcomDAO_interface {
           public void insert(BlogcomVO blogcomVO);
           public void update(BlogcomVO blogcomVO);
           public void delete(Integer bgcomno);
+          public void delete_fromFront(Integer bgcomno);
           public BlogcomVO findByPrimaryKey(Integer bgcomno);
           public List<BlogcomVO> getAll();
           //萬用複合查詢(傳入參數型態Map)(回傳 List)

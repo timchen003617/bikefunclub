@@ -285,6 +285,12 @@ public class BlogcomJDBCDAO implements BlogcomDAO_interface {
 		return list;
 	}
 
+	@Override
+	public void delete_fromFront(Integer bgcomno) {
+		// TODO Auto-generated method stub
+		
+	}
+
 //	public static void main(String[] args) {
 //
 //		BlogcomJDBCDAO dao = new BlogcomJDBCDAO();

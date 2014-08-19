@@ -29,6 +29,8 @@ public class BlogcomDAO implements BlogcomDAO_interface {
 			"SELECT * FROM blogcom where bgcomno = ?";
 		private static final String DELETE = 
 			"DELETE FROM blogcom where bgcomno = ?";
+		private static final String DELETE_FROMFRONT = 
+				"DELETE FROM blogcom where bgcomno = ?";
 		private static final String UPDATE = 
 			"UPDATE blogcom set blogno=?, memno=?, bgcomtext=?, bgcomtime=? where bgcomno = ?";
 
@@ -154,6 +156,46 @@ public class BlogcomDAO implements BlogcomDAO_interface {
 		}
 
 	}
+	
+	public void delete_fromFront(Integer bgcomno) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETE_FROMFRONT);
+
+			pstmt.setInt(1, bgcomno);
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	
 
 	@Override
 	public BlogcomVO findByPrimaryKey(Integer bgcomno) {
@@ -269,4 +311,6 @@ public class BlogcomDAO implements BlogcomDAO_interface {
 		}
 		return list;
 	}
+
+	
 }

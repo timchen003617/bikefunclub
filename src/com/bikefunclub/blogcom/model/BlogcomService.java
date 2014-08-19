@@ -42,6 +42,11 @@ public class BlogcomService {
 	public void deleteBlogcom(Integer bgcomno) {
 		dao.delete(bgcomno);
 	}
+	
+	public void deleteBlogcom_fromFront(Integer bgcomno) {
+		dao.delete_fromFront(bgcomno);
+	}
+
 
 	public BlogcomVO getOneBlogcom(Integer bgcomno) {
 		return dao.findByPrimaryKey(bgcomno);
