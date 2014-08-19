@@ -1,13 +1,28 @@
 package com.bikefunclub.gpcomm.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class GpcommVO {
 	private Integer gpcommno;
 	private Integer gpno;
 	private Integer memno;
 	private String gpcomm;
-	private Date gpcommdate;
+	private Timestamp gpcommdate;
+	
+	
+	
+	public GpcommVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public GpcommVO( Integer gpno, Integer memno,
+			String gpcomm, Timestamp gpcommdate) {
+		
+		this.gpno = gpno;
+		this.memno = memno;
+		this.gpcomm = gpcomm;
+		this.gpcommdate = gpcommdate;
+	}
 	public Integer getGpcommno() {
 		return gpcommno;
 	}
@@ -32,10 +47,10 @@ public class GpcommVO {
 	public void setGpcomm(String gpcomm) {
 		this.gpcomm = gpcomm;
 	}
-	public Date getGpcommdate() {
+	public Timestamp getGpcommdate() {
 		return gpcommdate;
 	}
-	public void setGpcommdate(Date gpcommdate) {
+	public void setGpcommdate(Timestamp gpcommdate) {
 		this.gpcommdate = gpcommdate;
 	}
 }

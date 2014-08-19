@@ -19,7 +19,7 @@ public class GpcommJDBCDAO implements GpcommDAO_interface {
 	private static final String INSERT_STMT = 
 		"INSERT INTO gpcomm (gpcommno,gpno,memno,gpcomm,gpcommdate) VALUES (gpcommseq.NEXTVAL, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT gpcommno,gpno,memno,gpcomm,gpcommdate FROM gpcomm order by gpcommno desc";
+		"SELECT gpcommno,gpno,memno,gpcomm,gpcommdate FROM gpcomm order by gpcommdate ";
 	private static final String GET_ONE_STMT = 
 		"SELECT gpcommno,gpno,memno,gpcomm,gpcommdate FROM gpcomm where gpcommno = ?";	
 	private static final String DELETE= "DELETE FROM gpcomm where gpcommno=?";	
@@ -41,7 +41,7 @@ public class GpcommJDBCDAO implements GpcommDAO_interface {
 			pstmt.setInt(1, gpcommVO.getGpno());
 			pstmt.setInt(2, gpcommVO.getMemno());
 			pstmt.setString(3, gpcommVO.getGpcomm());
-			pstmt.setDate(4, gpcommVO.getGpcommdate());
+			pstmt.setTimestamp(4, gpcommVO.getGpcommdate());
 			
 			pstmt.executeUpdate();
 
@@ -139,7 +139,7 @@ public class GpcommJDBCDAO implements GpcommDAO_interface {
 				gpcommVO.setGpno(rs.getInt("gpno"));
 				gpcommVO.setMemno(rs.getInt("memno"));
 				gpcommVO.setGpcomm(rs.getString("gpcomm"));
-				gpcommVO.setGpcommdate(rs.getDate("gpcommdate"));
+				gpcommVO.setGpcommdate(rs.getTimestamp("gpcommdate"));
 			}
 
 			// Handle any driver errors
@@ -201,7 +201,7 @@ public class GpcommJDBCDAO implements GpcommDAO_interface {
 				gpcommVO.setGpno(rs.getInt("gpno"));
 				gpcommVO.setMemno(rs.getInt("memno"));
 				gpcommVO.setGpcomm(rs.getString("gpcomm"));
-				gpcommVO.setGpcommdate(rs.getDate("gpcommdate"));
+				gpcommVO.setGpcommdate(rs.getTimestamp("gpcommdate"));
 				list.add(gpcommVO); // Store the row in the list
 			}
 
@@ -264,7 +264,7 @@ public class GpcommJDBCDAO implements GpcommDAO_interface {
 				gpcommVO.setGpno(rs.getInt("gpno"));
 				gpcommVO.setMemno(rs.getInt("memno"));
 				gpcommVO.setGpcomm(rs.getString("gpcomm"));
-				gpcommVO.setGpcommdate(rs.getDate("gpcommdate"));
+				gpcommVO.setGpcommdate(rs.getTimestamp("gpcommdate"));
 				list.add(gpcommVO); // Store the row in the list
 			}
 

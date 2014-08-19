@@ -49,7 +49,7 @@
 						</tr>
 						<tr>
 							<td>相簿標題:</td>
-							<td><input type="TEXT" name="albtitle" value="${albumVO.albtitle}" /></td>
+							<td><input type="text" name="albtitle" value="${albumVO.albtitle}" /></td>
 						</tr>
 						<tr>
 							<td>相簿描述:</td>

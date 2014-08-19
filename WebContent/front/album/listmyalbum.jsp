@@ -109,10 +109,9 @@
 								<td>
 									<form method="post"
 										action="<%=request.getContextPath()%>/AlbumServlet">
-										<input class="btn btn-primary" type="submit" value="刪除相簿"> <input type="hidden"
-											name="photono" value="${photoVO.photono}"> <input
+										<input class="btn btn-primary" type="submit" value="刪除相簿"> <input
 											type="hidden" name="albno" value="${albumVO.albno}">
-										<input type="hidden" name="action" value="GET_ALBNO_TO_Delete">
+										<input type="hidden" name="action" value="">
 										<input type="hidden" name="requestURL"
 											value="<%=request.getServletPath()%>"> <input
 											type="hidden" name="whichPage" value="<%=whichPage%>">
