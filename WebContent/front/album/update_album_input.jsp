@@ -14,8 +14,8 @@
 		<h3>相簿資料修改:</h3>
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
-			<span class='red'>請修正以下錯誤:</span>
-			<ul>
+			<span class="red">請修正以下錯誤:</span>
+			<ul class="red">
 				<c:forEach var="message" items="${errorMsgs}">
 					<li>${message}</li>
 				</c:forEach>
@@ -33,14 +33,13 @@
 				<tr>
 					<td>相簿分類:</td>
 					<td><select size="1">
-					<c:forEach var="albclsVO" items="albcls">
-					<option>${albclsVO.albclsname}</option>
-					</c:forEach>
-					</select>
-					<input type="hidden" name="albclsno"
+							<c:forEach var="albclsVO" items="albcls">
+								<option>${albclsVO.albclsname}</option>
+							</c:forEach>
+					</select> <input type="hidden" name="albclsno"
 						value="<%=albumVO.getAlbclsno()%>" /></td>
-				</tr>			
-<!-- 					權限名稱:PERSONAL,SHAREFS,PUBLIC -->				
+				</tr>
+				<!-- 					權限名稱:PERSONAL,SHAREFS,PUBLIC -->
 				<jsp:useBean id="albumSvc" scope="page"
 					class="com.bikefunclub.album.model.AlbumService" />
 				<tr>

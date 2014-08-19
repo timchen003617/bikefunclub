@@ -74,5 +74,12 @@ public class AlbumService {
 	public List<AlbumVO> getAlbclsno(Integer albclsno){
 		return dao.getAlbclsno(albclsno);
 	}
-	
+	//查詢相簿所屬會員
+	public List<AlbumVO> getAlbumbymemno(Integer memno){
+		return dao.getAlbumbymemno(memno);
+	}
+	//查詢相簿類別所屬會員
+	public List<AlbumVO> getAlbumclsbymemno(Integer memno,Integer albclsno){
+		return dao.getAlbumclsbymemno(memno, albclsno);
+	}
 }

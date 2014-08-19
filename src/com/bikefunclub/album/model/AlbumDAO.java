@@ -41,8 +41,10 @@ public class AlbumDAO implements AlbumDAO_interface {
 		//取得該分類所有相簿;新增相簿後,轉送到該分類所有相簿
 		private static final String GET_ALBCLSNO_TO_ALBUM = 
 				"SELECT * from album where albclsno=? order by albno desc";
-		
-
+		//查詢會員所屬相簿
+		private static final String GET_ALBMEM_TO_ALBUM = "select * from album where memno=?";
+		//查詢會員所屬相簿分類
+		private static final String GET_ALBMEMBYCLS_TO_ALBUM = "select * from album where memno=? and albclsno=?";
 	@Override
 	public void insert(AlbumVO albumVO) {
 
@@ -406,6 +408,127 @@ public class AlbumDAO implements AlbumDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALBCLSNO_TO_ALBUM);
 			pstmt.setInt(1, albclsno);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				albumVO = new AlbumVO();
+				albumVO.setAlbno(rs.getInt("albno"));
+				albumVO.setMemno(rs.getInt("memno"));
+				albumVO.setAlbclsno(rs.getInt("albclsno"));
+				albumVO.setAuthname(rs.getString("authname"));
+				albumVO.setAlbtitle(rs.getString("albtitle"));
+				albumVO.setAlbdesc(rs.getString("albdesc"));
+				albumVO.setAlbtime(rs.getTimestamp("albtime"));
+				list.add(albumVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<AlbumVO> getAlbumbymemno(Integer memno) {
+		List<AlbumVO> list = new ArrayList<AlbumVO>();
+		AlbumVO albumVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALBMEM_TO_ALBUM);
+			pstmt.setInt(1, memno);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				albumVO = new AlbumVO();
+				albumVO.setAlbno(rs.getInt("albno"));
+				albumVO.setMemno(rs.getInt("memno"));
+				albumVO.setAlbclsno(rs.getInt("albclsno"));
+				albumVO.setAuthname(rs.getString("authname"));
+				albumVO.setAlbtitle(rs.getString("albtitle"));
+				albumVO.setAlbdesc(rs.getString("albdesc"));
+				albumVO.setAlbtime(rs.getTimestamp("albtime"));
+				list.add(albumVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<AlbumVO> getAlbumclsbymemno(Integer memno, Integer albclsno) {
+		List<AlbumVO> list = new ArrayList<AlbumVO>();
+		AlbumVO albumVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALBMEMBYCLS_TO_ALBUM);
+			pstmt.setInt(1, memno);
+			pstmt.setInt(2, albclsno);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

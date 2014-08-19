@@ -25,7 +25,14 @@ public class AlbumJDBCDAO implements AlbumDAO_interface {
 	private static final String GET_ALBNO_TO_GPALBUM = 
 			"select * from photo where photono = any(select photono from gpalbum where albno=?)";
 	private static final String DELETE_GPALBUM = 
-			"DELETE FROM gpalbum where photono = ?";	
+			"DELETE FROM gpalbum where photono = ?";
+	//取得該分類所有相簿;新增相簿後,轉送到該分類所有相簿
+	private static final String GET_ALBCLSNO_TO_ALBUM = 
+			"SELECT * from album where albclsno=? order by albno desc";
+	//查詢會員所屬相簿
+	private static final String GET_ALBMEM_TO_ALBUM = "select * from album where memno=?";
+	//查詢會員所屬相簿分類
+	private static final String GET_ALBMEMBYCLS_TO_ALBUM = "select * from album where memno=? and albclsno=?";
 
 	@Override
 	public void insert(AlbumVO albumVO) {
@@ -483,6 +490,18 @@ public class AlbumJDBCDAO implements AlbumDAO_interface {
 
 	@Override
 	public List<AlbumVO> getAlbclsno(Integer albclsno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<AlbumVO> getAlbumbymemno(Integer memno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<AlbumVO> getAlbumclsbymemno(Integer memno, Integer albclsno) {
 		// TODO Auto-generated method stub
 		return null;
 	}
