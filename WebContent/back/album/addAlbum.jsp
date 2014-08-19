@@ -3,40 +3,39 @@
 <%@ page import="com.bikefunclub.album.model.*"%>
 
 
-<html>
-<head>
-<title>相簿資料新增 - addAlbum.jsp</title></head>
-<link rel="stylesheet" type="text/css" href="js/calendar.css">
-<script language="JavaScript" src="js/calendarcode.js"></script>
-<div id="popupcalendar" class="text"></div>
-
-<body>
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font color='red'>請修正以下錯誤:
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li>${message.value}</li>
-		</c:forEach>
-	</ul>
-	</font>
-</c:if>
+<div id="backmain" class="col-md-10">
+	<h1 class="page-header">新增相簿</h1>  
+	<div class="panel panel-warning">
+		<div class="panel-heading">
+			<h3 class="panel-title">新增相簿</h3>
+		</div>
+		<div class="panel-body">
+			<%-- 錯誤表列 --%>
+			<c:if test="${not empty errorMsgs}">
+				<p class="red">請修正以下錯誤:</p>
+				<ul class="red">
+					<c:forEach var="message" items="${errorMsgs}">
+						<li>${message}</li>
+					</c:forEach>
+				</ul>
+			</c:if>
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/AlbumServlet">
-<table border="0">
-
+	<div class="table table-bordered">
+	<table class="table table-bordered">
 	<tr>
 		<td>會員編號:</td>
 		<td><input type="TEXT" name="memno" size = "45"
 		     value ="${param.memno}"/></td><td>${errorMsgs.memno}</td>
 
 	</tr>
+	
 	<tr>
 		<td>相簿分類編號:</td>
 		<td><input type="TEXT" name="albclsno" size = "45"
 		     value ="${param.albclsno}"/></td><td>${errorMsgs.albclsno}</td>
 	</tr>
+	
 	<!-- 權限名稱:PERSONAL,SHAREFS,PUBLIC -->
 	<tr>
 		<td>權限名稱:</td>
@@ -57,9 +56,10 @@
 		<td><input type="TEXT" name="albdesc" size="45" 
 			 value="${param.albdesc }"/></td>${errorMsgs.albdesc}</td>
 	</tr>
+	</div>
+	</table>
 
 
-</table>
 <br>
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>

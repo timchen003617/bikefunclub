@@ -5,6 +5,8 @@
 <%-- 此頁採用 JSTL 與 EL 取值 --%>
 
 <%
+	String servletpath = request.getServletPath();
+	String contextpath = request.getContextPath();
 	AlbumService albumSvc = new AlbumService();
 	List<AlbumVO> list = albumSvc.getAll();
 	pageContext.setAttribute("list", list);
@@ -19,7 +21,7 @@
 				<c:forEach var="albclsVO" items="${albcls.all}">
 					<option value="${albclsVO.albclsno}">${albclsVO.albclsname}</option>
 				</c:forEach>
-			</select> <input type="submit" value="查詢">
+			</select> <input class="btn btn-warning" type="submit" value="查詢">
 				      <input type="hidden" name="action" value="getOneAlbcls_For_Display">
 		</FORM>
 		</div>
@@ -35,8 +37,10 @@
 					</ul>
 				</div>
 			</c:if>
-
+				<%@ include file="pages/page1.file"%>
+				<div class="table-responsive">
 			<table class="table table-hover">
+			<thead>
 				<tr>
 					<th>相簿編號</th>
 					<th>會員編號</th>
@@ -50,10 +54,12 @@
 					<th>刪除</th>
 
 				</tr>
-				<%@ include file="page1.file"%>
+	 </thead>
+	 	<tbody>
 				<c:forEach var="albumVO" items="${list}" begin="<%=pageIndex%>"
 					end="<%=pageIndex+rowsPerPage-1%>">
-					<tr>
+					<tr ${(albumVO.albno==param.albno)? 'style="background-color:#f5f0e9;"' : ''}>
+						<!--將修改的那一筆加入對比色而已-->
 						<td>${albumVO.albno}</td>
 						<td>${albumVO.memno}</td>
 						<td>${albumVO.albclsno}</td>
@@ -65,7 +71,7 @@
 						<td>
 							<FORM METHOD="post"
 								action="<%=request.getContextPath()%>/AlbumServlet">
-								<input type="submit" value="檢視相簿"> <input type="hidden"
+								<input class="btn btn-warning" type="submit" value="檢視相簿"> <input type="hidden"
 									name="albno" value="${albumVO.albno}"> <input
 									type="hidden" name="action" value="GET_ALBNO_TO_PHOTO">
 							</FORM>
@@ -73,7 +79,7 @@
 						<td>
 							<FORM METHOD="post"
 								action="<%=request.getContextPath()%>/AlbumServlet">
-								<input type="submit" value="修改"> <input type="hidden"
+								<input class="btn btn-warning" type="submit" value="修改"> <input type="hidden"
 									name="albno" value="${albumVO.albno}"> <input
 									type="hidden" name="action" value="getOne_For_Update">
 							</FORM>
@@ -81,7 +87,7 @@
 						<td>
 							<FORM METHOD="post"
 								action="<%=request.getContextPath()%>/AlbumServlet">
-								<input type="submit" value="刪除"> <input type="hidden"
+								<input class="btn btn-warning" type="submit" value="刪除"> <input type="hidden"
 									name="albno" value="${albumVO.albno}"> <input
 									type="hidden" name="action" value="delete"> <input
 									type="hidden" name="requestURL"
@@ -92,7 +98,8 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<%@ include file="page2.file"%>
+			</div>
+			<%@ include file="pages/page2.file"%>
 		</div>
 	</div>
 </div>

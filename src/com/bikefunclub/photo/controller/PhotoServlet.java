@@ -24,7 +24,6 @@ import com.bikefunclub.photo.model.*;
 @WebServlet("/PhotoServlet")
 public class PhotoServlet extends HttpServlet {
 
-
 	/**
 	 * 
 	 */
@@ -44,7 +43,8 @@ public class PhotoServlet extends HttpServlet {
 		PhotoService photoSvc = new PhotoService();
 		String contentType = req.getContentType();
 		// 判斷request的contentType
-		if (contentType != null && contentType.startsWith("multipart/form-data")) {
+		if (contentType != null
+				&& contentType.startsWith("multipart/form-data")) {
 			/** 建立MultipartRequest實體 */
 			multi = new MultipartRequest(req, getServletContext().getRealPath(
 					"img"), 5 * 1024 * 1024, "UTF-8");
@@ -60,8 +60,9 @@ public class PhotoServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str = req.getParameter("photono");  //form 送過來的資料格式是String
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String str = req.getParameter("photono"); // form
+															// 送過來的資料格式是String
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入相片編號");
 				}
@@ -70,10 +71,9 @@ public class PhotoServlet extends HttpServlet {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/back/photo/select_page.jsp");
 					failureView.forward(req, res);
-					return;//程式中斷
+					return;// 程式中斷
 				}
-				
-				
+
 				Integer photono = null;
 				try {
 					photono = new Integer(str);
@@ -85,30 +85,31 @@ public class PhotoServlet extends HttpServlet {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/back/photo/select_page.jsp");
 					failureView.forward(req, res);
-					return;//程式中斷
+					return;// 程式中斷
 				}
-				
-				/***************************2.開始查詢資料*****************************************/
+
+				/*************************** 2.開始查詢資料 *****************************************/
 				PhotoVO photoVO = photoSvc.getOnePhoto(photono);
 				if (photoVO == null) {
 					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
 				// if (errorMsgs不是空的)
-				if (!errorMsgs.isEmpty()) {  
+				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/back/photo/select_page.jsp");
 					failureView.forward(req, res);
-					return;//程式中斷
+					return;// 程式中斷
 				}
-				
-				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("photoVO", photoVO); // 資料庫取出的empVO物件,存入req
 				String url = "/back/photo/listOnePhoto.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交
+																				// listOneEmp.jsp
 				successView.forward(req, res);
 
-				/***************************其他可能的錯誤處理*************************************/
+				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
@@ -116,7 +117,7 @@ public class PhotoServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-     if ("getOne_For_Update".equals(action)) { // 來自listAllAd.jsp的請求
+		if ("getOne_For_Update".equals(action)) { // 來自listAllAd.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -150,7 +151,7 @@ public class PhotoServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-    if ("update".equals(action)) {// 來自update_ad_input.jsp的請求
+		if ("update".equals(action)) {// 來自update_ad_input.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
 
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -164,7 +165,7 @@ public class PhotoServlet extends HttpServlet {
 			try {
 				Integer photono = new Integer(multi.getParameter("photono"));
 				Integer memno = new Integer(multi.getParameter("memno"));
-			  //String phcoo = multi.getParameter("phcoo").trim();
+				// String phcoo = multi.getParameter("phcoo").trim();
 				Integer phass = new Integer(multi.getParameter("phass"));
 				Timestamp phup = Timestamp.valueOf(multi.getParameter("phup"));
 
@@ -173,8 +174,8 @@ public class PhotoServlet extends HttpServlet {
 				String phfilename = "";
 				String phextname = "";
 
-				PhotoVO photoVO = upload(multi, photoSvc, in, photono, memno, phass, phfilename,
-						          phextname, phfile);
+				PhotoVO photoVO = upload(multi, photoSvc, in, photono, memno,
+						phass, phfilename, phextname, phfile);
 
 				phfile = photoVO.getPhfile();
 				phfilename = photoVO.getPhfilename();
@@ -196,11 +197,11 @@ public class PhotoServlet extends HttpServlet {
 				}
 				/*************************** 2.開始修改資料 *****************************************/
 
-				photoVO = photoSvc.updatePhoto(photono , memno , phass , phfilename , phextname
-			            , phup , phfile);
+				photoVO = photoSvc.updatePhoto(photono, memno, phass,
+						phfilename, phextname, phup, phfile);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				String url = requestURL + "?whichPage=" + whichPage + "&photono="
-						+ photono;
+				String url = requestURL + "?whichPage=" + whichPage
+						+ "&photono=" + photono;
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交送出修改的來源網頁路徑
 				successView.forward(req, res);
 			} catch (Exception e) {
@@ -210,7 +211,7 @@ public class PhotoServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-	if ("insert".equals(action)) { 
+		if ("insert".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -219,7 +220,7 @@ public class PhotoServlet extends HttpServlet {
 
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			    Integer photono = 0;// insert時，adno給0,因編號是由sequence產生
+				Integer photono = 0;// insert時，adno給0,因編號是由sequence產生
 				Integer memno = new Integer(multi.getParameter("memno").trim());
 				Integer phass = new Integer(multi.getParameter("phass").trim());
 
@@ -228,8 +229,8 @@ public class PhotoServlet extends HttpServlet {
 				String phfilename = "";
 				String phextname = "";
 
-				PhotoVO photoVO = upload(multi, photoSvc, in, photono, memno, phass, phfilename,
-				          phextname, phfile);
+				PhotoVO photoVO = upload(multi, photoSvc, in, photono, memno,
+						phass, phfilename, phextname, phfile);
 				phfile = photoVO.getPhfile();
 				phfilename = photoVO.getPhfilename();
 				phextname = photoVO.getPhextname();
@@ -254,15 +255,16 @@ public class PhotoServlet extends HttpServlet {
 
 				/*************************** 2.開始新增資料 *****************************************/
 				Integer albno = new Integer(multi.getParameter("albno").trim());
-				photoSvc.insertWithGpalbum(photoVO , albno);
+				photoSvc.insertWithGpalbum(photoVO, albno);
 				AlbumService albumSvc = new AlbumService();
 				AlbumVO albumVO = albumSvc.getOneAlbum(albno);
 				List<PhotoVO> listPohto = albumSvc.getAlbno(albno);
-				
+
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				req.setAttribute("albumVO", albumVO);
-				req.setAttribute("listPohto", listPohto); 
-				String url = "/front/album/page_OneAlbum_TO_PHOTO.jsp?albno="+multi.getParameter("albno");
+				req.setAttribute("listPohto", listPohto);
+				String url = "/front/album/page_OneAlbum_TO_PHOTO.jsp?albno="
+						+ multi.getParameter("albno");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交page_listAllAd.jsp
 				successView.forward(req, res);
 
@@ -274,70 +276,71 @@ public class PhotoServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-	if ("myinsert".equals(action)) { 
+		if ("myinsert".equals(action)) {
 
-		List<String> errorMsgs = new LinkedList<String>();
-		// Store this set in the request scope, in case we need to
-		// send the ErrorPage view.
-		req.setAttribute("errorMsgs", errorMsgs);
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
 
-		try {
-			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-		    Integer photono = 0;// insert時，adno給0,因編號是由sequence產生
-			Integer memno = new Integer(multi.getParameter("memno").trim());
-			Integer phass = new Integer(multi.getParameter("phass").trim());
+			try {
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+				Integer photono = 0;// insert時，adno給0,因編號是由sequence產生
+				Integer memno = new Integer(multi.getParameter("memno").trim());
+				Integer phass = new Integer(multi.getParameter("phass").trim());
 
-			InputStream in = null;
-			byte[] phfile = null;
-			String phfilename = "";
-			String phextname = "";
+				InputStream in = null;
+				byte[] phfile = null;
+				String phfilename = "";
+				String phextname = "";
 
-			PhotoVO photoVO = upload(multi, photoSvc, in, photono, memno, phass, phfilename,
-			          phextname, phfile);
-			phfile = photoVO.getPhfile();
-			phfilename = photoVO.getPhfilename();
-			phextname = photoVO.getPhextname();
+				PhotoVO photoVO = upload(multi, photoSvc, in, photono, memno,
+						phass, phfilename, phextname, phfile);
+				phfile = photoVO.getPhfile();
+				phfilename = photoVO.getPhfilename();
+				phextname = photoVO.getPhextname();
 
-			if (phfilename.isEmpty()) {
-				errorMsgs.add("請輸入照片名稱!");
-			}
-			if (phextname.isEmpty()) {
-				errorMsgs.add("請輸入照片副檔名!");
-			}
-			if (phfile == null) {
-				errorMsgs.add("請選擇照片!");
-			}
-			// Send the use back to the form, if there were errors
-			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("photoVO", photoVO); // 含有輸入格式錯誤的adVO物件,也存入req
+				if (phfilename.isEmpty()) {
+					errorMsgs.add("請輸入照片名稱!");
+				}
+				if (phextname.isEmpty()) {
+					errorMsgs.add("請輸入照片副檔名!");
+				}
+				if (phfile == null) {
+					errorMsgs.add("請選擇照片!");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("photoVO", photoVO); // 含有輸入格式錯誤的adVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front/album/page_addmyPhoto.jsp");
+					failureView.forward(req, res);
+					return; // 程式中斷
+				}
+
+				/*************************** 2.開始新增資料 *****************************************/
+				Integer albno = new Integer(multi.getParameter("albno").trim());
+				photoSvc.insertWithGpalbum(photoVO, albno);
+				AlbumService albumSvc = new AlbumService();
+				AlbumVO albumVO = albumSvc.getOneAlbum(albno);
+				List<PhotoVO> listPohto = albumSvc.getAlbno(albno);
+
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				req.setAttribute("albumVO", albumVO);
+				req.setAttribute("listPohto", listPohto);
+				String url = "/front/album/page_OneAlbum_TO_MYPHOTO.jsp?albno="
+						+ multi.getParameter("albno");
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交page_listAllAd.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front/album/page_addmyPhoto.jsp");
 				failureView.forward(req, res);
-				return; // 程式中斷
 			}
-
-			/*************************** 2.開始新增資料 *****************************************/
-			Integer albno = new Integer(multi.getParameter("albno").trim());
-			photoSvc.insertWithGpalbum(photoVO , albno);
-			AlbumService albumSvc = new AlbumService();
-			AlbumVO albumVO = albumSvc.getOneAlbum(albno);
-			List<PhotoVO> listPohto = albumSvc.getAlbno(albno);
-			
-			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			req.setAttribute("albumVO", albumVO);
-			req.setAttribute("listPohto", listPohto); 
-			String url = "/front/album/page_OneAlbum_TO_MYPHOTO.jsp?albno="+multi.getParameter("albno");
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交page_listAllAd.jsp
-			successView.forward(req, res);
-
-			/*************************** 其他可能的錯誤處理 **********************************/
-		} catch (Exception e) {
-			errorMsgs.add(e.getMessage());
-			RequestDispatcher failureView = req
-					.getRequestDispatcher("/front/album/page_addmyPhoto.jsp");
-			failureView.forward(req, res);
 		}
-	}	
 		if ("delete".equals(action)) { //
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -369,12 +372,45 @@ public class PhotoServlet extends HttpServlet {
 			}
 		}
 
+		// 後端刪除相片
+		if ("back_delete".equals(action)) { // 來自select_page.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ***************************************/
+				Integer photono = new Integer(req.getParameter("photono"));
+
+				/*************************** 2.開始刪除資料 ***************************************/
+				AlbumService albumService = new AlbumService();
+				albumService.deleteGpalbum(photono);
+				photoSvc.deletePhoto(photono);
+				List<PhotoVO> list = photoSvc.getAll();
+
+				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				String url = req.getParameter("requestURL");
+				req.setAttribute("list", list); // 資料庫取出的empVO物件,存入req
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back/album/page_listAllPhoto.jsp");
+				failureView.forward(req, res);
+			}
+		}
 	}
 
 	/** 上傳圖片至資料夾、資料庫、存AdVO */
-	public PhotoVO upload(MultipartRequest multi, PhotoService photoSvc, InputStream in,
-			Integer photono,Integer memno,Integer phass,String  phfilename,
-			String  phextname,byte[]  phfile) throws IOException {
+	public PhotoVO upload(MultipartRequest multi, PhotoService photoSvc,
+			InputStream in, Integer photono, Integer memno, Integer phass,
+			String phfilename, String phextname, byte[] phfile)
+			throws IOException {
 		PhotoVO photoVO = new PhotoVO();
 		/** 取得所有上傳檔案之輸入型態、名稱 */
 		Enumeration<?> files = multi.getFileNames();// File物件 <input type="file"
@@ -408,12 +444,12 @@ public class PhotoServlet extends HttpServlet {
 					photoVO = photoSvc.getOnePhoto(photono);
 
 					photono = photoVO.getPhotono();
-					memno  = photoVO.getMemno();
-				  //phcoo = photoVO.getPhcoo();
+					memno = photoVO.getMemno();
+					// phcoo = photoVO.getPhcoo();
 					phass = photoVO.getPhass();
 					phfilename = photoVO.getPhfilename();
 					phextname = photoVO.getPhextname();
-//					phup = photoVO.getPhup();
+					// phup = photoVO.getPhup();
 					phfile = photoVO.getPhfile();
 				}
 
@@ -421,11 +457,11 @@ public class PhotoServlet extends HttpServlet {
 			// 存到AdVO
 			photoVO.setPhotono(photono);
 			photoVO.setMemno(memno);
-	      //photoVO.setPhcoo(phcoo);
+			// photoVO.setPhcoo(phcoo);
 			photoVO.setPhass(phass);
 			photoVO.setPhfilename(phfilename);
 			photoVO.setPhextname(phextname);
-//			photoVO.setPhup(phup);
+			// photoVO.setPhup(phup);
 			photoVO.setPhfile(phfile);
 
 		}

@@ -42,7 +42,7 @@
 
 		</tr>
 		
-		<%@ include file="page1A.file"%>
+		<%@ include file="pages/page1A.file"%>
 		<c:forEach var="photoVO" items="${listPohto}" begin="<%=pageIndex%>"
 			end="<%=pageIndex+rowsPerPage-1%>">
 			<tr align='center' valign='middle'>
@@ -79,7 +79,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<%@ include file="page2A.file"%>
+	<%@ include file="pages/page2A.file"%>
 
 </body>
 </html>

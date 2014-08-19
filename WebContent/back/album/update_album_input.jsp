@@ -1,9 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.bikefunclub.album.model.*"%>
+<%@ page import="com.bikefunclub.member.model.*"%>
 <%
     AlbumVO albumVO = (AlbumVO) request.getAttribute("albumVO"); //EmpServlet.java (Concroller), 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-
+	MemVO memVO = (MemVO)session.getAttribute("memVO");
+    pageContext.setAttribute("memVO", memVO);
 %>
 <html>
 <head>

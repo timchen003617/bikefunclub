@@ -21,6 +21,10 @@
 		<th>相簿標題</th>
 		<th>相簿描述</th>
 		<th>建立時間</th>
+		<td><FORM METHOD="post" action="<%=request.getContextPath()%>/front/albcls/page_listAllAlbcls.jsp">
+			     <input type="submit" value="回到分類相簿">
+			     <input type="hidden" name="albno" value="${albumVO.albno}">
+			</FORM></td>
 	</tr>
 	<tr align='center' valign='middle' var = albumVO>
 		<td>${albumVO.albno}</td>

@@ -533,7 +533,38 @@ public class AlbumServlet extends HttpServlet {
 						.getRequestDispatcher("/front/album/page_myalbum.jsp");
 				failureView.forward(req, res);
 			}
-
 		}
+		
+		//刪除相簿
+		 if ("back_delete".equals(action)) { // 來自listAllEmp.jsp
+
+				List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				req.setAttribute("errorMsgs", errorMsgs);
+				
+				try {
+					/***************************1.接收請求參數***************************************/
+
+					Integer albno = new Integer(req.getParameter("albno"));
+					
+					/***************************2.開始刪除資料***************************************/
+					AlbumService albumSvc = new AlbumService();
+					albumSvc.deleteAlbum(albno);
+					
+					/***************************3.刪除完成,準備轉交(Send the Success view)***********/	
+					String url = req.getParameter("requestURL");
+					String whichPage = req.getParameter("whichPage");
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+					successView.forward(req, res);
+					
+					/***************************其他可能的錯誤處理**********************************/
+				} catch (Exception e) {
+					errorMsgs.add("刪除資料失敗:"+"相簿內仍有照片!!");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back/album/page_listAllAlbum.jsp");
+					failureView.forward(req, res);
+				}
+			}
 	}
 }

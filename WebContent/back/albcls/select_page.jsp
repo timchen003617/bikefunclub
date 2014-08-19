@@ -1,30 +1,26 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head><title>IBM Albcls: Home</title></head>
-<body bgcolor='white'>
 
-	<table border='1' cellpadding='5' cellspacing='0' width='400'>
-		<tr bgcolor='#CCCCFF' align='center' valign='middle' height='20'>
-			<td><h3>IBM Albcls: Home</h3>	<font color=red>( MVC )</font></td></tr></table>
-
-<p>This is the Home page for IBM Albcls: Home</p>
-
-<h3>相簿分類查詢:</h3>
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font color='red'>請修正以下錯誤:
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li>${message}</li>
-		</c:forEach>
-	</ul>
-	</font>
-</c:if>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<div id="backmain" class="col-md-10">
+	<h1 class="page-header">相簿分類管理</h1>
+	<div class="panel panel-warning">
+		<div class="panel-heading">
+			<h3 class="panel-title">相簿分類管理</h3>
+		</div>
+		<div class="panel-body">
+			<%-- 錯誤表列 --%>
+			<c:if test="${not empty errorMsgs}">
+				<p class="red">請修正以下錯誤:</p>
+				<ul class="red">
+					<c:forEach var="message" items="${errorMsgs}">
+						<li>${message}</li>
+					</c:forEach>
+				</ul>
+			</c:if>
 <ul>
-  <li><a href='<%=request.getContextPath() %>/back/albcls/listAllAlbcls.jsp'>List</a> all Albcls. </li> <br>
+  <li><a href='<%=request.getContextPath() %>/back/albcls/page_listAllAlbcls.jsp'>List</a> all Albcls. </li> <br>
 </ul>
 <li>
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/AlbclsServlet" >
@@ -49,7 +45,11 @@
        <input type="hidden" name="action" value="getOne_For_Display">
     </FORM>
   </li>
+  </div>
+  </div>
 </ul>
+</div>
+
 
 
 
@@ -57,9 +57,7 @@
 <h3>相簿分類管理</h3>
 
 <ul>
-  <li><a href='<%=request.getContextPath() %>/back/albcls/addAlbcls.jsp'>Add</a> a new Albcls.</li>
+  <li><a href='<%=request.getContextPath() %>/back/albcls/page_addAlbcls.jsp'>Add</a> a new Albcls.</li>
 </ul>
 
-</body>
 
-</html>
