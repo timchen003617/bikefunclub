@@ -43,6 +43,7 @@
 							<th>網誌標題</th>
 							<th>網誌內容</th>
 							<th>發布時間</th>
+							<th>刪除</th>
 							
 						</tr>
 					</thead>
@@ -84,17 +85,17 @@
 <!-- 										<input type="hidden" name="action" value="getOne_For_Update"> -->
 <!-- 									</form> -->
 <!-- 								</td> -->
-<!-- 								<td> -->
-<%-- 									<form method="post" action="<%=contextpath%>/BlogServlet"> --%>
-<!-- 										<input type="submit" value="刪除"> <input type="hidden" -->
-<%-- 											name="blogno" value="${blogVO.blogno}"><input --%>
-<%-- 											type="hidden" name="requestURL" value="<%=servletpath%>"> --%>
-<!-- 										送出本網頁的路徑給Controller -->
-<%-- 										<input type="hidden" name="whichPage" value="<%=whichPage%>"> --%>
-<!-- 										送出當前是第幾頁給Controller -->
-<!-- 										<input type="hidden" name="action" value="delete"> -->
-<!-- 									</form> -->
-<!-- 								</td> -->
+								<td>
+									<form method="post" action="<%=contextpath%>/BlogServlet">
+										<input class="btn btn-warning" type="submit" value="刪除"> <input type="hidden"
+											name="blogno" value="${blogVO.blogno}"><input
+											type="hidden" name="requestURL" value="<%=servletpath%>">
+                                        <!--送出本網頁的路徑給Controller -->
+										<input type="hidden" name="whichPage" value="<%=whichPage%>">
+										<!--送出當前是第幾頁給Controller-->
+										<input type="hidden" name="action" value="delete">
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

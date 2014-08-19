@@ -1,62 +1,91 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
+
+<%@ page import="com.bikefunclub.rotcls.model.*"%>
 <%@ page import="com.bikefunclub.blogcls.model.*"%>
-<%-- 此頁採用 JSTL 與 EL 取值 --%>
 
 <%
-    BlogclsService blogclsSvc = new BlogclsService();
-    List<BlogclsVO> list = blogclsSvc.getAll();
-    pageContext.setAttribute("list",list);
+	String servletpath = request.getServletPath();
+	String contextpath = request.getContextPath();
+	BlogclsService blogclsSvc = new BlogclsService();
+	List<BlogclsVO> list = blogclsSvc.getAll();
+	pageContext.setAttribute("list", list);
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title>網誌分類 - listAllAlbcls.jsp</title>
-</head>
-<body>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<div id="backmain" class="col-md-10">
+	<h1 class="page-header">網誌分類管理</h1>
+	<div class="panel panel-warning">
+		<div class="panel-heading">
+			<h3 class="panel-title">網誌分類管理</h3>
+		</div>
+		<div class="panel-body">
+			<%-- 錯誤表列 --%>
+			<c:if test="${not empty errorMsgs}">
+				<p class="red">請修正以下錯誤:</p>
+				<ul class="red">
+					<c:forEach var="message" items="${errorMsgs}">
+						<li>${message}</li>
+					</c:forEach>
+				</ul>
+			</c:if>
+			<%@ include file="pages/page1.file"%>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>路線分類編號</th>
+							<th>路線分類名稱</th>
+							<th>修改</th>
+							<th>刪除</th>
 
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font color='red'>請修正以下錯誤:
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li>${message}</li>
-		</c:forEach>
-	</ul>
-	</font>
-</c:if>
-
-<table border='1' bordercolor='#CCCCFF' width='800'>
-	<tr>
-		<th>網誌分類編號</th>
-		<th>網誌分類名稱</th>
-
-	</tr>
-	<%@ include file="page1.file" %>  
-	<c:forEach var="blogclsVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr align='center' valign='middle'>
-			<td>${blogclsVO.blogclsno}</td>
-			<td>${blogclsVO.blogclsname}</td>
-			<td>
-			  <FORM METHOD="post" action="<%=request.getContextPath()%>/BlogclsServlet">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="blogclsno" value="${blogclsVO.blogclsno}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
-			</td>
-			<td>
-			  <FORM METHOD="post" action="<%=request.getContextPath()%>/BlogclsServlet">
-			    <input type="submit" value="刪除">
-			    <input type="hidden" name="blogclsno" value="${blogclsVO.blogclsno}">
-			    <input type="hidden" name="action"value="delete">
-			    <input type="hidden" name="requestURL" value="<%=request.getServletPath() %>">
-			    <input type="hidden" name="whichPage" value="<%=whichPage %>"></FORM>
-			</td>
-		</tr>
-	</c:forEach>
-</table>
-<%@ include file="page2.file" %>
-
-</body>
-</html>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="blogclsVO" items="${list}" begin="<%=pageIndex%>"
+							end="<%=pageIndex+rowsPerPage-1%>">
+							
+								<td>${blogclsVO.blogclsno}</td>
+								<td>${blogclsVO.blogclsname}</td>
+								<td>
+									<FORM METHOD="post"
+										action="<%=request.getContextPath()%>/BlogclsServlet">
+										<input class="btn btn-warning" type="submit" value="修改"> <input type="hidden"
+											name="blogclsno" value="${blogclsVO.blogclsno}"> <input
+											type="hidden" name="action" value="getOne_For_Update">
+									</FORM>
+								</td>
+								<td>
+									<FORM METHOD="post"
+										action="<%=request.getContextPath()%>/BlogclsServlet">
+										<input class="btn btn-warning" type="submit" value="刪除"> <input type="hidden"
+											name="blogclsno" value="${blogclsVO.blogclsno}"> <input
+											type="hidden" name="action" value="delete"> <input
+											type="hidden" name="requestURL"
+											value="<%=request.getServletPath()%>"> <input
+											type="hidden" name="whichPage" value="<%=whichPage%>">
+									</FORM>
+								</td>
+								<!-- 								<td> -->
+								<%-- 									<FORM METHOD="post" ACTION="<%=contextpath%>/Rotcls.do"> --%>
+								<!-- 										<input type="submit" value="查詢"> <input type="hidden" -->
+								<%-- 											name="gpclsno" value="${rotclsVO.rotclsno}"> <input --%>
+								<%-- 											type="hidden" name="requestURL" value="<%=servletpath%>"> --%>
+								<!-- 										送出本網頁的路徑給Controller -->
+								<%-- 										<input type="hidden" name="whichPage" value="<%=whichPage%>"> --%>
+								<!-- 										送出當前是第幾頁給Controller -->
+								<!-- 										<input type="hidden" name="action" -->
+								<!-- 											value="getRots_FromRotclsno_ForRotcls"> -->
+								<!-- 									</FORM> -->
+								<!-- 								</td> -->
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+			<%@ include file="pages/page2.file"%>
+		</div>
+	</div>
+</div>
