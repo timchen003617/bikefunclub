@@ -29,7 +29,6 @@
 <script src="<%=path%>/js/tabs.js"></script>
 <script src="<%=path%>/js/slider.js"></script>
 <script src="<%=path%>/js/chat.js"></script>
-<script src="<%=path%>/js/previewimage.js"></script>
 </head>
 <body>
 	<!-- slider -->
@@ -39,7 +38,7 @@
 	<!-- navbar -->
 	<jsp:include page="/front/home/navbar.jsp"></jsp:include>
 	<!--main-->
-	<jsp:include page="addPhoto.jsp"></jsp:include>
+	<jsp:include page="listmyalbum.jsp"></jsp:include>
 	<!-- footer -->
 	<jsp:include page="/front/home/footer.jsp"></jsp:include>
 </body>
