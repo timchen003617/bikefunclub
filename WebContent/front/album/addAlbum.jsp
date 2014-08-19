@@ -49,11 +49,11 @@
 						</tr>
 						<tr>
 							<td>相簿標題:</td>
-							<td><input type="TEXT" name="albtitle" size="45" value="" /></td>
+							<td><input type="TEXT" name="albtitle" value="${albumVO.albtitle}" /></td>
 						</tr>
 						<tr>
 							<td>相簿描述:</td>
-							<td><input type="TEXT" name="albdesc" size="45" value="" /></td>
+							<td><textarea name="albdesc" rows="10" cols="40">${albumVO.albdesc}</textarea></td>
 						</tr>
 					</table>
 					<br> <input type="hidden" name="action" value="addAlbum">

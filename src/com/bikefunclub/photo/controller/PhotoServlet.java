@@ -210,7 +210,7 @@ public class PhotoServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-	if ("insert".equals(action)) { // 來自addAD.jsp的請求
+	if ("insert".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -274,6 +274,70 @@ public class PhotoServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+	if ("myinsert".equals(action)) { 
+
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+
+		try {
+			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+		    Integer photono = 0;// insert時，adno給0,因編號是由sequence產生
+			Integer memno = new Integer(multi.getParameter("memno").trim());
+			Integer phass = new Integer(multi.getParameter("phass").trim());
+
+			InputStream in = null;
+			byte[] phfile = null;
+			String phfilename = "";
+			String phextname = "";
+
+			PhotoVO photoVO = upload(multi, photoSvc, in, photono, memno, phass, phfilename,
+			          phextname, phfile);
+			phfile = photoVO.getPhfile();
+			phfilename = photoVO.getPhfilename();
+			phextname = photoVO.getPhextname();
+
+			if (phfilename.isEmpty()) {
+				errorMsgs.add("請輸入照片名稱!");
+			}
+			if (phextname.isEmpty()) {
+				errorMsgs.add("請輸入照片副檔名!");
+			}
+			if (phfile == null) {
+				errorMsgs.add("請選擇照片!");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("photoVO", photoVO); // 含有輸入格式錯誤的adVO物件,也存入req
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front/album/page_addmyPhoto.jsp");
+				failureView.forward(req, res);
+				return; // 程式中斷
+			}
+
+			/*************************** 2.開始新增資料 *****************************************/
+			Integer albno = new Integer(multi.getParameter("albno").trim());
+			photoSvc.insertWithGpalbum(photoVO , albno);
+			AlbumService albumSvc = new AlbumService();
+			AlbumVO albumVO = albumSvc.getOneAlbum(albno);
+			List<PhotoVO> listPohto = albumSvc.getAlbno(albno);
+			
+			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+			req.setAttribute("albumVO", albumVO);
+			req.setAttribute("listPohto", listPohto); 
+			String url = "/front/album/page_OneAlbum_TO_MYPHOTO.jsp?albno="+multi.getParameter("albno");
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交page_listAllAd.jsp
+			successView.forward(req, res);
+
+			/*************************** 其他可能的錯誤處理 **********************************/
+		} catch (Exception e) {
+			errorMsgs.add(e.getMessage());
+			RequestDispatcher failureView = req
+					.getRequestDispatcher("/front/album/page_addmyPhoto.jsp");
+			failureView.forward(req, res);
+		}
+	}	
 		if ("delete".equals(action)) { // 來自listAllAd.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();

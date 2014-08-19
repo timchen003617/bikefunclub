@@ -280,8 +280,7 @@ public class AlbumServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-
-		if ("GET_ALBNO_TO_PHOTO".equals(action)) { // 來自select_page.jsp的請求
+		if ("GET_ALBNO_TO_MYPHOTO".equals(action)) {// 來自listmyalbum.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -291,26 +290,52 @@ public class AlbumServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String str = req.getParameter("albno"); // form 送過來的資料格式是String
-
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back/album/select_page.jsp");
-					failureView.forward(req, res);
-					return;// 程式中斷
-				}
-
 				Integer albno = null;
-
 				albno = new Integer(str);
 
+				/*************************** 2.開始查詢資料 *****************************************/
+				AlbumService albumSvc = new AlbumService();
+				List<PhotoVO> listPohto = albumSvc.getAlbno(albno);
+				AlbumVO albumVO = new AlbumVO();
+				albumVO.setAlbno(albno);
+
 				// Send the use back to the form, if there were errors
+				// if (errorMsgs不是空的)
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/album/select_page.jsp");
+							.getRequestDispatcher("/front/album/page_myalbum.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("listPohto", listPohto); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("albumVO", albumVO);
+				String url = "/front/album/page_OneAlbum_TO_MYPHOTO.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交
+																				// listOneEmp.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front/album/page_myalbum.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		if ("GET_ALBNO_TO_PHOTO".equals(action)) { // 來自listAllalbnum.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String str = req.getParameter("albno"); // form 送過來的資料格式是String
+				Integer albno = null;
+				albno = new Integer(str);
 
 				/*************************** 2.開始查詢資料 *****************************************/
 				AlbumService albumSvc = new AlbumService();
@@ -351,7 +376,9 @@ public class AlbumServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			String requestURL = req.getParameter("requestURL"); // 送出刪除的來源網頁路徑:
+			// 可能為【/add/listAllAd.jsp】
+			String whichPage = req.getParameter("whichPage"); // 送出刪除的來源網頁的第幾頁(只用於:listAllAd.jsp)
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				Integer albno = new Integer(req.getParameter("albno"));
@@ -359,14 +386,11 @@ public class AlbumServlet extends HttpServlet {
 
 				/*************************** 2.開始刪除資料 ***************************************/
 				AlbumService albumSvc = new AlbumService();
-				AlbumVO albumVO = albumSvc.getOneAlbum(albno);
 				albumSvc.deleteGpalbum(photono);
-				List<PhotoVO> listPohto = albumSvc.getAlbno(albno);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = req.getParameter("requestURL");
-				req.setAttribute("albumVO", albumVO);
-				req.setAttribute("listPohto", listPohto); // 資料庫取出的empVO物件,存入req
+				String url = requestURL + "?whichPage=" + whichPage; 
+
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
@@ -440,15 +464,15 @@ public class AlbumServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			List<AlbumVO> albumVO;
-			
+
 			try {
 				Integer albclsno = new Integer(req.getParameter("albclsno"));
 
 				/*************************** 2.開始查詢資料 *****************************************/
 				AlbumService albumSvc = new AlbumService();
-				if (albclsno == 0) {//查詢全部相簿分類
+				if (albclsno == 0) {// 查詢全部相簿分類
 					albumVO = albumSvc.getAll();
-				}else{
+				} else {
 					albumVO = albumSvc.getAlbclsno(albclsno);
 				}
 				if (albumVO == null) {
@@ -491,10 +515,10 @@ public class AlbumServlet extends HttpServlet {
 				Integer albclsno = new Integer(req.getParameter("albclsno"));
 
 				/*************************** 2.開始查詢資料 *****************************************/
-				if (albclsno == 0) {//查詢全部相簿分類
+				if (albclsno == 0) {// 查詢全部相簿分類
 					albumVO = albumSvc.getAlbumbymemno(memno);
 				} else {
-					albumVO = albumSvc.getAlbumclsbymemno(memno,albclsno);
+					albumVO = albumSvc.getAlbumclsbymemno(memno, albclsno);
 				}
 				if (albumVO == null) {
 					errorMsgs.add("查無資料");

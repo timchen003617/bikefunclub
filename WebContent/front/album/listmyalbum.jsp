@@ -38,7 +38,7 @@
 					<form method="post"
 						action="<%=request.getContextPath()%>/AlbumServlet">
 						<span>相簿分類:</span> <select name="albclsno">
-						<option value="0">全部</option>
+							<option value="0">全部</option>
 							<c:forEach var="albclsVO" items="${albcls.all}">
 								<c:choose>
 									<c:when test="${albclsVO.albclsno==albclsno}">
@@ -79,6 +79,7 @@
 							<th>建立會員</th>
 							<th>建立日期</th>
 							<th>檢視相片</th>
+							<th>刪除相簿</th>
 						</tr>
 						<%@ include file="page1.file"%>
 						<c:forEach var="albumVO" items="${list}" begin="<%=pageIndex%>"
@@ -101,7 +102,20 @@
 										action="<%=request.getContextPath()%>/AlbumServlet">
 										<input class="btn btn-primary" type="submit" value="檢視相片">
 										<input type="hidden" name="albno" value="${albumVO.albno}">
-										<input type="hidden" name="action" value="GET_ALBNO_TO_PHOTO">
+										<input type="hidden" name="action"
+											value="GET_ALBNO_TO_MYPHOTO">
+									</form>
+								</td>
+								<td>
+									<form method="post"
+										action="<%=request.getContextPath()%>/AlbumServlet">
+										<input class="btn btn-primary" type="submit" value="刪除相簿"> <input type="hidden"
+											name="photono" value="${photoVO.photono}"> <input
+											type="hidden" name="albno" value="${albumVO.albno}">
+										<input type="hidden" name="action" value="GET_ALBNO_TO_Delete">
+										<input type="hidden" name="requestURL"
+											value="<%=request.getServletPath()%>"> <input
+											type="hidden" name="whichPage" value="<%=whichPage%>">
 									</form>
 								</td>
 							</tr>
