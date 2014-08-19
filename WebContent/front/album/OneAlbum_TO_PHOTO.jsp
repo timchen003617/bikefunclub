@@ -12,7 +12,20 @@
 	List<PhotoVO> list = (List<PhotoVO>) request.getAttribute("listPohto");
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 %>
-
+<script>
+	$(document).ready(function() {
+		$('.fancybox').each(function(){
+		    $(this).fancybox({
+		             'autoScale' : false,
+		             'href' : $(this).attr('id'),
+		             'type':'iframe',
+		             'padding' : 0,
+		             'closeClick'  : false,
+		             //some other callbacks etc
+		    });
+		});
+	});
+</script>
 <div class="container body-content">
 	<div class="row">
 		<div class="panel panel-default">
@@ -46,9 +59,10 @@
 							<tr>
 								<td><fmt:formatDate value="${photoVO.phup}"
 										pattern="yyyy-MM-dd HH:mm:ss" /></td>
-								<td><img
-									src="<%=request.getContextPath()%>/PhotoPreViewServlet?photono=${photoVO.photono}"
-									width='100' height='100'></td>
+								<td><a id="<%=request.getContextPath()%>/PhotoPreViewServlet?photono=${photoVO.photono}" class="fancybox" data-fancybox-group="gallery"
+									href="" title="${photoVO.phfilename}"><img
+										src="<%=request.getContextPath()%>/PhotoPreViewServlet?photono=${photoVO.photono}" alt=""
+										width='100' height='100'></a></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -58,7 +72,6 @@
 		</div>
 	</div>
 </div>
-
 
 
 

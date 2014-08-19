@@ -18,7 +18,9 @@
 <link rel="stylesheet" href="<%=path%>/css/style.css">
 <link rel="stylesheet" href="<%=path%>/css/navigation.css">
 <link rel="stylesheet" href="<%=path%>/css/slider.css">
+<link href="<%=path%>/fancybox/jquery.fancybox.css?v=2.1.5" rel="stylesheet">
 <script src="<%=path%>/js/jquery-1.11.1.min.js"></script>
+<script src="<%=path%>/fancybox/jquery.fancybox.js?v=2.1.5"></script>
 <script src="<%=path%>/js/bootstrap.min.js"></script>
 <script src="<%=path%>/js/jquery-ui.js"></script>
 <script src="<%=path%>/js/nav1.1.min.js"></script>

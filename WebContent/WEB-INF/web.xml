@@ -69,6 +69,8 @@
     <url-pattern>/front/rot/*</url-pattern>
     <url-pattern>/front/album/page_myalbum.jsp</url-pattern>
     <url-pattern>/front/album/myalbum.jsp</url-pattern>
+    <url-pattern>/front/photo/addmyPhoto.jsp</url-pattern>
+    <url-pattern>/front/photo/page_addmyPhoto.jsp</url-pattern>
     <!--網誌(新增.修改.網誌會員管理面)-->
     <url-pattern>/front/blog/manage_blog.jsp</url-pattern>
     <url-pattern>/front/blog/page_manage_blog.jsp</url-pattern>
