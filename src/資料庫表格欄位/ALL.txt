@@ -1271,7 +1271,7 @@ CREATE SEQUENCE ANNseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
     ('H','網誌','','','1'
     );
   insert into auth values
-    ('H1','網誌分類管理','back/blogcls/select_page.jsp','H','2'
+    ('H1','網誌分類管理','back/blogcls/page_listAllBlogcls.jsp','H','2'
     );
   insert into auth values
     ('H2','網誌管理','back/blog/page_listAllBlog.jsp','H','2'

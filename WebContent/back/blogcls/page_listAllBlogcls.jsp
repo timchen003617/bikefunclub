@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>管理員後台</title>
+<title>網誌分類</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
