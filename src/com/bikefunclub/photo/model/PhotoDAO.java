@@ -295,7 +295,7 @@ public class PhotoDAO implements PhotoDAO_interface {
 			// 1●設定於 pstm.executeUpdate()之前
     		con.setAutoCommit(false);
 			
-    		// 先新增部門
+    		// 先新增相片
 			String cols[] = {"PHOTONO"};
 			pstmt = con.prepareStatement(INSERT_STMT , cols);			
 			pstmt.setInt(1, photoVO.getMemno());

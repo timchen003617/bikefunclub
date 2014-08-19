@@ -338,7 +338,7 @@ public class PhotoServlet extends HttpServlet {
 			failureView.forward(req, res);
 		}
 	}	
-		if ("delete".equals(action)) { // 來自listAllAd.jsp
+		if ("delete".equals(action)) { //
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to

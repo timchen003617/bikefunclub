@@ -18,13 +18,16 @@ body {
 	padding: 30px 0px 10px 260px;
 	font: 14pt/1.7em "微軟正黑體";
 }
+
 #myhome-inner .field {
 	padding: 0px 0px 10px 20px;
 	font: 14pt/1.7em "微軟正黑體";
 }
+
 #myhome-inner .field td {
-	text-indent:50px;
+	text-indent: 50px;
 }
+
 #myhome-inner legend {
 	margin: 0px;
 	padding-top: 60px;
@@ -71,23 +74,28 @@ a:hover,a:focus {
 .orange {
 	color: #f18d00;
 }
-#memlist .img-thumbnail{
+
+#memlist .img-thumbnail {
 	width: 50px;
 	height: 50px;
-	overflow: hidden;	
+	overflow: hidden;
 }
-#notfrimemlist .img-thumbnail{
+
+#notfrimemlist .img-thumbnail {
 	width: 96px;
 	height: 96px;
-	overflow: hidden;	
+	overflow: hidden;
 }
-#memlist .table{
-	width:160px;
-	margin-bottom:5px;
+
+#memlist .table {
+	width: 160px;
+	margin-bottom: 5px;
 }
-#memlist .table tr{
+
+#memlist .table tr {
 	cursor: pointer;
 }
+
 .img-thumbnail {
 	width: 96px;
 	height: 96px;
@@ -241,9 +249,11 @@ ul.ann_index li {
 	height: 70px;
 	margin: 5px 0px;
 }
-ul.ann_index li a{
-	display:block;
+
+ul.ann_index li a {
+	display: block;
 }
+
 ul.ann_index li p {
 	height: 50px;
 	overflow: hidden;
@@ -406,7 +416,7 @@ header #menulist li a:hover {
 }
 
 .panel-default>.panel-heading h3 {
-	font-weight:bold;
+	font-weight: bold;
 	color: #fff;
 }
 
