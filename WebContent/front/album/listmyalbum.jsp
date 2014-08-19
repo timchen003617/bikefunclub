@@ -111,7 +111,7 @@
 										action="<%=request.getContextPath()%>/AlbumServlet">
 										<input class="btn btn-primary" type="submit" value="刪除相簿"> <input
 											type="hidden" name="albno" value="${albumVO.albno}">
-										<input type="hidden" name="action" value="">
+										<input type="hidden" name="action" value="delete">
 										<input type="hidden" name="requestURL"
 											value="<%=request.getServletPath()%>"> <input
 											type="hidden" name="whichPage" value="<%=whichPage%>">

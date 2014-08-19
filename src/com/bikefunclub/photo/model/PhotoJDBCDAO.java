@@ -22,7 +22,7 @@ public class PhotoJDBCDAO implements PhotoDAO_interface {
 	private static final String DELETE = 
 		"DELETE FROM photo where photono = ?";
 	private static final String DELETE_GPALBUM = 
-			"DELETE FROM gpalbum where photono = ?";
+		"DELETE FROM gpalbum where photono = ?";
 	private static final String UPDATE = 
 		"UPDATE photo set memno=?, phass=?, phfilename=?, phextname=?, phfile=? where photono = ?";
     

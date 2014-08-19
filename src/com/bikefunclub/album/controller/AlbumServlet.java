@@ -245,38 +245,25 @@ public class AlbumServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-			String url = req.getParameter("requestURL");
+			String requestURL = req.getParameter("requestURL");
 			String whichPage = req.getParameter("whichPage");
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				Integer albno = new Integer(req.getParameter("albno"));
-				Integer albclsno = new Integer(req.getParameter("albclsno"));
 				/*************************** 2.開始刪除資料 ***************************************/
 				AlbumService albumSvc = new AlbumService();
-				AlbclsService albclsSvc = new AlbclsService();
-				if (albumSvc.getAlbno(albno) == null) {
-					albumSvc.deleteAlbum(albno);
-				} else {
-					errorMsgs.add("刪除資料失敗:" + "相簿內仍有照片!!");
-				}
-				AlbclsVO albclsVO = new AlbclsVO();
-				albclsVO.setAlbclsno(albclsno);
-				req.setAttribute("albclsVO", albclsVO);
-
-				List<AlbumVO> listAlbum = albclsSvc.findByAlbum(albclsno);
+				
+				albumSvc.deleteAlbum(albno);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				req.setAttribute("listAlbum", listAlbum); // 資料庫取出的empVO物件,存入req
-
+				String url = requestURL + "?whichPage=" + whichPage;
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("刪除資料失敗:" + "相簿內仍有照片!!");
-				System.out.println(url);
-
-				RequestDispatcher failureView = req.getRequestDispatcher(url);
+				errorMsgs.add("刪除資料失敗:相簿內還有相片!!");
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
 		}
@@ -381,14 +368,16 @@ public class AlbumServlet extends HttpServlet {
 			String whichPage = req.getParameter("whichPage"); // 送出刪除的來源網頁的第幾頁(只用於:listAllAd.jsp)
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
-				Integer albno = new Integer(req.getParameter("albno"));
 				Integer photono = new Integer(req.getParameter("photono"));
-
+				Integer albno = new Integer(req.getParameter("albno"));
 				/*************************** 2.開始刪除資料 ***************************************/
 				AlbumService albumSvc = new AlbumService();
 				albumSvc.deleteGpalbum(photono);
-
+				AlbumVO albumVO = albumSvc.getOneAlbum(albno);
+				List<PhotoVO> listPohto = albumSvc.getAlbno(albno);
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
+				req.setAttribute("albumVO", albumVO);
+				req.setAttribute("listPohto", listPohto); 
 				String url = requestURL + "?whichPage=" + whichPage; 
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
@@ -398,7 +387,7 @@ public class AlbumServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back/album/OneAlbum_TO_PHOTO.jsp");
+						.getRequestDispatcher("/front/album/OneAlbum_TO_MYPHOTO.jsp");
 				failureView.forward(req, res);
 			}
 		}

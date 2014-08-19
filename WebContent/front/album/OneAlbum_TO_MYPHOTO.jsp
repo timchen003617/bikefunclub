@@ -9,9 +9,7 @@
 <%-- 此頁採用 JSTL 與 EL 取值 --%>
 
 <%
-	List<PhotoVO> list = (List<PhotoVO>) request
-			.getAttribute("listPohto");
-	AlbumVO albumVO = (AlbumVO) request.getAttribute("albumVO");
+	List<PhotoVO> list = (List<PhotoVO>) request.getAttribute("listPohto");
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 %>
 
@@ -21,8 +19,8 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">個人相片管理</h3>
 				<div class="text-right">
-					<input class="btn btn-default" type="button" value="上一頁"
-						onClick="history.back();return true;" name="button">
+					<a class="btn btn-default"
+						href="<%=request.getContextPath()%>/front/album/page_myalbum.jsp">回相簿</a>
 				</div>
 			</div>
 			<div class="panel-body">
@@ -61,11 +59,11 @@
 								<td>
 									<form method="post"
 										action="<%=request.getContextPath()%>/AlbumServlet">
-										<input class="btn btn-primary" type="submit" value="刪除"> <input type="hidden"
-											name="photono" value="${photoVO.photono}"> <input
-											type="hidden" name="albno" value="${albumVO.albno}">
-										<input type="hidden" name="action" value="GET_ALBNO_TO_Delete">
-										<input type="hidden" name="requestURL"
+										<input class="btn btn-primary btn-lg" type="submit" value="刪除">
+										<input type="hidden" name="photono" value="${photoVO.photono}">
+										<input type="hidden" name="albno" value="${albumVO.albno}">
+										<input type="hidden" name="action" value="GET_ALBNO_TO_Delete"> <input
+											type="hidden" name="requestURL"
 											value="<%=request.getServletPath()%>"> <input
 											type="hidden" name="whichPage" value="<%=whichPage%>">
 									</form>

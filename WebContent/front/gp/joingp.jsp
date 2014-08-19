@@ -54,8 +54,8 @@
 						</div>
 					</c:if>
 					<div class="text-right">
-						<input class="btn btn-warning" type="button" value="上一頁"
-							onClick="history.back();return true;" name="button">
+						<a class="btn btn-primary"
+						href="<%=path%>/front/gp/page_listAllgp.jsp">回瀏覽揪團</a>
 					</div>
 					<form action="<%=path%>/Gp.do" method="post">
 						<table class="table table-hover">

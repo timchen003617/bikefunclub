@@ -29,7 +29,7 @@
 
 				<form method="post"
 					action="<%=request.getContextPath()%>/AlbumServlet">
-					<table>
+					<table class="table">
 						<tr>
 							<td>相簿分類:</td>
 							<td><select size="1" name="albclsno">
@@ -58,7 +58,7 @@
 					</table>
 					<br> <input type="hidden" name="action" value="addAlbum">
 					<input type="hidden" name="memno" value="${memVO.memno}"><input
-						type="submit" value="送出新增">
+						class="btn btn-primary" type="submit" value="送出新增">
 				</form>
 			</div>
 		</div>
