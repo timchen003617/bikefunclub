@@ -32,7 +32,7 @@
 			</c:if>
 		<%@ include file="pages/page1.file"%>
 	<div class="table-responsive">
-<table class="table table-hover">
+<table id="photo" class="table table-hover">
 <thead>
 		<tr>
 			<th>相片編號</th>
@@ -40,7 +40,7 @@
 <!-- 			<th>拍攝地點</th> -->
 			<th>相片上傳時間</th>
 			<th>相片檔案</th>
-
+			<th>相片刪除</th>
 		</tr>
 </thead>
  	<tbody>

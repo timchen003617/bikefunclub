@@ -96,6 +96,10 @@ ul.nav.navbar-nav.navbar-right {
 	width: 192px;
 	height: 73px;
 }
+#backmain .table#photo img {
+	width: 73px;
+	height: 73px;
+}
 #backmain .table img#mem{
 	width: 73px;
 	height: 73px;

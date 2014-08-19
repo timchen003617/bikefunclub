@@ -11,7 +11,8 @@
     List<AlbumVO> list = albumSvc.getAll();
     pageContext.setAttribute("list",list);
 %>
-
+<jsp:useBean id="albcls" class="com.bikefunclub.albcls.model.AlbclsService" />
+<jsp:useBean id="memSvc" class="com.bikefunclub.member.model.MemService" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <div id="backmain" class="col-md-10">
 	<h1 class="page-header">相簿管理</h1>
@@ -37,8 +38,10 @@
 	<tr>
 		<th>相簿編號</th>
 		<th>會員編號</th>
+		<th>會員姓名</th>
 		<th>相簿分類編號</th>
-		<th>權限名稱</th>
+		<th>相簿分類名稱</th>
+<!-- 		<th>權限名稱</th> -->
 		<th>相簿標題</th>
 		<th>相簿描述</th>
 		<th>建立時間</th>
@@ -52,8 +55,16 @@
 						<!--將修改的那一筆加入對比色而已-->
 			<td>${albumVO.albno}</td>
 			<td>${albumVO.memno}</td>
+			<td><c:forEach var="memVO" items="${mem.all}">
+				<c:if test="${memVO.memno==albumVO.memno}">
+						${memVO.memname}</c:if>
+									</c:forEach></td>
 			<td>${albumVO.albclsno}</td>
-			<td>${albumVO.authname}</td>
+			<td><c:forEach var="albclsVO" items="${albcls.all}">
+				<c:if test="${albclsVO.albclsno==albumVO.albclsno}">
+						${albclsVO.albclsname}</c:if>
+									</c:forEach></td>
+<%-- 			<td>${albumVO.authname}</td> --%>
 			<td>${albumVO.albtitle}</td>
 			<td>${albumVO.albdesc}</td>
 			<td>${albumVO.albtime}</td>
@@ -75,6 +86,7 @@
 			    <input class="btn btn-warning" type="submit" value="刪除">
 			    <input type="hidden" name="albno" value="${albumVO.albno}">
 			    <input type="hidden" name="albclsno" value="${albumVO.albclsno}">
+			    <input type="hidden" name="authname" value="${albumVO.authname}">
 			    <input type="hidden" name="action"value="back_delete">
 			    <input type="hidden" name="requestURL" value="<%=request.getServletPath() %>">
 			    <input type="hidden" name="whichPage" value="<%=whichPage %>"></FORM>
