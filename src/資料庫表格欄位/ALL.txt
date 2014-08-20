@@ -302,75 +302,7 @@ CREATE SEQUENCE memberseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
       FOREIGN KEY (MEMNO) REFERENCES MEMBER(MEMNO)
     );
 CREATE SEQUENCE photoseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
-  INSERT
-  INTO PHOTO
-    (
-      photono,
-      memno,
-      phcoo,
-      phass,
-      phfilename,
-      phextname,
-      phup,
-      phfile
-    )
-    VALUES
-    (
-      photoseq.NEXTVAL,
-      1,
-      '{"lng":121.190915,"lat":24.96650833333333}',
-      1,
-      '1234',
-      'jpg',
-      TO_DATE('2014/07/07 20:00:00','yyyy-mm-dd hh24:mi:ss'),
-      utl_raw.cast_to_raw('你好嗎?')
-    );
-  INSERT
-  INTO PHOTO
-    (
-      photono,
-      memno,
-      phcoo,
-      phass,
-      phfilename,
-      phextname,
-      phup,
-      phfile
-    )
-    VALUES
-    (
-      photoseq.NEXTVAL,
-      2,
-      '{"lng":121.19537666666665,"lat":24.969563333333333}',
-      1,
-      '12345',
-      'jpg',
-      TO_DATE('2014/07/08 21:10:10','yyyy-mm-dd hh24:mi:ss'),
-      utl_raw.cast_to_raw('很不好')
-    );
-  INSERT
-  INTO PHOTO
-    (
-      photono,
-      memno,
-      phcoo,
-      phass,
-      phfilename,
-      phextname,
-      phup,
-      phfile
-    )
-    VALUES
-    (
-      photoseq.NEXTVAL,
-      2,
-      '{"lng":121.18750166666665,"lat":24.973978333333335}',
-      0,
-      'aaaa',
-      'jpg',
-      TO_DATE('2014/05/05 20:12:10','yyyy-mm-dd hh24:mi:ss'),
-      utl_raw.cast_to_raw('烙賽阿')
-    );
+
   --相簿分類
   CREATE TABLE ALBCLS
     (
@@ -387,7 +319,17 @@ CREATE SEQUENCE albclsseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE
   INSERT INTO ALBCLS
     (albclsno,albclsname
     ) VALUES
-    (albclsseq.NEXTVAL, '路線'
+    (albclsseq.NEXTVAL, '活動'
+    );
+  INSERT INTO ALBCLS
+    (albclsno,albclsname
+    ) VALUES
+    (albclsseq.NEXTVAL, '比賽'
+    );
+  INSERT INTO ALBCLS
+    (albclsno,albclsname
+    ) VALUES
+    (albclsseq.NEXTVAL, '個人'
     );
   --相簿
   CREATE TABLE ALBUM
@@ -421,9 +363,9 @@ CREATE SEQUENCE albumseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
       1,
       1,
       'PERSONAL',
-      '后里鐵馬道一日遊',
-      '后里鐵馬道一日遊',
-      TO_DATE('2014/01/01 00:05:10','yyyy-mm-dd hh24:mi:ss')
+      '花蓮一日遊',
+      '觀賞風景、種樹、喝茶、騎車健身',
+      TO_DATE('2014/01/01 14:05:10','yyyy-mm-dd hh24:mi:ss')
     );
   INSERT
   INTO ALBUM
@@ -440,11 +382,11 @@ CREATE SEQUENCE albumseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
     (
       albumseq.NEXTVAL,
       2,
-      1,
+      2,
       'PUBLIC',
-      '單車環島全紀錄',
-      '單車環島全紀錄',
-      TO_DATE('2014/02/02 00:10:30','yyyy-mm-dd hh24:mi:ss')
+      '新北市健康行',
+      '繞台北一圈',
+      TO_DATE('2014/02/02 16:10:30','yyyy-mm-dd hh24:mi:ss')
     );
   INSERT
   INTO ALBUM
@@ -460,12 +402,33 @@ CREATE SEQUENCE albumseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
     VALUES
     (
       albumseq.NEXTVAL,
-      2,
-      1,
+      3,
+      3,
       'SHAREFS',
-      'XXX',
-      '...',
-      TO_DATE('2014/03/03 03:10:30','yyyy-mm-dd hh24:mi:ss')
+      '自由車環台公路大賽',
+      '104年3月9號，觀光盃，東港到墾丁',
+      TO_DATE('2014/03/13 13:10:30','yyyy-mm-dd hh24:mi:ss')
+    );
+  INSERT
+  INTO ALBUM
+    (
+      albno,
+      memno,
+      albclsno,
+      authname,
+      albtitle,
+      albdesc,
+      albtime
+    )
+    VALUES
+    (
+      albumseq.NEXTVAL,
+      4,
+      4,
+      'SHAREFS',
+      '天涯我獨行',
+      '爆肝的一週',
+      TO_DATE('2014/03/05 15:10:30','yyyy-mm-dd hh24:mi:ss')
     );
   --相片所屬相簿
   CREATE TABLE GPALBUM

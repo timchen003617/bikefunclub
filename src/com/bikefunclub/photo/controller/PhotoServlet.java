@@ -283,7 +283,7 @@ public class PhotoServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try {
+			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 				Integer photono = 0;// insert時，adno給0,因編號是由sequence產生
 				Integer memno = new Integer(multi.getParameter("memno").trim());
@@ -334,12 +334,12 @@ public class PhotoServlet extends HttpServlet {
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/front/photo/page_addmyPhoto.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front/photo/page_addmyPhoto.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		if ("delete".equals(action)) { //
 
