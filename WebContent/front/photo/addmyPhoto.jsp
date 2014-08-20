@@ -36,7 +36,7 @@
 				</tr>
 			</table>
 			<br> <input type="hidden" name="action" value="myinsert">
-			<input type="submit" value="送出新增"> <input type="hidden"
+			<input class="btn btn-primary" type="submit" value="送出新增"> <input type="hidden"
 				name="albno" value="<%=request.getParameter("albno")%>"> <input
 				type="hidden" name="memno" value="${memVO.memno}"> <input
 				type="hidden" name="phass" value="1">
