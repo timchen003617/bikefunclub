@@ -1259,13 +1259,13 @@ CREATE SEQUENCE ANNseq INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
     ('G','相簿','','','1'
     );
   insert into auth values
-    ('G1','相簿分類管理','back/albcls/select_page.jsp','G','2'
+    ('G1','相簿分類管理','back/albcls/page_listAllAlbcls.jsp','G','2'
     );
   insert into auth values
-    ('G2','相簿管理','back/album/select_page.jsp','G','2'
+    ('G2','相簿管理','back/album/page_listAllAlbum.jsp','G','2'
     );
   insert into auth values
-    ('G3','相片管理','back/photo/select_page.jsp','G','2'
+    ('G3','相片管理','back/photo/page_listAllPhoto.jsp','G','2'
     );
   insert into auth values
     ('H','網誌','','','1'
