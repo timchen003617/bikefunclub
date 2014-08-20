@@ -15,8 +15,7 @@
 	List<RotVO> listrotbymem = rotSvc.getrotsBymemnoFromMemrot(memno);
 	pageContext.setAttribute("listrotbymem", listrotbymem);
 %>
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="<%=path%>/js/googlemap_dialog.js"></script>
+
 <div class="container body-content">
 	<div class="row">
 		<form class="form-gp" action="<%=path%>/Gp.do" method="post"
@@ -39,7 +38,7 @@
 					class="com.bikefunclub.gpcls.model.GpclsService" />
 				<div>
 					<label for="gpclsno" class="label"><span class="red">*揪團分類</span></label>
-					<select size="1" name="gpclsno">
+					<select size="1" name="gpclsno" id="gpclsno">
 						<c:forEach var="gpclsVO" items="${gpclsSvc.all}">
 							<option value="${gpclsVO.gpclsno}"
 								${(gpVO.gpclsno==gpclsVO.gpclsno)?'selected':'' }>${gpclsVO.gpclsname}</option>
@@ -113,6 +112,7 @@
 					type="hidden" name="action" value="launchgp"><input
 					id="insertgp" class="btn btn-primary btn-lg" type="submit"
 					value="確定發起">
+				<a id="magic_insertgp"class="btn btn-info">magic</a>
 			</div>
 		</form>
 	</div>

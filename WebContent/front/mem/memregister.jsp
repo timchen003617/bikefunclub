@@ -24,6 +24,7 @@
 <script src="<%=path%>/js/datepicker.js"></script>
 <script src="<%=path%>/js/validate.js"></script>
 <script src="<%=path%>/js/previewimage.js"></script>
+<script src="<%=path%>/js/magicbutton.js"></script>
 </head>
 <body>
 	<h1 class="loginlogo">
@@ -113,6 +114,7 @@
 		<div>
 			<input type="hidden" name="action" value="insert"> <input
 				class="btn btn-primary btn-lg" type="submit" value="建立帳號">
+			<a id="magic_register"class="btn btn-info">magic</a>
 		</div>
 	</form>
 </body>
