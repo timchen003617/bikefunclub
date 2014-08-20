@@ -11,7 +11,9 @@
 	List<PhotoVO> list = photoSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
-
+<jsp:useBean id="memSvc" class="com.bikefunclub.member.model.MemService" />
+<jsp:useBean id="gpalbumSvc" class="com.bikefunclub.gpalbum.model.GpalbumService" />
+<jsp:useBean id="albumSvc" class="com.bikefunclub.album.model.AlbumService" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <div id="backmain" class="col-md-10">
 	<h1 class="page-header">相片管理</h1>
@@ -36,7 +38,8 @@
 <thead>
 		<tr>
 			<th>相片編號</th>
-			<th>會員編號</th>
+			<th>相簿標題</th>
+			<th>會員姓名</th>
 <!-- 			<th>拍攝地點</th> -->
 			<th>相片上傳時間</th>
 			<th>相片檔案</th>
@@ -49,7 +52,15 @@
 			end="<%=pageIndex+rowsPerPage-1%>">
 			<tr ${(photoVO.photono==param.photono)? 'style="background-color:#f5f0e9;"' : ''}>
 				<td>${photoVO.photono}</td>
-				<td>${photoVO.memno}</td>
+				<td><c:forEach var="gpalbumVO" items="${gpalbumSvc.all}">
+				<c:if test="${gpalbumVO.photono==photoVO.photono}">
+				<c:forEach var="albumVO" items="${albumSvc.all}">
+				<c:if test="${gpalbumVO.albno==albumVO.albno}">
+						${albumVO.albtitle}</c:if>	</c:forEach></c:if></c:forEach></td>
+						
+				<td><c:forEach var="memVO" items="${memSvc.all}">
+				<c:if test="${memVO.memno==photoVO.memno}">
+						${memVO.memname}</c:if>	</c:forEach></td>
 <%-- 				<td>${photoVO.phcoo}</td> --%>
 				<td>${photoVO.phup}</td>
 				<td><img
