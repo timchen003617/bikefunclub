@@ -37,12 +37,10 @@
 <thead>
 	<tr>
 		<th>相簿編號</th>
-		<th>會員編號</th>
-		<th>會員姓名</th>
-		<th>相簿分類編號</th>
-		<th>相簿分類名稱</th>
-<!-- 		<th>權限名稱</th> -->
 		<th>相簿標題</th>
+		<th>會員姓名</th>
+		<th>相簿分類名稱</th>
+<!-- 		<th>權限名稱</th> -->		
 		<th>相簿描述</th>
 		<th>建立時間</th>
 <!-- 		<th>檢視相簿</th> -->
@@ -54,18 +52,14 @@
 		<tr ${(albumVO.albno==param.albno)? 'style="background-color:#f5f0e9;"' : ''}>
 						<!--將修改的那一筆加入對比色而已-->
 			<td>${albumVO.albno}</td>
-			<td>${albumVO.memno}</td>
-			<td><c:forEach var="memVO" items="${mem.all}">
+			<td>${albumVO.albtitle}</td>
+			<td><c:forEach var="memVO" items="${memSvc.all}">
 				<c:if test="${memVO.memno==albumVO.memno}">
-						${memVO.memname}</c:if>
-									</c:forEach></td>
-			<td>${albumVO.albclsno}</td>
+						${memVO.memname}</c:if>	</c:forEach></td>
 			<td><c:forEach var="albclsVO" items="${albcls.all}">
 				<c:if test="${albclsVO.albclsno==albumVO.albclsno}">
-						${albclsVO.albclsname}</c:if>
-									</c:forEach></td>
+						${albclsVO.albclsname}</c:if> </c:forEach></td>
 <%-- 			<td>${albumVO.authname}</td> --%>
-			<td>${albumVO.albtitle}</td>
 			<td>${albumVO.albdesc}</td>
 			<td>${albumVO.albtime}</td>
 
