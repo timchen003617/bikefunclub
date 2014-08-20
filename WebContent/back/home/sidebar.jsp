@@ -22,7 +22,6 @@
 							</ul>
 						</c:if>
 					</c:forEach>
-
 				</div>
 			</c:if>
 		</c:forEach>

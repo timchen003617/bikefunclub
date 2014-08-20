@@ -27,7 +27,7 @@
 
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/PhotoServlet"
 		enctype="multipart/form-data">
-		<table border="0">
+		<table>
 
 			<tr>
 				<td>會員編號:</td>

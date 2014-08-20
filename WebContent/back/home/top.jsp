@@ -12,7 +12,7 @@
 		<div class="navbar-header"></div>
 		<div class="navbar-collapse collapse">
 			<h3 class="logo">
-				<a href="<%=path%>/back/home/admin.jsp">Bikefunclub</a>
+				<a href="<%=path%>/back/ann/page_listAllAnn.jsp">Bikefunclub</a>
 			</h3>
 			<h3 style="letter-spacing: 3px; font-weight:bold;">單車俱樂部後台管理系統</h3>
 			<p class="text-right">

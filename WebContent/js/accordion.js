@@ -1,7 +1,6 @@
 $(function() {
-	//自動伸縮符合內容高度
 	$("#accordion").accordion({
-		heightStyle : "content"
+	    heightStyle: "content",//自動伸縮符合內容高度
 	});
 	//收合速度100毫秒
 	$(".ui-accordion").accordion({
