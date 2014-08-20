@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<script src="<%=path%>/js/magicbutton.js"></script>
 </head>
 <body>
 	<form class="form-register" action="<%=path%>/Rot.do" method="post">
@@ -71,6 +71,7 @@
             <input type="hidden" name="rotend" value=<%=request.getParameter("rotend") %>>
             <input type="hidden" name="memno" value="${memno}">
 			<input class="btn btn-primary btn-lg" type="submit" value="建立路線">
+			<a id="magic_insertrot"class="btn btn-info">magic</a>
 		</div>
 	</form>
 </body>

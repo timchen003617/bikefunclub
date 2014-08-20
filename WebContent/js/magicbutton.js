@@ -16,4 +16,10 @@ $(function() {
 		$("#gpmaxnum").val("10");
 		$("#gpnote").val("保持愉快的心情");
 	});
+	//路線儲存
+	$("#magic_insertrot").click(function(){
+		$("#rotname").val("中央大學");
+		$("#rottag").val("中央大學週邊道路");
+		$("#rotdesc").val("中央大學週邊道路");
+	});
 });
