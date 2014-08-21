@@ -234,9 +234,8 @@ var rendererOptions = {
 
 		} 
 </script>
-<div class="container body-content">
+<div id="backmain" class="col-md-10">
 	<h1 class="page-header">新增推薦路線</h1>
-
 	<div class="row">
 		<div class="col-md-3">
 			<div class="panel panel-warning">
@@ -258,10 +257,10 @@ var rendererOptions = {
 
 
 		<div id="map-container" class="col-md-7"></div>
-		<FORM id="formhidden" method="post" action="<%=path%>/back/rot/page_insert_sgrot_2.jsp">
+		<form id="formhidden" method="post" action="<%=path%>/back/rot/page_insert_sgrot_2.jsp">
 			<input type="hidden" id="rotloc" name="rotloc"> <input
 				type="hidden" id="rotstart" name="rotstart"> <input
 				type="hidden" id="rotend" name="rotend">
-		</FORM>
+		</form>
 	</div>
 </div>

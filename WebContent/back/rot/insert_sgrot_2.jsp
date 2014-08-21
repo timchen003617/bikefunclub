@@ -21,7 +21,7 @@
 				</ul>
 			</c:if>
 			<br/>
-			<FORM METHOD="post" ACTION="<%=path%>/Rot.do" name="form1" >
+			<form method="post" action="<%=path%>/Rot.do" name="form1" >
 				<div>
 					<b class="page-header">路線名稱:</b> <input type="TEXT"
 						name="rotname"/>
@@ -53,7 +53,7 @@
             <input type="hidden" name="rotend" value=<%=request.getParameter("rotend") %>>
 			<input class="btn btn-warning btn-lg" type="submit" value="建立路線">
 		</div>
-			</FORM>
+			</form>
 		</div>
 	</div>
 </div>

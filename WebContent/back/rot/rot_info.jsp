@@ -141,7 +141,7 @@
 	
 	google.maps.event.addDomListener(window, 'load', init_map);
 </script>
-<div class="container body-content">
+<div id="backmain" class="col-md-10">
 	<jsp:useBean id="rotclsSvc" scope="page"
 		class="com.bikefunclub.rotcls.model.RotclsService" />
 	<h1>
@@ -157,17 +157,13 @@
 			<div class="panel panel-warning">
 				<div class="panel-heading">
 					<h3 class="panel-title">路線資訊</h3>
-				</div>
-
-				<p>
-					Total Distance: <span id="total"></span>
-				</p>
-				<div class="panel-body" id="selected_rots"></div>
+				</div>	
+				<div class="panel-body" id="selected_rots"><p>總距離:<span id="total"></span></p></div>
 			</div>
 		</div>
 		<div id="map-container" class="col-md-7"></div>
 	</div>
-	<div class="col-md-13">
+	<div class="col-md-11">
 		<div class="panel panel-warning">
 			<div class="panel-heading">
 				<h3 class="panel-title">路線描述</h3>
