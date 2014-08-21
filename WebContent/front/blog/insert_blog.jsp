@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%  String path = request.getContextPath();  %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://ckeditor.com" prefix="ckeditor"%>
+
 <%@ page import="java.util.*"%>
 <%@ page import="com.bikefunclub.blog.model.*"%>
 <%@ page import="com.bikefunclub.blogcls.model.*"%>
 <%@ page import="com.bikefunclub.member.model.*"%>
+<script src="<%=path%>/js/magicbutton.js"></script>
 
 <%
 
 
-	String path = request.getContextPath();
+	
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 	Integer memno = memVO.getMemno();
 	
@@ -79,6 +82,7 @@
 					type="hidden" name="action" value="insert"><input
 					id="insertblog" class="btn btn-primary btn-lg" type="submit"
 					value="確定發文">
+					<a id="magic_inserblog"class="btn btn-info">magic</a>
 			</div>
 		</form>
 	</div>

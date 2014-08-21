@@ -29,41 +29,42 @@
 					<table class="table table-bordered">
 						<tr>
 							<th>帳號:</th>
-							<td><input type="text" name="empacc" value="${empVO2.empacc}"  placeholder="請輸入帳號" 
+							<td><input type="text" name="empacc" id="empacc" value="${empVO2.empacc}"  placeholder="請輸入帳號" 
 								required></td>
 						</tr>
 						<tr>
 							<th>姓名:</th>
-							<td><input type="text" name="empname"
+							<td><input type="text" name="empname" id="empname"
 								value="${empVO2.empname}" placeholder="請輸入姓名" required></td>
 						</tr>
 						<tr>
 							<th>信箱:</th>
-							<td><input type="text" name="empemail"
+							<td><input type="text" name="empemail" id="empemail"
 								value="${empVO2.empemail}" placeholder="請輸入信箱 "  required></td>
 
 						</tr>
 						<tr>
 							<th>地址:</th>
-							<td><textarea rows="1" cols="50" name="empaddr">${empVO2.empaddr}</textarea></td>
+							<td><textarea rows="1" cols="50" name="empaddr" id="empaddr">${empVO2.empaddr}</textarea></td>
 
 						</tr>
 						<tr>
 							<th>身分證號:</th>
-							<td><input type="text" name="empid" value="${empVO2.empid}" placeholder="請輸入身分證號"
+							<td><input type="text" name="empid" id="empid" value="${empVO2.empid}" placeholder="請輸入身分證號"
 								required></td>
 
 
 						</tr>
 						<tr>
 							<th>電話:</th>
-							<td><input type="text" name="emptel"
+							<td><input type="text" name="emptel" id="emptel"
 								value="${empVO2.emptel}" placeholder="請輸入電話" required></td>
 						</tr>
 					</table>
 				</div>
 				<input type="hidden" name="action" value="insert"> <input
 					class="btn btn-warning btn-lg" type="submit" value="確定新增">
+					<a id="magic_inseremp"class="btn btn-info">magic</a>
 			</form>
 		</div>
 	</div>

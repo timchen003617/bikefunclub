@@ -23,6 +23,7 @@
 <script src="<%=path%>/js/previewimage.js"></script>
 <script src="<%=path%>/js/jquery.validate.min.js"></script>
 <script src="<%=path%>/js/datepicker.js"></script>
+<script src="<%=path%>/js/magicbutton.js"></script>
 </head>
 
 <body>

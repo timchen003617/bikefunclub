@@ -33,6 +33,8 @@
 <script src="<%=path%>/js/previewimage.js"></script>
 <script src="<%=path%>/js/messages.js"></script>
 <script src="<%=path%>/js/validate_for_blog.js"></script>
+<script src="<%=path%>/js/magicbutton.js"></script>
+
 </head>
 <body>
 	<!-- slider -->
