@@ -1,6 +1,6 @@
 $(function() {
 	var w = $("#slider_content").width();
-	$('#slider_content').css('height', ($(window).height()) + 'px'); // 將區塊自動撐滿畫面高度
+	$('#slider_content').css('height', ($(document).height()) + 'px'); // 將區塊自動撐滿畫面高度
 	$("#fb_tab").click(function() {// 按下滑鼠時
 		if ($("#slider_scroll").css('right') == '-' + w + 'px') {
 			$("#slider_scroll").animate({
