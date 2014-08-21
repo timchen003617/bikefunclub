@@ -201,7 +201,7 @@
 				<div class="panel-body" id="selected_rots"></div>
 			</div>
 		</div>
-		<div id="map-container" class="col-md-8"></div>
+		<div id="map-container" class="col-md-7"></div>
 		<FORM id="formhidden" METHOD="post" ACTION="<%=path%>/Rot.do">
 			<input type="hidden" id="rotno" name="rotno"> <input
 				type="hidden" name="action" value="getRot_info">

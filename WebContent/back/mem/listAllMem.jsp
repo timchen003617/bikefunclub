@@ -19,7 +19,7 @@
 	<h1 class="page-header">會員資料管理</h1>
 	<div class="panel panel-warning">
 		<div class="panel-heading">
-			<h3 class="panel-title">公告管理</h3>
+			<h3 class="panel-title">會員資料管理</h3>
 		</div>
 		<div class="panel-body">
 			<%@ include file="pages/page1.file"%>

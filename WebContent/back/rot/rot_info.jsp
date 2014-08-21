@@ -165,7 +165,7 @@
 				<div class="panel-body" id="selected_rots"></div>
 			</div>
 		</div>
-		<div id="map-container" class="col-md-9"></div>
+		<div id="map-container" class="col-md-7"></div>
 	</div>
 	<div class="col-md-13">
 		<div class="panel panel-warning">

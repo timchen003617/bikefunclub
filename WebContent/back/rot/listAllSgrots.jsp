@@ -57,7 +57,7 @@
                     			</c:if>
 								</c:forEach></td>
 								<td>
-									<FORM METHOD="post" ACTION="<%=contextpath%>/Rot.do">
+									<FORM method="post" action="<%=contextpath%>/Rot.do">
 										<input class="btn btn-warning" type="submit" value="刪除"> <input type="hidden"
 											name="rotno" value="${rotVO.rotno}"> <input
 											type="hidden" name="requestURL" value="<%=servletpath%>">
@@ -68,7 +68,7 @@
 									</FORM>
 								</td>
 								<td>
-									<FORM METHOD="post" ACTION="<%=contextpath%>/Rot.do">
+									<FORM method="post" action="<%=contextpath%>/Rot.do">
 										<input class="btn btn-warning" type="submit" value="詳細資料"> <input
 											type="hidden" name="rotno" value="${rotVO.rotno}"> <input
 											type="hidden" name="requestURL" value="<%=servletpath%>">

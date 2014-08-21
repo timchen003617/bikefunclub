@@ -257,8 +257,8 @@ var rendererOptions = {
 		</div>
 
 
-		<div id="map-container" class="col-md-8"></div>
-		<FORM id="formhidden" METHOD="post" ACTION="<%=path%>/back/rot/page_insert_sgrot_2.jsp">
+		<div id="map-container" class="col-md-7"></div>
+		<FORM id="formhidden" method="post" action="<%=path%>/back/rot/page_insert_sgrot_2.jsp">
 			<input type="hidden" id="rotloc" name="rotloc"> <input
 				type="hidden" id="rotstart" name="rotstart"> <input
 				type="hidden" id="rotend" name="rotend">

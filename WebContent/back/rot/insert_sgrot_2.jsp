@@ -24,7 +24,7 @@
 			<FORM METHOD="post" ACTION="<%=path%>/Rot.do" name="form1" >
 				<div>
 					<b class="page-header">路線名稱:</b> <input type="TEXT"
-						name="rotname" size="110"/>
+						name="rotname"/>
 				</div><br/>
 				<div>
 					<b class="page-header">路線分類:</b>
@@ -37,12 +37,12 @@
 					</select>
 				</div><br/>
 				<div>
-					<b class="page-header">經過地區:</b> <input type="TEXT"
-						name="rottag" size="110"/>
+					<b class="page-header">經過地區:</b> <input type="text"
+						name="rottag"/>
 				</div><br/>
 				<div>
 					<b class="page-header">路線描述:</b>
-					<textarea name="rotdesc" rows="10" cols="109"></textarea>
+					<textarea name="rotdesc" rows="10" cols="70"></textarea>
 				</div>
 				<br>
 						<div class="text-center">
