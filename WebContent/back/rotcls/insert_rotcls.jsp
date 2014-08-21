@@ -28,7 +28,7 @@
 					<table class="table table-bordered">
 						<tr>
 							<th>路線名稱:</th>
-							<td><input type="TEXT" name="rotclsname" size="45"
+							<td><input type="text" name="rotclsname"
 								placeholder="請輸入路線名稱" /></td>
 						</tr>
 					</table>

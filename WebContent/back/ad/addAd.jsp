@@ -28,12 +28,12 @@
 					<table class="table table-bordered">
 						<tr>
 							<th>廣告標題</th>
-							<td><input type="text" name="adname" size="40"
+							<td><input type="text" name="adname"
 								value="${adVO.adname}" required></td>
 						</tr>
 						<tr>
 							<th>廣告連結</th>
-							<td><input type="text" name="adurl" size="40"
+							<td><input type="text" name="adurl"
 								value="${adVO.adurl}" required></td>
 						</tr>
 						<tr>

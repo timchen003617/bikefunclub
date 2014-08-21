@@ -32,7 +32,7 @@
 						</tr>
 						<tr>
 							<th>路線分類名稱:</th>
-							<td><input type="TEXT" name="rotclsname" size="45"
+							<td><input type="text" name="rotclsname"
 								value="${rotclsVO.rotclsname}" /></td>
 						</tr>
 					</table>
