@@ -61,7 +61,7 @@ public class FriendListServlet extends HttpServlet {
 			/** 2.登入會員開始新增好友 */
 			friSvc.addFriendList(memno, youno, isblack, isfriend);
 //			friSvc.addFriendList(youno, memno, isblack, isfriend);
-			
+
 			/**3.查詢完成,準備轉交(Send the Success view) ***********/
 			String url = "/front/friendlist/friendlist.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
