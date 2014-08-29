@@ -42,4 +42,4 @@
 	<!-- footer -->
 	<jsp:include page="/front/home/footer.jsp"></jsp:include>
 </body>
-</html>l>
+</html>
