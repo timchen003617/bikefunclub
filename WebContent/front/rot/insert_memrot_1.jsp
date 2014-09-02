@@ -204,7 +204,7 @@ var rendererOptions = {
 			deleteedit.disabled='disabled';
 			home.disabled = 'disabled';
 			startflag = 1;
-// 			google.maps.event.clearListeners(map, 'click');
+ 			google.maps.event.clearListeners(map, 'click');
 		}
 	}
 

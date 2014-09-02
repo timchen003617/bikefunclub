@@ -65,6 +65,7 @@
 					<h3 class="panel-title">網誌資料</h3>
 				</div>
 				<div class="panel-body">
+				    <!--按此回網誌首頁-->
 					<div class="text-right">
 						<a class="btn btn-primary"
 						href="<%=path%>/front/blog/page_listAllblog.jsp">回瀏覽網誌</a>
@@ -86,7 +87,7 @@
 								</tr>
 
 								<tr>
-
+                                    <!--比對網誌分類，並將比對後的網誌分類顯示出來 -->
 									<th>網誌分類</th>
 									<td><c:forEach var="blogclsVO" items="${list3}">
 											<c:if test="${blogVO.blogclsno==blogclsVO.blogclsno}">
@@ -135,7 +136,7 @@
 					<hr style="height: 3px; border: none; border-top: 2px ridge #6b3" />
 					
 					
-					<!--判斷網誌留言是否屬這個網誌(P.140行的判斷句) -->	
+					<!--判斷網誌留言是否屬這個網誌(140行的判斷句) -->	
 					<c:forEach var="blogcomVO" items="${blogcomlist}">
                         <c:if test="${blogVO.blogno == blogcomVO.blogno}">
 						   <table class="table table-hover">
@@ -172,7 +173,7 @@
 									<td class="col-md-7"
 										style="word-wrap: break-word; word-break: break-all;">${blogcomVO.bgcomtext}</td>
 									<td>
-                                    <!-- 判斷此留言是否是由同一個會員 -->
+                                    <!--判斷此留言是否是由同一個會員，只有自己的留言可以刪除-->
 									
 										<FORM method="post" action="<%=path%>/BlogcomServlet">
 										<c:if test="${blogcomVO.memno == memVO.memno}">
@@ -180,6 +181,7 @@
 									      
 											<input class="btn btn-primary" type="submit" value="刪除留言 ">
 											</c:if>
+											<!--刪除按鈕區塊結束-->
 											<input type="hidden" name="blogno"
 												value="${blogcomVO.blogno}">
 											<input type="hidden" name="bgcomno"
