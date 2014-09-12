@@ -82,9 +82,9 @@ public class MemberServlet extends HttpServlet {
 				}
 				// 判斷會員帳號是否已被使用
 				Boolean flagacc = isusedaccount(memSvc, memacc);
-				//判斷會員身分證是否已被使用
+				// 判斷會員身分證是否已被使用
 				Boolean flagid = isusedmemid(memSvc, memid);
-				
+
 				String mempw = multi.getParameter("password").trim();
 				String memzip = multi.getParameter("zip").trim();
 				String memaddr = multi.getParameter("addr").trim();
@@ -141,8 +141,7 @@ public class MemberServlet extends HttpServlet {
 				memVO.setMemtelo(memtelo);
 				memVO.setMemtelm(memtelm);
 				memVO.setMemrgdate(memrgdate);
-				
-				
+
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO); // 含有輸入格式錯誤的memVO物件,也存入req
@@ -157,10 +156,10 @@ public class MemberServlet extends HttpServlet {
 						memnickname, memfile, memfilename, memextname,
 						mememail, memsex, memzip, memaddr, memtelh, memtelo,
 						memtelm, memgetmailyn, memrgdate);
-				/*************************** 4.新增完成,準備轉交(Send the Success view) ***********/				
-				//取得剛新增成功的會員編號
-				 MemVO memVOmail= memSvc.findByAccount(memacc);				 
-				 Integer aftermemno = memVOmail.getMemno();
+				/*************************** 4.新增完成,準備轉交(Send the Success view) ***********/
+				// 取得剛新增成功的會員編號
+				MemVO memVOmail = memSvc.findByAccount(memacc);
+				Integer aftermemno = memVOmail.getMemno();
 				// 使用者信箱認證的連結
 				String getmailurl = "http://localhost:8081"
 						+ req.getContextPath() + req.getServletPath()
@@ -187,17 +186,17 @@ public class MemberServlet extends HttpServlet {
 			}
 		}
 		if ("updategetmailyn".equals(action)) {// 來自使用者信箱內文超連結的請求
-			
+
 			/** 1接收請求參數 ***/
 			Integer memno = new Integer(req.getParameter("memno"));
 			String memgetmailyn = req.getParameter("memgetmailyn");
-			
-			/**2開始修改會員認證狀態為Y**/
-			memSvc.updateMem_getmailyn(memno,memgetmailyn);
-			
-			/**3.修改完成,準備轉交(Send the Success view)**/
+
+			/** 2開始修改會員認證狀態為Y **/
+			memSvc.updateMem_getmailyn(memno, memgetmailyn);
+
+			/** 3.修改完成,準備轉交(Send the Success view) **/
 			req.setAttribute("getmailstatus", "success");
-			
+
 			String url = "/front/home/index.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
@@ -373,16 +372,20 @@ public class MemberServlet extends HttpServlet {
 		}
 		return flag;
 	}
+
 	/* 判斷新會員的身分證是否已經被舊會員使用;被使用回傳true,未被使用回傳false */
 	public Boolean isusedmemid(MemService memSvc, String memid) {
 		Boolean flag = false;
 		List<MemVO> list = memSvc.getAll();
 		for (MemVO memVO : list) {
 			String memoldid = memVO.getMemid();
-			if (memoldid.equals(memid)) {
-				flag = true;
-				break;
+			if (memoldid != null) {
+				if (memoldid.equals(memid)) {
+					flag = true;
+					break;
+				}
 			}
+			;
 		}
 		return flag;
 	}
