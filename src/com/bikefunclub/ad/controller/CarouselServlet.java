@@ -29,7 +29,7 @@ public class CarouselServlet extends HttpServlet {
 		String adno = req.getParameter("adno");
 		AdService adsvc = new AdService();
 		AdVO adVO = adsvc.getOneAd(Integer.parseInt(adno));
-		// 開啟輸出資料串流,1次傳4k資料在網頁上,直到上傳完畢
+		// 開啟輸出資料串流,從資料庫1次傳4k資料在網頁上,直到傳輸完畢
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
