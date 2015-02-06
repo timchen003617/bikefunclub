@@ -33,7 +33,6 @@ public class RotJDBCDAO implements RotDAO_interface {
 
 	@Override
 	public int insert(RotVO rotVO) {
-		// TODO Auto-generated method stub
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -87,7 +86,6 @@ public class RotJDBCDAO implements RotDAO_interface {
 
 	@Override
 	public void update(RotVO rotVO) {
-		// TODO Auto-generated method stub
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -141,7 +139,6 @@ public class RotJDBCDAO implements RotDAO_interface {
 
 	@Override
 	public void delete(Integer rotno) {
-		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -259,7 +256,6 @@ public class RotJDBCDAO implements RotDAO_interface {
 
 	@Override
 	public List<RotVO> getAll() {
-		// TODO Auto-generated method stub
 		List<RotVO> list = new ArrayList<RotVO>();
 		RotVO rotVO = null;
 
