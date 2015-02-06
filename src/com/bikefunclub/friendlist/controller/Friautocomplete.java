@@ -56,7 +56,7 @@ public class Friautocomplete extends HttpServlet {
 		String frinamelike = "%"+friname+"%";
 		/** 3.開始查詢登入會員好友 */
 		List<FriendListVO> frilist = friSvc.getFriendListByname(memno, frinamelike);
-		
+
 		int i = 0;
 		for (FriendListVO friendListVO : frilist) {
 			// 取好友會員編號
